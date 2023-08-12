@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import logo from '../../assets/img/logo.png'
-import smallLogo from '../../assets/img/small-logo.png'
+import logo from '@/assets/img/logo.png'
+import smallLogo from '@/assets/img/small-logo.png'
 
 type Props = {
     width: number,

@@ -1,25 +1,47 @@
+import { faArrowsRotate, faTag, faUserFriends } from '@fortawesome/free-solid-svg-icons'
+import { faCopy } from '@fortawesome/free-regular-svg-icons'
+
+
 export const statistics = [
     {
         id: 1,
         title: "Status Updates",
         currentValue: 50,
         previousValue: 45,
+        icon: {
+            name: faArrowsRotate,
+            className: "-scale-y-100 rotate-45",
+            bgColor: "#EBDB82"
+        }
     },
     {
         id: 2,
         title: "Projects",
         currentValue: 24,
         previousValue: 28,
+        icon: {
+            name: faCopy,
+            className: "-scale-y-100",
+            bgColor: "#82CFEB"
+        }
     },
     {
         id: 3,
         title: "Tags",
         currentValue: 156,
+        icon: {
+            name: faTag,
+            bgColor: "#B282EB"
+        }
     },
     {
         id: 4,
         title: "Users",
         currentValue: 86,
+        icon: {
+            name: faUserFriends,
+            bgColor: "#EB82A6"
+        }
     },
 
 ]

@@ -2,9 +2,9 @@
 
 import Image from 'next/image'
 
-import Logo from '../../components/Logo/Logo';
-import googleLogo from "../../assets/img/google.png";
-import Container from "../../components/Container/Container";
+import Logo from '@/components/Logo/Logo';
+import googleLogo from "@/assets/img/google.png";
+import Container from "@/components/Container/Container";
 
 const Login = () => {
   return (
@@ -16,17 +16,17 @@ const Login = () => {
                 height={85}
             />
 
-            <button className="mt-[48px] flex py-2 items-center justify-center border min-w-full rounded">
+            <button className="mt-[48px] flex py-2 items-center justify-center border min-w-full rounded shadow-sm">
                 <Image 
                     src={googleLogo}
                     width={27}
                     height={27}
                     alt="Google logo"
                 />
-                <p className="pl-2 text-[#4F5761] text-lg">Login with Google</p>
+                <p className="pl-2 text-[#4F5761] text-opacity-95 text-lg">Login with Google</p>
             </button>
 
-            <p className="text-[#4F5761] py-2">OR</p>
+            <p className="text-body py-2">OR</p>
 
             <form 
                 className="flex flex-col min-w-full"
@@ -37,7 +37,7 @@ const Login = () => {
                     name="email"
                     id="email"
                     placeholder="Enter email"
-                    className="p-2 mb-3 border rounded text-lg"
+                    className="p-2 mb-3 border rounded text-lg bg-[#FBFBFD]"
                 />
 
                 <input
@@ -45,21 +45,21 @@ const Login = () => {
                     name="password"
                     id="password"
                     placeholder="Enter password"
-                    className="p-2 border rounder text-lg"
+                    className="p-2 border rounder text-lg bg-[#FBFBFD]"
                 />
 
-                <p className="self-end underline text-[#222222] text-opacity-70 text-sm mb-4 ">Forgotten Password?</p>
+                <p className="self-end underline text-body text-sm mb-4 mt-1 ">Forgotten Password?</p>
 
                 <button 
                     type="submit" 
-                    className="border rounded p-1 text-[white] bg-[#4DA1FF] text-xl"
+                    className="border rounded py-2 text-white bg-primary text-xl"
                 >
                     Login
                 </button>
             </form>
 
             <p 
-                className="mt-4 text-[#222222] text-opacity-70 text-sm"
+                className="mt-4 text-body text-sm"
             >
                 Not a member? <span className="underline">Register now!</span>
             </p>

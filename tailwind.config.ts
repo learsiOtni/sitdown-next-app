@@ -25,6 +25,10 @@ const config: Config = {
       backgroundColor: {
         'primary': '#4DA1FF',
         'brand': '#04DFD0',
+        'yellow': '#EBDB82',
+        'blue': '#82CFEB',
+        'purple': '#B282EB',
+        'red': '#EB82A6'
       },
       borderColor: {
         'success': '#30C431',

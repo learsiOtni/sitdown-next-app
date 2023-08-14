@@ -2,17 +2,14 @@ import Logo from '@/components/Logo/Logo'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle, IconDefinition } from '@fortawesome/free-solid-svg-icons'
-
+import Icon, { CustomIcons } from '@/components/Icon/Icon'
 import links from './links';
+
 
 type Link = {
     id: number;
     title: string;
     url: string;
-    icon: IconDefinition;
-    className?: string;
 }
 
 const SideNav = () => {
@@ -22,16 +19,14 @@ const SideNav = () => {
             <Logo width={29} height={50} smallLogo/>
         </div>
 
-        <div className="w-7 h-7 mt-20">
-            <FontAwesomeIcon className="text-brand" icon={faPlusCircle} />
-        </div>
+        <Icon name="add" iconContainerStyle="w-7 h-7 mt-20" background/>
 
         <nav className="w-5 mt-8">
             <ul>
                 { links.map( (link: Link) => (
                     <li className="text-[#B6B6B6] pt-7" key={link.id}>
                         <Link href={link.url}>
-                            <FontAwesomeIcon className={link.className} icon={link.icon} />
+                            <Icon name={link.title as CustomIcons}/>
                         </Link>
                     </li>
                 ))}

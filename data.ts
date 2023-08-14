@@ -1,47 +1,29 @@
-import { faArrowsRotate, faTag, faUserFriends } from '@fortawesome/free-solid-svg-icons'
-import { faCopy } from '@fortawesome/free-regular-svg-icons'
-
-
 export const statistics = [
     {
         id: 1,
+        name: "updates",
         title: "Status Updates",
         currentValue: 50,
         previousValue: 45,
-        icon: {
-            name: faArrowsRotate,
-            className: "-scale-y-100 rotate-45",
-            bgColor: "#EBDB82"
-        }
     },
     {
         id: 2,
+        name: "projects",
         title: "Projects",
         currentValue: 24,
         previousValue: 28,
-        icon: {
-            name: faCopy,
-            className: "-scale-y-100",
-            bgColor: "#82CFEB"
-        }
     },
     {
         id: 3,
+        name: "tags",
         title: "Tags",
         currentValue: 156,
-        icon: {
-            name: faTag,
-            bgColor: "#B282EB"
-        }
     },
     {
         id: 4,
+        name: "users",
         title: "Users",
         currentValue: 86,
-        icon: {
-            name: faUserFriends,
-            bgColor: "#EB82A6"
-        }
     },
 
 ]
@@ -64,39 +46,40 @@ export const statusUpdates = [
     },
     {
         statusId: 2,
-        title: "Performance - GetUserDetails request is slow",
-        body: "The Performance details takes too long to load which leaves the user with... empty field screen. There are some screen in the",
+        title: "IE - Logout screen not visible",
+        body: "In Internet Explorer, when you click ‘logout’ you are taken to a completely blank screen. Depending on what’s causing this, the bug may be a big issue when it comes to hand-offs in and out of the app during payment process.",
         user: {
             userId: 123,
-            name: "Time Stones"
+            name: "Jake Cuenca"
         },
         createdAt: "10 mins ago",
         tags: [
-            "Subscription",
-            "Trial"
+            "Bug",
+            "Internet",
+            "Network"
         ]
     },
     {
         statusId: 3,
-        title: "Performance - GetUserDetails request is slow",
-        body: "The Performance details takes too long to load which leaves the user with... empty field screen. There are some screen in the",
+        title: "Add and test new token endpoint to API",
+        body: "Need to Add endpoint and retrieve and re-use JToken. Need to find alternative to change the app settings to disable cookie authentication. This would disable the possibility of manually testing on test. This needs to be check",
         user: {
             userId: 123,
-            name: "Time Stones"
+            name: "Maddy Jane"
         },
         createdAt: "20 mins ago",
         tags: [
-            "Subscription",
-            "Trial"
+            "Test",
+            "Token"
         ]
     },
     {
         statusId: 4,
-        title: "Performance - GetUserDetails request is slow",
-        body: "The Performance details takes too long to load which leaves the user with... empty field screen. There are some screen in the",
+        title: "Create user alerts for trial/subscription",
+        body: "The user should get a notification when a user’s trial/subscription is due to expire within the app. This will be shown when a user next login. There is no current framework within the application itself so this will be build from scratch",
         user: {
             userId: 123,
-            name: "Time Stones"
+            name: "Thomas Cook"
         },
         createdAt: "1 hour ago",
         tags: [
@@ -106,11 +89,11 @@ export const statusUpdates = [
     }
 ]
 
-export const Projects = [
+export const projects = [
     {
         id: 1,
         title: "Project Twitter",
-        body: "lorem posum",
+        body: "Nulla tincidunt ipsum eu lorem vulputate, id imperdiet nunc condimentum. Praesent ut leo ultricies justo facilisis iaculis. Nullam rutrum arcu vel lacus bibendum, eu vehicula orci tempor.",
         user: {
             userId: 123,
             name: "Time Stones"
@@ -123,8 +106,8 @@ export const Projects = [
     },
     {
         id: 2,
-        title: "Project Twitter",
-        body: "lorem posum",
+        title: "Firefox Stratum",
+        body: "Nulla tincidunt ipsum eu lorem vulputate, id imperdiet nunc condimentum. Praesent ut leo ultricies justo facilisis iaculis. Nullam rutrum arcu vel lacus bibendum, eu vehicula orci tempor.",
         user: {
             userId: 123,
             name: "Time Stones"
@@ -137,8 +120,8 @@ export const Projects = [
     },
     {
         id: 3,
-        title: "Project Twitter",
-        body: "lorem posum",
+        title: "Doc Ox",
+        body: "Nulla tincidunt ipsum eu lorem vulputate, id imperdiet nunc condimentum. Praesent ut leo ultricies justo facilisis iaculis. Nullam rutrum arcu vel lacus bibendum, eu vehicula orci tempor.",
         user: {
             userId: 123,
             name: "Time Stones"
@@ -151,8 +134,8 @@ export const Projects = [
     },
     {
         id: 4,
-        title: "Project Twitter",
-        body: "lorem posum",
+        title: "Ace the Fire",
+        body: "Nulla tincidunt ipsum eu lorem vulputate, id imperdiet nunc condimentum. Praesent ut leo ultricies justo facilisis iaculis. Nullam rutrum arcu vel lacus bibendum, eu vehicula orci tempor.",
         user: {
             userId: 123,
             name: "Time Stones"
@@ -165,7 +148,7 @@ export const Projects = [
     }
 ]
 
-export const Users = [
+export const users = [
     {
         id: 1,
         name: "Isaac Newton",

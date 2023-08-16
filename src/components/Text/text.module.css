@@ -1,0 +1,24 @@
+/* Fonts */
+.heading {
+    @apply text-2xl text-black text-opacity-80;
+}
+
+.title {
+    @apply text-lg text-black font-semibold;
+}
+
+.body {
+    @apply text-body;
+}
+
+.caption {
+    @apply text-sm text-black;
+}
+
+.caption-underline {
+    @apply text-sm text-black underline;
+}
+
+.caption-primary {
+    @apply text-sm text-primary
+}

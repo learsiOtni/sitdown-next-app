@@ -31,7 +31,7 @@ export const statistics = [
 
 export const statusUpdates = [
     {
-        statusId: 1,
+        id: 1,
         title: "Performance - GetUserDetails request is slow",
         body: "The Performance details takes too long to load which leaves the user with... empty field screen. There are some screen in the",
         user: {
@@ -45,7 +45,7 @@ export const statusUpdates = [
         ]
     },
     {
-        statusId: 2,
+        id: 2,
         title: "IE - Logout screen not visible",
         body: "In Internet Explorer, when you click ‘logout’ you are taken to a completely blank screen. Depending on what’s causing this, the bug may be a big issue when it comes to hand-offs in and out of the app during payment process.",
         user: {
@@ -60,7 +60,7 @@ export const statusUpdates = [
         ]
     },
     {
-        statusId: 3,
+        id: 3,
         title: "Add and test new token endpoint to API",
         body: "Need to Add endpoint and retrieve and re-use JToken. Need to find alternative to change the app settings to disable cookie authentication. This would disable the possibility of manually testing on test. This needs to be check",
         user: {
@@ -74,7 +74,7 @@ export const statusUpdates = [
         ]
     },
     {
-        statusId: 4,
+        id: 4,
         title: "Create user alerts for trial/subscription",
         body: "The user should get a notification when a user’s trial/subscription is due to expire within the app. This will be shown when a user next login. There is no current framework within the application itself so this will be build from scratch",
         user: {
@@ -102,7 +102,8 @@ export const projects = [
         teamMembers: [
             "Jane Dayle",
             "John Doe"
-        ]
+        ],
+        editable: true,
     },
     {
         id: 2,
@@ -116,7 +117,8 @@ export const projects = [
         teamMembers: [
             "Jane Dayle",
             "John Doe"
-        ]
+        ],
+        editable: false
     },
     {
         id: 3,
@@ -130,7 +132,8 @@ export const projects = [
         teamMembers: [
             "Jane Dayle",
             "John Doe"
-        ]
+        ],
+        editable: true,
     },
     {
         id: 4,
@@ -144,7 +147,8 @@ export const projects = [
         teamMembers: [
             "Jane Dayle",
             "John Doe"
-        ]
+        ],
+        editable: false,
     }
 ]
 
@@ -164,7 +168,7 @@ export const users = [
         projects: [
             "ProjectX",
             "ProjectY",
-        ]
+        ],
     }
 ]
 

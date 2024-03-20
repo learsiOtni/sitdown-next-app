@@ -3,13 +3,14 @@ import Image from 'next/image'
 import Card from '../Card/Card';
 import Text from '@/components/Text/Text';
 import Icon from '@/components/Icon/Icon'
-
+import { formatDate } from '@/util/helper';
 
 export type StatusUpdate = {
     id: number,
     user: {
         userId: number,
-        name: string,
+        firstname: string,
+        lastname?: string
     },
     title: string,
     body: string,
@@ -25,7 +26,7 @@ type Props = {
 const CardUpdate = ({ data, view }: Props) => {
 
     let header = <Text tag="p" type="caption-primary" className="mb-4">
-        {data.user.name} <Text tag="span" type="body">updated his status</Text> {data.createdAt}
+        {`${data.user.firstname} ${data.user.lastname && data.user.lastname}`} <Text tag="span" type="body">updated his status</Text> {formatDate( new Date(data.createdAt))}
     </Text>
 
     let imageSize = 52;
@@ -34,7 +35,7 @@ const CardUpdate = ({ data, view }: Props) => {
 
     if (view === "table") {
         header = <div className="float-right mt-[-10px]">
-            <Text tag="p" type="caption-primary">{data.createdAt}</Text>
+            <Text tag="p" type="caption-primary">{ formatDate( new Date(data.createdAt))}</Text>
         </div>;
 
         imageSize = 68;
@@ -52,7 +53,7 @@ const CardUpdate = ({ data, view }: Props) => {
         header = header = <div className="flex justify-between items-center mb-6">
         <div className="flex items-center">
             {image}
-            <Text tag="p" type="caption-underline">{data.user.name}</Text>
+            <Text tag="p" type="caption-underline">{data.user.firstname + data.user.lastname}</Text>
         </div>
 
         <Text tag="p" type="caption-primary" className="">{data.createdAt}</Text>

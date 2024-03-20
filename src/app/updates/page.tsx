@@ -12,7 +12,7 @@ const Updates = () => {
       <div className="p-11 w-full">
         
         { /** Search Bar */}
-        <SearchBar placeholder="Find updates by tags" buttonText="Filter by"/>
+        <SearchBar placeholder="Find updates by tags" buttonText="Filter by" buttonDropdown/>
 
         { /** Table Card options */}
         <div className="mt-10 flex justify-end">

@@ -157,19 +157,50 @@ export const users = [
         id: 1,
         name: "Isaac Newton",
         role: "Senior Project Leader",
-        updates: [
-            "ProjectX",
-            "ProjectY",
-        ],
-        teams: [
-            "ProjectX",
-            "ProjectY",
-        ],
-        projects: [
-            "ProjectX",
-            "ProjectY",
-        ],
-    }
+        updates: 0,
+        teams: 4,
+        projects: 4,
+    },
+    {
+        id: 2,
+        name: "Isaac Newton",
+        role: "Senior Software Developer",
+        updates: 10,
+        teams: 2,
+        projects: 3,
+    },
+    {
+        id: 3,
+        name: "Leah Smith",
+        role: "Junior Software Developer",
+        updates: 50,
+        teams: 1,
+        projects: 4,
+    },
+    {
+        id: 4,
+        name: "Firefist Ace",
+        role: "HR Manager",
+        updates: 20,
+        teams: 0,
+        projects: 0,
+    },
+    {
+        id: 5,
+        name: "Jack Sparrow",
+        role: "Project Manager",
+        updates: 20,
+        teams: 10,
+        projects: 10,
+    },
+    {
+        id: 5,
+        name: "Holly Mane",
+        role: "Junior Software Developer",
+        updates: 40,
+        teams: 1,
+        projects: 5,
+    },
 ]
 
 

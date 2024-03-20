@@ -1,5 +1,15 @@
+'use client';
+
 import RightSideBar from "./RightSideBar/RightSideBar";
-import SideNav from "./SideNav/SideNav"
+import SideNav from "./SideNav/SideNav";
+
+import type { NextPage } from "next";
+import { selectAuthState } from "../../store/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { getCookie, deleteCookie } from 'cookies-next';
 
 
 const Layout = ({
@@ -7,28 +17,34 @@ const Layout = ({
 }: {
     children: React.ReactNode
 }) => {
+  //const isLoggedIn = true;
+  const rightSideBar = false;
 
-  const isLoggedIn = true;
+  const isAuth = useSelector(selectAuthState);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  
+  if(!isAuth) router.push('/login');
 
   return (
     <div>
 
-        { isLoggedIn ? (
+        { isAuth ? (
           <>
             <SideNav />
 
-            <div className="flex ml-[110px] bg-[#F5F7FA] h-full min-h-screen mr-[266px]">
+            <div className="flex ml-[110px] bg-[#F5F7FA] h-full min-h-screen">
               {children}
             </div>
 
-            <RightSideBar />
+            { rightSideBar && <RightSideBar /> }
           </>
         ) : (
           <div>{children}</div>
         )}
-        
     </div>
   )
 }
 
-export default Layout
+export default Layout;

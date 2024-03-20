@@ -1,10 +1,10 @@
-import { faGlobe, faArrowsRotate, faTag, faUserFriends, faPlusCircle, faPen, faSearch, faBell, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faGlobe, faArrowsRotate, faTag, faUserFriends, faPlusCircle, faPen, faSearch, faBell, faTrash, faUser, faGear } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export type CustomIcons = "dashboard" | "projects" | "tags" | 
 "updates" | "users" | "add" | "edit" | "search" | "notification" |
-"delete";
+"delete" | "user" | "settings";
 
 type Props = {
     name: CustomIcons;
@@ -32,6 +32,8 @@ const Icon = (props: Props) => {
     props.name === "search" && (icon = faSearch);
     props.name === "notification" && (icon = faBell);
     props.name === "delete" && (icon = faTrash);
+    props.name === "user" && (icon = faUser);
+    props.name === "settings" && (icon = faGear);
     
     return (
         <div className={containerStyle}>

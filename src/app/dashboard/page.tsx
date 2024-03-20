@@ -1,4 +1,7 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react';
+import { redirect } from 'next/navigation';
 import { statistics, statusUpdates, projects } from '../../../data'
 
 import Button from '@/components/Button/Button'
@@ -9,19 +12,45 @@ import CardUpdate, { StatusUpdate } from '@/components/CardUpdate/CardUpdate'
 import CardStatistic from '@/components/CardStatistic/CardStatistic'
 import CardProject from '@/components/CardProject/CardProject';
 
+import { selectAllUpdates } from '@/store/updatesSlice'
+import { selectAuthToken, selectAuthState } from '@/store/authSlice'
+import { useSelector } from 'react-redux'
 
+interface Update {
+  id: string,
+  createdAt: string,
+  title: string,
+  body: string,
+  tags: string[],
+  user: {
+    id: string,
+    firstname: string
+  },
+  project: {
+    id: string,
+    title: string,
+  }
+}
 
 
 const Dashboard = () => {
+  const updates = useSelector(selectAllUpdates);
+  const token = useSelector(selectAuthToken);
+  const isAuth = useSelector(selectAuthState);
+
+  /*if(!isAuth) {
+    redirect("/login")
+  }*/
+
   return (
     <div className="p-11 w-full">
 
       {/* Header */}
       <header className="flex items-center justify-between">
         <Text tag="h1" type="heading">Overview Statistics</Text>
-        <Button className="px-5 mr-1">
+
+        <Button className="px-5 mr-1" dropdown onClick={ () => 'test'}>
           Last 30 days
-          <span className="inline-block ml-2 "><TriangleIcon direction="down" color="border-b-[##FFFFFF]" size="sm"/></span>
         </Button>
       </header>
       
@@ -39,7 +68,7 @@ const Dashboard = () => {
 
           <Text tag="h1" type="heading" className="mb-2.5">Status Updates</Text>
 
-          {statusUpdates.map((status) => (
+          {updates.updates && updates.updates.map((status) => (
             <CardUpdate data={status as StatusUpdate} />
           ))}
 
@@ -60,7 +89,7 @@ const Dashboard = () => {
 
           <div className="min-w-[575px] flex flex-wrap gap-4">
             { projects.map( project => (
-              <CardProject data={project} className="w-[48.5%]"/>
+              <CardProject key={project.id} data={project} className="w-[48.5%]"/>
             ))}
           </div>
 

@@ -12,12 +12,12 @@ type User = {
     projects: number,
   }
   
-  type Props = {
+  type CardUserProps = {
     data: User
   }
 
-const CardUser = (props: Props) => {
-    const { id, name, role, updates, teams, projects } = props.data;
+const CardUser = ({data}: CardUserProps) => {
+    const { id, name, role, updates, teams, projects } = data;
 
     return (
         <Card key={id} className="flex items-center justify-between py-2.5 px-5 mt-2.5">

@@ -1,24 +1,24 @@
 import React from 'react'
 import Image from 'next/image'
 import logo from '@/assets/img/logo.png'
-import smallLogo from '@/assets/img/small-logo.png'
+import smallLogoImg from '@/assets/img/small-logo.png'
 
-type Props = {
+type LogoProps = {
     width: number,
     height: number,
     smallLogo?: boolean
 }
 
-const Logo = (props: Props) => {
+const Logo = ({width, height, smallLogo}: LogoProps) => {
 
     let imageSrc = logo;
-    props.smallLogo && (imageSrc = smallLogo);
+    smallLogo && (imageSrc = smallLogoImg);
     
     return (
         <Image
             src={imageSrc}
-            width={props.width}
-            height={props.height}
+            width={width}
+            height={height}
             alt="Sitdown app logo"
         />
     )

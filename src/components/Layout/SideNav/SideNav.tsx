@@ -1,18 +1,13 @@
-"use client"
-
 import { usePathname, useRouter } from 'next/navigation';
 import Logo from '@/components/Logo/Logo'
-import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Icon, { CustomIcons } from '@/components/Icon/Icon'
 import links from './links';
 
-import { logout } from '../../../store/authSlice';
-import { useDispatch } from 'react-redux';
-
-
-
+import { useAppDispatch } from '@/lib/hooks';
+import { logout } from '@/lib/features/auth/authSlice';
+import { toggleModal } from '@/lib/features/updates/updatesSlice';
 
 type Link = {
     id: number;
@@ -22,22 +17,26 @@ type Link = {
 
 const SideNav = () => {
     const pathname = usePathname();
-    const dispatch = useDispatch();
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     const handleLogout = () => {
-        dispatch(logout());
-        router.push('/login');
+        dispatch(logout())
+        router.push('/login')
     }
 
+    
     return (
         <header className="w-28 h-screen flex flex-col items-center fixed">
+
             <div className="mt-11">
                 <Logo width={29} height={50} smallLogo />
             </div>
 
-            <Icon name="add" iconContainerStyle="w-7 h-7 mt-20" background />
-
+            <div onClick={() => dispatch(toggleModal())} className="h-7 mt-20 cursor-pointer hover:text-lg hover:opacity-90">
+                <Icon name="add" background size="2xl" />
+            </div>
+            
             <nav className="w-5 mt-8">
                 <ul>
                     {links.map((link: Link) => (
@@ -69,7 +68,7 @@ const SideNav = () => {
                 </Link>
             </div>
 
-            <button onClick={handleLogout}>Logout</button>
+            <button className="hover:opacity-50" onClick={handleLogout}>Logout</button>
 
         </header>
     )

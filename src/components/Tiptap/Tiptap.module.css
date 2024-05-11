@@ -1,0 +1,11 @@
+.container {
+    @apply border mb-5;
+}
+
+.tiptapEditor {
+    @apply grow w-full h-[220px] p-4 overflow-scroll;
+}
+
+.tiptapEditor:focus {
+    @apply outline-none;
+}

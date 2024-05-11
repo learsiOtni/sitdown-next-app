@@ -1,11 +1,11 @@
 
-type Props = {
+type TableProps = {
     color: string
 }
 
-const Table = (props: Props) => {
+const Table = ({color}: TableProps) => {
 
-    let style = `w-4 h-[7px] mt-[1px] ${props.color && props.color}`;
+    let style = `w-4 h-[7px] mt-[1px] ${color && color}`;
 
     return (
         <div className="">

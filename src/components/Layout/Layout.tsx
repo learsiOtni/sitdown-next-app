@@ -1,50 +1,60 @@
-'use client';
+"use client";
 
+import { useEffect } from "react";
+import { getCookie } from "cookies-next";
 import RightSideBar from "./RightSideBar/RightSideBar";
 import SideNav from "./SideNav/SideNav";
+import { useAppSelector, useAppDispatch } from "../../lib/hooks";
+import { getAuthUser } from "@/lib/features/auth/authSlice";
+import ModalUpdateForm from "../ModalUpdateForm/ModalUpdateForm";
+import { fetchProjects } from "@/lib/features/projects/projectsSlice";
+import { fetchUpdates } from "@/lib/features/updates/updatesSlice";
+//import { useGetAuthenticatedUserQuery } from "@/lib/services/auth/authService";
 
-import type { NextPage } from "next";
-import { selectAuthState } from "../../store/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+const Layout = ({ children }: { children: React.ReactNode }) => {
 
-import { getCookie, deleteCookie } from 'cookies-next';
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
+  const dispatch = useAppDispatch();
 
-
-const Layout = ({
-    children
-}: {
-    children: React.ReactNode
-}) => {
-  //const isLoggedIn = true;
   const rightSideBar = false;
 
-  const isAuth = useSelector(selectAuthState);
-  const dispatch = useDispatch();
-  const router = useRouter();
+  /*const {data, isFetching } = useGetAuthenticatedUserQuery('userDetails')
+  useEffect( () => {
+    //dispatch( getUserData())
+    if (data) dispatch(setCredentials(data))
+  }, [data, dispatch])*/
 
-  
-  if(!isAuth) router.push('/login');
+  const authCookie = getCookie("authToken");
+
+  useEffect(() => {
+    authCookie && dispatch(getAuthUser(authCookie));
+  }, []);
+
+  useEffect( () => {
+    if(isAuth) {
+      dispatch( fetchProjects());
+      dispatch( fetchUpdates());
+    }
+  }, [isAuth])
 
   return (
     <div>
+      {isAuth ? (
+        <>
+          <ModalUpdateForm/>
+          <SideNav />
 
-        { isAuth ? (
-          <>
-            <SideNav />
+          <div className="flex ml-[110px] bg-[#F5F7FA] h-full min-h-screen">
+            {children}
+          </div>
 
-            <div className="flex ml-[110px] bg-[#F5F7FA] h-full min-h-screen">
-              {children}
-            </div>
-
-            { rightSideBar && <RightSideBar /> }
-          </>
-        ) : (
-          <div>{children}</div>
-        )}
+          {rightSideBar && <RightSideBar />}
+        </>
+      ) : (
+        <div>{children}</div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Layout;

@@ -22,8 +22,8 @@ const Profile = () => {
                         </Button>
 
                         <Button
-                            bgNone
                             className="text-xl"
+                            bgNone={true}
                             icon="settings"
                             iconStyle="w-5 h-5 text-[#B6B6B6]"
                         >

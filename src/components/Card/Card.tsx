@@ -1,18 +1,17 @@
 
-type Props = {
-    key: number,
+type CardProps = {
     className?: string
     children: React.ReactNode
 }
 
-const Card = (props: Props) => {
+const Card = ({className, children}: CardProps) => {
 
     let defaultStyle = `border-[#E2E5E6] bg-white rounded shadow-md `
-    props.className && (defaultStyle = defaultStyle + props.className)
+    className && (defaultStyle = defaultStyle + className)
 
     return (
         <div className={defaultStyle}>
-            {props.children}
+            {children}
         </div>
     )
 }

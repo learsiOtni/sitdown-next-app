@@ -1,46 +1,100 @@
-import { faGlobe, faArrowsRotate, faTag, faUserFriends, faPlusCircle, faPen, faSearch, faBell, faTrash, faUser, faGear } from '@fortawesome/free-solid-svg-icons'
-import { faCopy } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faGlobe,
+  faArrowsRotate,
+  faTag,
+  faUserFriends,
+  faPlusCircle,
+  faPen,
+  faSearch,
+  faBell,
+  faTrash,
+  faUser,
+  faGear,
+  faTimes,
+  faList,
+  faListOl,
+  faCheck
+} from "@fortawesome/free-solid-svg-icons";
+import { faCopy } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SizeProp } from "@fortawesome/fontawesome-svg-core";
 
-export type CustomIcons = "dashboard" | "projects" | "tags" | 
-"updates" | "users" | "add" | "edit" | "search" | "notification" |
-"delete" | "user" | "settings";
+export type CustomIcons =
+  | "dashboard"
+  | "projects"
+  | "tags"
+  | "updates"
+  | "users"
+  | "add"
+  | "edit"
+  | "search"
+  | "notification"
+  | "delete"
+  | "user"
+  | "settings"
+  | "close"
+  | "list"
+  | "orList"
+  | "check";
 
-type Props = {
-    name: CustomIcons;
-    iconContainerStyle?: string;
-    background?: boolean;
-}
+type IconProps = {
+  name: CustomIcons;
+  iconContainerStyle?: string;
+  background?: boolean;
+  size?: SizeProp
+};
 
-const Icon = (props: Props) => {
+const Icon = ({ name, iconContainerStyle, background, size }: IconProps) => {
+  let icon = faCopy;
+  let containerStyle = `flex items-center justify-center ${iconContainerStyle}`;
+  let iconStyle = "";
 
-    let icon = faCopy;
-    let containerStyle = props.iconContainerStyle;
-    let iconStyle = "";
+  name === "updates" && (iconStyle = "-scale-y-100 rotate-45");
+  name === "projects" && (iconStyle = "-scale-y-100");
 
-    props.name === "updates" && (iconStyle = "-scale-y-100 rotate-45");
-    props.name === "projects" && (iconStyle = "-scale-y-100");
+  name === "dashboard" &&
+    (icon = faGlobe) &&
+    background &&
+    (containerStyle = containerStyle + " bg-yellow");
+  name === "updates" &&
+    (icon = faArrowsRotate) &&
+    background &&
+    (containerStyle = containerStyle + " bg-yellow");
+  name === "tags" &&
+    (icon = faTag) &&
+    background &&
+    (containerStyle = containerStyle + " bg-purple");
+  name === "users" &&
+    (icon = faUserFriends) &&
+    background &&
+    (containerStyle = containerStyle + " bg-red");
+  name === "projects" &&
+    (icon = faCopy) &&
+    background &&
+    (containerStyle = containerStyle + " bg-blue");
 
-    props.name === "dashboard" && (icon = faGlobe) && props.background && (containerStyle = containerStyle + " bg-yellow");
-    props.name === "updates" && (icon = faArrowsRotate) && props.background && (containerStyle = containerStyle + " bg-yellow");
-    props.name === "tags" && (icon = faTag) && props.background && (containerStyle = containerStyle + " bg-purple");
-    props.name === "users" && (icon = faUserFriends) && props.background && (containerStyle = containerStyle + " bg-red");
-    props.name === "projects" && (icon = faCopy) && props.background && (containerStyle = containerStyle + " bg-blue");
+  name === "add" &&
+    (icon = faPlusCircle) &&
+    background &&
+    (iconStyle = iconStyle + " text-brand");
+  name === "edit" &&
+    (icon = faPen) &&
+    (containerStyle = containerStyle + " border-b-4");
+  name === "search" && (icon = faSearch);
+  name === "notification" && (icon = faBell);
+  name === "delete" && (icon = faTrash);
+  name === "user" && (icon = faUser);
+  name === "settings" && (icon = faGear);
+  name === "close" && (icon = faTimes);
+  name === "list" && (icon = faList);
+  name === "orList" && (icon = faListOl);
+  name === "check" && (icon = faCheck);
 
-    props.name === "add" && (icon = faPlusCircle) && props.background && (iconStyle = iconStyle + " text-brand");
-    props.name === "edit" && (icon = faPen) && (containerStyle = containerStyle + " border-b-4");
-    props.name === "search" && (icon = faSearch);
-    props.name === "notification" && (icon = faBell);
-    props.name === "delete" && (icon = faTrash);
-    props.name === "user" && (icon = faUser);
-    props.name === "settings" && (icon = faGear);
-    
-    return (
-        <div className={containerStyle}>
-            <FontAwesomeIcon icon={icon} className={iconStyle}/>
-        </div>
-        
-    )
-}
+  return (
+    <div className={containerStyle}>
+      <FontAwesomeIcon icon={icon} className={iconStyle} size={size} />
+    </div>
+  );
+};
 
-export default Icon
+export default Icon;

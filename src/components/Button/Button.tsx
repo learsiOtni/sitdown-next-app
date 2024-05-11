@@ -1,45 +1,49 @@
 import Icon, { CustomIcons } from "../Icon/Icon"
 import TriangleIcon from "../Icon/TriangleIcon"
-import { MouseEventHandler } from 'react';
 
 type Props = {
   className?: string,
-  type?: string,
+  type?: "button" | "submit" | "reset" | undefined,
   icon?: CustomIcons,
   iconStyle?: string,
   bgNone?: boolean,
   dropdown?: boolean,
   children: React.ReactNode,
-  onClick: () => {},
+  onClick?: any,
 }
-const Button = (props: Props) => {
+const Button = ({ className, type, icon, iconStyle, bgNone, dropdown, children, onClick}: Props) => {
 
-  let defaultStyle = `whitespace-nowrap rounded py-2 text-white bg-primary shadow-md hover:opacity-70 `
+  let style = ""
+  let defaultStyle = `whitespace-nowrap rounded py-2 text-white bg-primary shadow-md hover:opacity-70`
   let bgNoneStyle = `whitespace-nowrap py-3 px-5 hover:bg-slate-100 `
   
-  if (props.className) {
-    defaultStyle = defaultStyle + props.className;
-
-    props.bgNone && (defaultStyle = bgNoneStyle + props.className);
+  if (className) {
+    style = `${defaultStyle} ${className}`;
+    bgNone && (style = `${bgNoneStyle} ${className}`);
   } else {
-    props.bgNone && (defaultStyle = bgNoneStyle)
+    bgNone && (style = bgNoneStyle)
   }
 
-  props.icon && (defaultStyle = defaultStyle + ` flex px-5`)
+  icon && (style = `${style} flex px-5`)
 
   let dropdownEl;
-  if (props.dropdown) dropdownEl = <span className="inline-block ml-2 "><TriangleIcon direction="down" color="border-b-[##FFFFFF]" size="sm" /></span>
-
+  if (dropdown)
+    dropdownEl = (
+      <span className="inline-block ml-2 ">
+        <TriangleIcon direction="down" color="border-b-[#FFFFFF]" size="sm" />
+      </span>
+    );
+    
   return (
-    <button className={defaultStyle} onClick={props.onClick}>
+    <button className={style ? style : defaultStyle} onClick={onClick} type={type}>
 
-      {props.icon ? <>
-        <Icon name={props.icon} iconContainerStyle={props.iconStyle} />
+      {icon ? <>
+        <Icon name={icon} iconContainerStyle={iconStyle} />
         <div className="ml-2">
-          {props.children}
+          {children}
         </div>
       </> : <>
-        {props.children}
+        {children}
       </>}
 
       {dropdownEl}

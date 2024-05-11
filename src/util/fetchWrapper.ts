@@ -1,23 +1,28 @@
-import { store } from '@/store/store';
-
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 const request = (method: RequestMethod) => {
 
-    return async (url: string, body?: {}) => {
+    return async (url: string, body?: any, token?: any) => {
+
         const options: RequestInit = {
             method,
-            headers: body ? {'Content-Type': 'application/json' } : setHeader(url),
-            body: body && JSON.stringify(body)
         }
 
-        //return fetch(url, options).then(handleResponse);
+        if (body) {
+            options.headers = {'Content-Type': 'application/json'}
+            options.body = JSON.stringify(body)
+        }
+        console.log(token)
+        if (token) options.headers = {...options.headers, 'Authorization': `Bearer ${token}`}
 
+        console.log(url, options);
+        //return fetch(url, options).then(handleResponse);
         const response = await fetch(url, options);
 
         if (!response.ok) {
             // if 401, 403 includes in response.status and theres token
             // then logout
+            //console.log('response not okay')
         }
 
         //  need to return if theres an error so rejectedValue can be called
@@ -32,28 +37,3 @@ export const fetchWrapper = {
     put: request('PUT'),
     delete: request('DELETE')
 }
-
-//const getToken = () => store.getState().auth.credentials.token;
-
-const setHeader = (url: string): {} => {
-
-    /*const test = false;
-    if (test) {
-        console.log('here');
-        const token = getToken();
-        const isAuth = !!token;
-
-        if(!isAuth) return {}; //&& !not api url?
-        return { Authorization: `Bearer ${token}`}
-    }*/
-    
-    // api url
-    return {}
-}
-
-
-
-
-
-
-

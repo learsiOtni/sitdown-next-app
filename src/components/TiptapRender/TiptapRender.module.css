@@ -1,0 +1,10 @@
+.container {
+    @apply max-h-16 overflow-scroll;
+}
+
+.tiptapEditor {
+}
+
+.tiptapEditor p {
+    @apply text-body;
+}

@@ -1,33 +1,19 @@
-
-
 import Text from '@/components/Text/Text';
 import Icon from '@/components/Icon/Icon'
 import Card from '@/components/Card/Card'
+import { Project } from '@/lib/features/projects/projectsSlice';
 
-type Project = {
-    id: number,
-    title: string,
-    body: string,
-    user: {
-        userId: number,
-        name: string
-    },
-    createdAt: string,
-    teamMembers: string[],
-    editable: boolean
-}
-
-type Props = {
+type CardProjectProps = {
     data: Project,
     className?: string 
 }
 
-const CardProject = (props: Props) => {
+const CardProject = ({data, className}: CardProjectProps) => {
 
-    const { id, title, body, editable } = props.data;
+    const { id, title, body, editable } = data;
 
     return (
-        <Card key={id} className={props.className}>
+        <Card key={id} className={className}>
 
             <div className="p-5">
                 <Text tag="h2" type="title">{title}</Text>

@@ -12,13 +12,13 @@ type Statistic = {
     previousValue?: number
 }
 
-type Props = {
-    data: Statistic;
+type CardStatisticProps = {
+    data: Statistic
 }
 
-const CardStatistic = (props: Props) => {
+const CardStatistic = ({data}: CardStatisticProps) => {
 
-    const { id, name, title, currentValue, previousValue } = props.data;
+    const { id, name, title, currentValue, previousValue } = data;
 
     const percValue = previousValue && calculatePercentageChange(currentValue, previousValue)
 

@@ -1,0 +1,27 @@
+.toolbar {
+    @apply flex p-3 gap-0.5 text-body border-b;
+}
+
+.button {
+    @apply flex items-center justify-center cursor-pointer h-6 w-6;
+}
+
+.button:hover {
+    @apply text-primary;
+}
+
+.button:active {
+    @apply text-primary;
+}
+
+.button[data-active] {
+    @apply text-primary;
+}
+
+.select {
+    @apply flex items-center justify-center cursor-pointer w-24 mr-2 hidden;
+}
+
+.select:hover {
+    @apply opacity-80;
+}

@@ -1,13 +1,13 @@
 import classes from './text.module.css';
 
-type Props = {
+type TextProps = {
     tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
     type: "heading" | "title" | "body" | "caption" | "caption-underline" | "caption-primary";
     className?: string
     children: React.ReactNode
 }
 
-const Text = (props: Props) => {
+const Text = (props: TextProps) => {
 
     let text;
     let textClasses = [];

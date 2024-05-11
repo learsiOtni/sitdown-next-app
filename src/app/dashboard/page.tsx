@@ -1,47 +1,19 @@
 "use client"
 
-import React, { useState } from 'react';
-import { redirect } from 'next/navigation';
 import { statistics, statusUpdates, projects } from '../../../data'
-
 import Button from '@/components/Button/Button'
 import TriangleIcon from '@/components/Icon/TriangleIcon'
 import Text from '@/components/Text/Text';
-
-import CardUpdate, { StatusUpdate } from '@/components/CardUpdate/CardUpdate'
 import CardStatistic from '@/components/CardStatistic/CardStatistic'
-import CardProject from '@/components/CardProject/CardProject';
-
-import { selectAllUpdates } from '@/store/updatesSlice'
-import { selectAuthToken, selectAuthState } from '@/store/authSlice'
-import { useSelector } from 'react-redux'
-
-interface Update {
-  id: string,
-  createdAt: string,
-  title: string,
-  body: string,
-  tags: string[],
-  user: {
-    id: string,
-    firstname: string
-  },
-  project: {
-    id: string,
-    title: string,
-  }
-}
+import CardProject from '@/components/CardProjects/CardProject';
+import CardUpdates from '../../components/CardUpdates/CardUpdates';
+import CardProjects from '@/components/CardProjects/CardProjects';
+import ModalUpdateForm from '@/components/ModalUpdateForm/ModalUpdateForm';
 
 
-const Dashboard = () => {
-  const updates = useSelector(selectAllUpdates);
-  const token = useSelector(selectAuthToken);
-  const isAuth = useSelector(selectAuthState);
 
-  /*if(!isAuth) {
-    redirect("/login")
-  }*/
 
+const Dashboard = () => {  
   return (
     <div className="p-11 w-full">
 
@@ -49,15 +21,16 @@ const Dashboard = () => {
       <header className="flex items-center justify-between">
         <Text tag="h1" type="heading">Overview Statistics</Text>
 
-        <Button className="px-5 mr-1" dropdown onClick={ () => 'test'}>
+        <Button className="px-5 mr-1" dropdown>
           Last 30 days
         </Button>
+
       </header>
       
 
       <div className="flex gap-4 mt-2.5">
         {statistics.map((statistic) => (
-          <CardStatistic data={statistic} />
+          <CardStatistic key={statistic.id} data={statistic} />
         ))}
       </div>
       {/* End of Header */}
@@ -65,13 +38,9 @@ const Dashboard = () => {
       <div className="mt-10 grid grid-cols-2 gap-4">
         {/* status updates */}
         <div className="col-span-1">
-
           <Text tag="h1" type="heading" className="mb-2.5">Status Updates</Text>
 
-          {updates.updates && updates.updates.map((status) => (
-            <CardUpdate data={status as StatusUpdate} />
-          ))}
-
+          <CardUpdates />
         </div>
         
         {/* projects */}
@@ -88,9 +57,7 @@ const Dashboard = () => {
           </div>
 
           <div className="min-w-[575px] flex flex-wrap gap-4">
-            { projects.map( project => (
-              <CardProject key={project.id} data={project} className="w-[48.5%]"/>
-            ))}
+            <CardProjects />
           </div>
 
         </div>

@@ -1,0 +1,11 @@
+.optionContainer {
+    @apply p-2.5 w-[50%] flex items-center;
+}
+
+.active {
+    @apply bg-white text-[#4F5761];
+}
+
+.inactive {
+    @apply bg-[#EBEFF0] opacity-50 text-[#454D57] cursor-pointer hover:bg-white;
+}

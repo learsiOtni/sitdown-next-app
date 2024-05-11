@@ -20,7 +20,6 @@ const config: Config = {
         'brand': '#04DFD0',
         'success': '#30C431',
         'error': '#EF3737'
-
       },
       backgroundColor: {
         'primary': '#4DA1FF',
@@ -28,15 +27,17 @@ const config: Config = {
         'yellow': '#EBDB82',
         'blue': '#82CFEB',
         'purple': '#B282EB',
-        'red': '#EB82A6'
+        'red': '#EB82A6',
+        'body': '#222222'
       },
       borderColor: {
         'success': '#30C431',
         'error': '#EF3737'
-      }
-
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
 export default config

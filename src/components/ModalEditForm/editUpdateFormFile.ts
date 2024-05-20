@@ -1,4 +1,4 @@
-const UpdateFormFile = {
+const EditUpdateFormFile = {
     title: {
         label: 'Headline*',
         elementType: 'input',
@@ -58,4 +58,4 @@ const UpdateFormFile = {
     },
 }
 
-export default UpdateFormFile
+export default EditUpdateFormFile

@@ -1,41 +1,60 @@
-import { NewUpdate, postUpdate, toggleModal } from "@/lib/features/updates/updatesSlice";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getCookie } from "cookies-next";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { NewUpdate, postUpdate, setStatus, toggleModal } from "@/lib/features/updates/updatesSlice";
 import Button from "../Button/Button";
 import Form from "../Form/Form";
 import Modal from "../Modal/Modal";
 import UpdateFormFile from "./updateFormFile";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { getCookie } from "cookies-next";
-
 
 
 export default function ModalUpdateForm(){
-
-    const dispatch = useAppDispatch()
     const authCookie = getCookie("authToken");
+    const router = useRouter()
+    const dispatch = useAppDispatch()
+
     const errors = useAppSelector( state => state.updates.errors)
     const isModalOpen = useAppSelector( state => state.updates.isModalOpen)
+    const status = useAppSelector( state => state.updates.status)
+    const user = useAppSelector( state => state.auth.credentials.user)
 
     const handleSubmit = (formData: NewUpdate) => {
-        const tagsToArray = formData.tags.split(' ')
 
+        let tagsToArray: string | string[] = '';
+        if(typeof formData.tags === "string") tagsToArray = formData.tags.split(' ')
+        
+        const { firstname, lastname, image } = user;
         const newData = {
             body: {...formData, tags: tagsToArray},
-            token: authCookie
+            token: authCookie,
+            userInfo: {
+                firstname,
+                lastname,
+                image
+            }
         }
-        
         dispatch( postUpdate(newData))
     }
 
+    useEffect(() => {
+      if (status === "postSucceeded") {
+        dispatch(setStatus("idle"));
+        dispatch(toggleModal());
+        router.push("/dashboard");
+      }
+    }, [status]);
+    
     return (
-        <Modal title="Add new update" isOpen={isModalOpen} toggle={ () => dispatch( toggleModal())}>
-            <Form 
+        <Modal title={"Add new update"} isOpen={isModalOpen} toggle={ () => dispatch( toggleModal())}>
+            {(status !== "postSucceeded") && <Form 
                 formFile={UpdateFormFile}
                 className="flex flex-col min-w-full"
                 onSubmit={handleSubmit}
                 errors={errors}
             >
                 <Button type="submit" className="text-xl p-10 mb-7 place-self-end">Add</Button>
-            </Form>
+            </Form>}
         </Modal>
     )
 }

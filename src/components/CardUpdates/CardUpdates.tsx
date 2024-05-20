@@ -9,7 +9,7 @@ export default function CardUpdates() {
   return (
     <>
       {updates &&
-        updates.map((update) => <CardUpdate key={update.id} data={update}/>)}
+        updates.map((update) => <CardUpdate key={update.id} data={update} />)}
     </>
   );
 }

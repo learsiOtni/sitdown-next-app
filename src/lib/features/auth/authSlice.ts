@@ -1,26 +1,18 @@
-import { createAsyncThunk, createSlice, isRejected, isRejectedWithValue } from '@reduxjs/toolkit';
-import { RootState } from '../../store';
-import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { CookieValueTypes, deleteCookie, setCookie } from 'cookies-next';
 import { fetchWrapper } from '@/util/fetchWrapper';
-import { useAppSelector } from '@/lib/hooks';
-import { useSelector } from 'react-redux';
 
 export type Status = 'idle' | 'loading' | 'succeeded' | 'failed';
 
-export interface AuthState {
-    isAuth: boolean;
-    credentials: {
-        token: string,
-        user: {
-            email?: string,
-            firstname?: string,
-            lastname?: string,
-            image?: string,
-            id: string,
-        }
-    };
-    status: Status,
-    errors: { [x: string]: string};
+export type User = {
+    id: string,
+    email: string,
+    firstname: string,
+    lastname: string,
+    createdAt: string,
+    image?: string,
+    projects?: string[],
+    updates?: string[],
 }
 
 export interface UserLogin {
@@ -34,11 +26,27 @@ export interface UserSignup extends UserLogin {
     lastname: string
 }
 
+export interface AuthState {
+    isAuth: boolean;
+    credentials: {
+        token: string,
+        user: User
+    };
+    status: Status,
+    errors: { [x: string]: string};
+}
+
 const initialState: AuthState = {
     isAuth: false,
     credentials: {
         token: '',
-        user: {}
+        user: {
+            id: '',
+            email: '',
+            firstname: '',
+            lastname: '',
+            createdAt: '',
+        }
     },
     status: 'idle',
     errors: {} as any
@@ -48,7 +56,7 @@ export const login = createAsyncThunk(
   "/login",
   async (userData: UserLogin, { rejectWithValue }) => {
     const data = await fetchWrapper.post(
-      process.env.NEXT_PUBLIC_API_URL + "login",
+      `${process.env.NEXT_PUBLIC_API_URL}login`,
       userData
     );
 
@@ -59,7 +67,7 @@ export const login = createAsyncThunk(
     setCookie("authToken", data.token, {
       expires: new Date(Date.now() + 60 * 60 * 1000),
     });
-
+    
     return data;
   }
 );
@@ -68,7 +76,7 @@ export const signup = createAsyncThunk(
   "/signup",
   async (userData: UserSignup, { rejectWithValue }) => {
     const data = await fetchWrapper.post(
-      process.env.NEXT_PUBLIC_API_URL + "signup",
+      `${process.env.NEXT_PUBLIC_API_URL}signup`,
       userData
     );
 
@@ -84,20 +92,18 @@ export const signup = createAsyncThunk(
 
 export const getAuthUser = createAsyncThunk(
   "/getAuthUser",
-  async (token: string, { rejectWithValue }) => {
+  async (token: CookieValueTypes, { rejectWithValue }) => {
     const user = await fetchWrapper.get(
-      process.env.NEXT_PUBLIC_API_URL + "user",
+      `${process.env.NEXT_PUBLIC_API_URL}user`,
       undefined,
       token
     );
 
     if (user.error) return rejectWithValue(user.error);
-
     return user;
   }
 );
 
-// actual slice
 export const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -121,13 +127,13 @@ export const authSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(login.pending, (state, action) => {
-                state.errors = {},
-                state.status = 'loading'
+                state.errors = {};
+                state.status = 'loading';
             })
             .addCase(login.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                state.isAuth = true
-                state.credentials.token = action.payload.token
+                state.status = 'succeeded';
+                state.isAuth = true;
+                state.credentials.token = action.payload.token;
             })
             .addCase(login.rejected, (state, action) => {
                 state.status = 'failed';
@@ -135,13 +141,13 @@ export const authSlice = createSlice({
             })
 
             .addCase(signup.pending, (state, action) => {
-                state.errors = {},
-                state.status = 'loading'
+                state.errors = {};
+                state.status = 'loading';
             })
             .addCase(signup.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                state.isAuth = true
-                state.credentials.token = action.payload.token
+                state.status = 'succeeded';
+                state.isAuth = true;
+                state.credentials.token = action.payload.token;
             })
             .addCase(signup.rejected, (state, action) => {
                 state.status = 'failed';
@@ -149,22 +155,20 @@ export const authSlice = createSlice({
             })
 
             .addCase(getAuthUser.pending, (state, action) => {
-                state.errors = {},
-                state.status = 'loading'
+                state.errors = {};
+                state.status = 'loading';
             })
             .addCase(getAuthUser.fulfilled, (state, action) => {
-                state.status = 'succeeded'
-                state.credentials.user = action.payload
-                state.isAuth = true
+                state.status = 'succeeded';
+                state.credentials.user = action.payload;
+                state.isAuth = true;
             })
             .addCase(getAuthUser.rejected, (state, action) => {
                 state.status = 'failed';
-                state.errors = action.error.message as any
+                state.errors = action.error.message as any;
             })
     }
 });
 
 export const { setAuth, setCredentials, clearErrors, logout } = authSlice.actions;
-
-export const isAuth = (state:RootState) => state.auth.isAuth
 export default authSlice.reducer;

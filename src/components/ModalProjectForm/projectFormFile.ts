@@ -14,7 +14,7 @@ const ProjectFormFile = {
         valid: true
     },
     body: {
-        elementType: 'input',
+        elementType: 'editor',
         label: "Description*",
         config: {
             id: "body",
@@ -28,7 +28,7 @@ const ProjectFormFile = {
         valid: true
     },
     teamMembers: {
-        elementType: 'input',
+        elementType: 'teamMenu',
         label: "Team members*",
         config: {
             id: "teamMembers",

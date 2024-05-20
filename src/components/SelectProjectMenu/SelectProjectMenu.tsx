@@ -1,29 +1,26 @@
 "use client";
 
-import { Project, fetchProjects } from "@/lib/features/projects/projectsSlice";
+import { Project } from "@/lib/features/projects/projectsSlice";
 import { useAppSelector } from "@/lib/hooks";
 import { useRef, useState } from "react";
 import TriangleIcon from "../Icon/TriangleIcon";
 import Icon from "../Icon/Icon";
-import { onInputChange } from "../Input/Input";
+import { CustomInput } from "../Input/Input";
 
-type SelectProjectMenuProps = {
-    onChange: onInputChange
-    error?: string
-}
 
-export default function SelectProjectMenu({ onChange, error} : SelectProjectMenuProps) {
+export default function SelectProjectMenu({ onChange, error, value} : CustomInput) {
   const projects = useAppSelector((state) => state.projects.projects);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<Project>();
+  const [selectedItem, setSelectedItem] = useState<Project | undefined>(projects.find( (project) => project.id === value));
   const menu = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   };
-
+  console.log(projects)
   const handleMenuSelect = (e: MouseEvent, project: Project) => {
     const projectId = (e.currentTarget as HTMLButtonElement).getAttribute("data-value")
+    console.log(projectId)
     
     setSelectedItem(project);
     toggleMenu();

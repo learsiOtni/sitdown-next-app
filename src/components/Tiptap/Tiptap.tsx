@@ -5,14 +5,10 @@ import StarterKit from '@tiptap/starter-kit'
 import Toolbar from '../Toolbar/Toolbar'
 import classes from './Tiptap.module.css'
 import Underline from '@tiptap/extension-underline'
-import { onInputChange } from '../Input/Input'
+import { CustomInput } from '../Input/Input'
 
-type TiptapProps = {
-    onChange: onInputChange
-    error?: string
-}
 
-export default function Tiptap({ onChange, error}: TiptapProps) {
+export default function Tiptap({ onChange, error, value}: CustomInput) {
 
     const editor = useEditor({
         editorProps:{
@@ -20,6 +16,7 @@ export default function Tiptap({ onChange, error}: TiptapProps) {
                 class: `${classes.tiptapEditor} prose max-w-none [&_ol]:list-decimal [&_ul]:list-disc`
             }
         },
+        content: value,
         extensions: [
             StarterKit,
             Underline,

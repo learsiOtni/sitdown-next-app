@@ -3,27 +3,27 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Form from "../Form";
 import loginForm from "./loginFormFile";
-import { UserLogin, clearErrors, login } from "@/lib/features/auth/authSlice";
+import { UserLogin, clearErrors, getAuthUser, login } from "@/lib/features/auth/authSlice";
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
 import Button from "@/components/Button/Button";
-import { fetchProjects } from "@/lib/features/projects/projectsSlice";
-import { fetchUpdates } from "@/lib/features/updates/updatesSlice";
 
 export default function LoginForm() {
   const errors = useAppSelector( state => state.auth.errors)
   const isAuth = useAppSelector( state => state.auth.isAuth)
+  const authUserId = useAppSelector( state => state.auth.credentials.user.id)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(clearErrors());
   }, []);
 
-  const handleSubmit = (formData: UserLogin) => {
-    dispatch(login(formData));
+  const handleSubmit = async (formData: UserLogin) => {
+    const action = await dispatch(login(formData))
+    if(action.payload.token) dispatch(getAuthUser(action.payload.token))
   };
 
-  if (isAuth) redirect('/dashboard');
+  if (isAuth && authUserId) redirect('/dashboard');
 
   return (
     <Form

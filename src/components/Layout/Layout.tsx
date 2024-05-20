@@ -14,8 +14,10 @@ import { fetchUpdates } from "@/lib/features/updates/updatesSlice";
 const Layout = ({ children }: { children: React.ReactNode }) => {
 
   const isAuth = useAppSelector((state) => state.auth.isAuth);
+  const isModalOpen = useAppSelector( state => state.updates.isModalOpen);
   const dispatch = useAppDispatch();
-
+  const updates = useAppSelector( state => state.updates.updates)
+  const authUserId = useAppSelector( state => state.auth.credentials.user.id) 
   const rightSideBar = false;
 
   /*const {data, isFetching } = useGetAuthenticatedUserQuery('userDetails')
@@ -31,17 +33,24 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect( () => {
-    if(isAuth) {
+    console.log(Object.keys(updates).length)
+    if(isAuth && Object.keys(updates).length <= 0) {
       dispatch( fetchProjects());
       dispatch( fetchUpdates());
     }
   }, [isAuth])
 
+  /*if(status === "postSucceeded" && !isModalOpen) {
+    setStatus("idle")
+    redirect('/dashboard');
+  }*/
+console.log(authUserId, isAuth)
   return (
     <div>
-      {isAuth ? (
+      {isAuth && authUserId ? (
         <>
           <ModalUpdateForm/>
+          
           <SideNav />
 
           <div className="flex ml-[110px] bg-[#F5F7FA] h-full min-h-screen">

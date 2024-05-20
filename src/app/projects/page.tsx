@@ -29,10 +29,6 @@ const Projects = () => {
           {projects.map(project => (
             <CardProject data={project as Project} className="w-[24%]"/>
           ))}
-
-          {projects.map(project => (
-            <CardProject data={project as Project } className="w-[24%]" />
-          ))}
           
         </div>
       </div>

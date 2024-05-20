@@ -41,10 +41,11 @@ type IconProps = {
   name: CustomIcons;
   iconContainerStyle?: string;
   background?: boolean;
-  size?: SizeProp
+  size?: SizeProp;
+  onClick?: () => void
 };
 
-const Icon = ({ name, iconContainerStyle, background, size }: IconProps) => {
+const Icon = ({ name, iconContainerStyle, background, size, onClick }: IconProps) => {
   let icon = faCopy;
   let containerStyle = `flex items-center justify-center ${iconContainerStyle}`;
   let iconStyle = "";
@@ -91,7 +92,7 @@ const Icon = ({ name, iconContainerStyle, background, size }: IconProps) => {
   name === "check" && (icon = faCheck);
 
   return (
-    <div className={containerStyle}>
+    <div className={containerStyle} onClick={onClick}>
       <FontAwesomeIcon icon={icon} className={iconStyle} size={size} />
     </div>
   );

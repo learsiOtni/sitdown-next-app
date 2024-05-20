@@ -3,8 +3,9 @@
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import classes from "./TiptapRender.module.css";
+import Underline from '@tiptap/extension-underline';
 
-export default ({content, fullView} : {content: any, fullView?: boolean}) => {
+export default ({content, className} : {content: any, className?: string}) => {
 
   const editor = useEditor({
     editorProps:{
@@ -16,6 +17,7 @@ export default ({content, fullView} : {content: any, fullView?: boolean}) => {
     content: content,
     extensions: [
         StarterKit,
+        Underline
     ],
   })
 
@@ -23,9 +25,10 @@ export default ({content, fullView} : {content: any, fullView?: boolean}) => {
     return null
   }
 
+  
   return (
-    <div className={`pt-2.5 ${!fullView && classes.container}`}>
-        {!content.type ? (
+    <div className={`pt-2.5 ${className}`}>
+        {!content?.type ? (
             <p className="text-body">{content}</p>
         ) : (
             <EditorContent editor={editor} />

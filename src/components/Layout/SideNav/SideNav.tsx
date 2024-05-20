@@ -5,9 +5,9 @@ import Link from 'next/link'
 import Icon, { CustomIcons } from '@/components/Icon/Icon'
 import links from './links';
 
-import { useAppDispatch } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { logout } from '@/lib/features/auth/authSlice';
-import { toggleModal } from '@/lib/features/updates/updatesSlice';
+import { clearErrors, setStatus, toggleModal } from '@/lib/features/updates/updatesSlice';
 
 type Link = {
     id: number;
@@ -19,12 +19,18 @@ const SideNav = () => {
     const pathname = usePathname();
     const router = useRouter();
     const dispatch = useAppDispatch();
+    const status = useAppSelector( state => state.updates.status)
 
     const handleLogout = () => {
         dispatch(logout())
         router.push('/login')
     }
 
+    const handleAddUpdate = () => {
+        if(status !== "failed" && status !== "idle") dispatch( setStatus("idle"))
+        dispatch(clearErrors())
+        dispatch(toggleModal())
+    }
     
     return (
         <header className="w-28 h-screen flex flex-col items-center fixed">
@@ -33,7 +39,7 @@ const SideNav = () => {
                 <Logo width={29} height={50} smallLogo />
             </div>
 
-            <div onClick={() => dispatch(toggleModal())} className="h-7 mt-20 cursor-pointer hover:text-lg hover:opacity-90">
+            <div onClick={handleAddUpdate} className="h-7 mt-20 cursor-pointer hover:text-lg hover:opacity-90">
                 <Icon name="add" background size="2xl" />
             </div>
             

@@ -16,14 +16,16 @@ export default function Modal({ title, isOpen, toggle, children }: ModalProps) {
 
   const handleOutsideModal = (e: React.MouseEvent<HTMLElement>) => {
     if (outsideModalRef && outsideModalRef.current === e.target) toggle()
-    
   };
+
+  const handleCloseButton = () => toggle()
 
   useEffect( () => {
     if(isOpen) document.body.style.overflow = "hidden"
     else document.body.style.overflow = "auto"
   }, [isOpen])
 
+  
   return (
     <div
       className={`${
@@ -35,7 +37,7 @@ export default function Modal({ title, isOpen, toggle, children }: ModalProps) {
       <Card className="bg-red-500 w-[600px] my-0 mx-auto">
         <header className="py-4 px-5 bg-[#F4F8F9] flex justify-between items-center">
           <h3 className="text-body text-lg">{title}</h3>
-          <div onClick={toggle} className="hover:opacity-80">
+          <div onClick={handleCloseButton} className="hover:opacity-80">
             <Icon
               name="close"
               iconContainerStyle="w-5 h-5 bg-body opacity-50 rounded-full text-white cursor-pointer"
@@ -44,7 +46,7 @@ export default function Modal({ title, isOpen, toggle, children }: ModalProps) {
           </div>
         </header>
 
-        <div className="px-5 pt-5">{children}</div>
+        <div className="px-5 pt-5 max-h-[80vh] overflow-scroll">{children}</div>
       </Card>
     </div>
   );

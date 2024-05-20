@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import { checkValidity } from "@/util/formValidation";
 
@@ -20,6 +20,7 @@ export type InputValidation = {
 export type ElementForm = {
   elementType?: string
   label?: string
+  subLabel?: string 
   config: InputConfig
   value: string
   validation: InputValidation
@@ -38,6 +39,8 @@ type FormProps = {
   errors?: { [T in string]: string };
 };
 
+export type ElementType = "input" | "editor" | "projectMenu" | "teamMenu";
+
 export default function Form({
   formFile,
   className,
@@ -45,7 +48,7 @@ export default function Form({
   children,
   errors,
 }: FormProps) {
-  const [form, setForm] = useState(formFile);
+  const [form, setForm] = useState<Forms>(formFile);
   const formKeys = Object.keys(formFile);
 
   const handleSubmit = (e: FormEvent) => {
@@ -72,7 +75,7 @@ export default function Form({
 
   return (
     <form onSubmit={handleSubmit} className={className}>
-      {formKeys.map((formKey) => (
+      {Object.keys(form).length > 0 && formKeys.map((formKey) => (
         <Input
           key={formKey}
           config={form[formKey].config}
@@ -80,7 +83,8 @@ export default function Form({
           onChange={handleInputChange}
           error={errors && errors[formKey] && errors[formKey]}
           label={form[formKey].label}
-          elementType={form[formKey].elementType}
+          subLabel={form[formKey].subLabel}
+          elementType={form[formKey].elementType as ElementType}
         />
       ))}
 

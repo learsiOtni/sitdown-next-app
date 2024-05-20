@@ -10,11 +10,7 @@ export default function CardProjects() {
     <>
       {projects &&
         projects.map((project) => (
-          <CardProject
-            key={`${project.id} ${project.createdAt}`}
-            data={project}
-            className="w-[48.5%]"
-          />
+          <CardProject key={project.id} data={project} />
         ))}
     </>
   );

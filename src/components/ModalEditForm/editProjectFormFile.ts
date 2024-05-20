@@ -1,7 +1,7 @@
-const UpdateFormFile = {
+const EditProjectFormFile = {
     title: {
-        label: 'Headline*',
         elementType: 'input',
+        label: "Project name*",
         config: {
             id: "title",
             type: "text",
@@ -14,8 +14,8 @@ const UpdateFormFile = {
         valid: true
     },
     body: {
-        label: 'Description*',
         elementType: 'editor',
+        label: "Description*",
         config: {
             id: "body",
             type: "text",
@@ -27,28 +27,13 @@ const UpdateFormFile = {
         },
         valid: true
     },
-    projectId: {
-        label: 'Assign to a project',
-        elementType: 'projectMenu',
+    teamMembers: {
+        elementType: 'teamMenu',
+        label: "Team members*",
         config: {
-            id: "projectId",
+            id: "teamMembers",
             type: "text",
-            name: "projectId",
-        },
-        value: '',
-        validation: {
-
-        },
-        valid: true
-    },
-    tags: {
-        elementType: 'input',
-        label: 'Tags*',
-        subLabel: '(Separate tags using space)',
-        config: {
-            id: "tags",
-            type: "text",
-            name: "tags",
+            name: "teamMembers",
         },
         value: '',
         validation: {
@@ -58,4 +43,4 @@ const UpdateFormFile = {
     },
 }
 
-export default UpdateFormFile
+export default EditProjectFormFile;

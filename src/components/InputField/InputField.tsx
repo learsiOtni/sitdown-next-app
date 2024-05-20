@@ -1,9 +1,9 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import { Input } from "../Input/Input";
+import { InputProps } from "../Input/Input";
 
-export default function InputField({ label, error, config, value, onChange}: Input) {
+export default function InputField({ label, error, config, value, onChange}: InputProps) {
 
     const [data, setData] = useState(value)
 

@@ -1,5 +1,3 @@
-import Text from "@/components/Text/Text"
-
 type DividerProps = {
     title: string
 }
@@ -7,7 +5,7 @@ type DividerProps = {
 const Divider = ({title}: DividerProps) => {
     return (
         <div className="flex items-center">
-            <Text tag="p" type="body" className="whitespace-nowrap">{title}</Text>
+            <p className="text-body whitespace-nowrap">{title}</p>
             <div className="ml-2.5 border-b-2 border-b-[#E6E7E8] w-full h-min" />
         </div>
     )

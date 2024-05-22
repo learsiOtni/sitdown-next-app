@@ -1,5 +1,4 @@
 import Icon from "@/components/Icon/Icon"
-import Text from "@/components/Text/Text"
 import Card from "@/components/Card/Card"
 
 
@@ -11,14 +10,14 @@ const RightSideBar = () => {
                 <Icon name="notification"/>
             </div>
             
-            <Text tag="h1" type="heading" className="ml-2.5">Today's Agenda</Text>
+            <h1 className="ml-2.5 text-heading">Today's Agenda</h1>
         </div>
 
         <div className="mt-9 border-b-[3px] border-[#4DA1FF] mb-5"/>
 
         <Card key={1} className="p-2.5 shadow-xl">
-            <div className="flex items-center justify-between">
-                <Text tag="p" type="caption">12.45</Text>
+            <div className="flex-between">
+                <p className="text-caption">12.45</p>
                 
                 <div className="flex">
                     <div className="w-4 h-4 text-primary"><Icon name="edit"/></div>
@@ -26,11 +25,11 @@ const RightSideBar = () => {
                 </div>
             </div>
 
-            <Text tag="p" type="body" className="mt-2.5">New user interface</Text>
+            <p className="mt-2.5 text-body">New user interface</p>
         </Card>
         
     </div>
   )
 }
 
-export default RightSideBar
+export default RightSideBar;

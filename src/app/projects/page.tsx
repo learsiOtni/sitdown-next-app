@@ -19,6 +19,11 @@ const Projects = () => {
 
         <div className="mt-2.5 flex flex-wrap gap-4">
           <CardProjects />
+
+
+          {/** Todo
+           * Need card projects to be more reusable
+           */}
         </div>
       </div>
 

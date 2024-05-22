@@ -35,20 +35,23 @@ const Button = ({ className, type, icon, iconStyle, bgNone, dropdown, children, 
     );
     
   return (
-    <button className={style ? style : defaultStyle} onClick={onClick} type={type}>
-
-      {icon ? <>
-        <Icon name={icon} iconContainerStyle={iconStyle} />
-        <div className="ml-2">
-          {children}
+    <button
+      className={style ? style : defaultStyle}
+      onClick={onClick}
+      type={type}
+    >
+      {icon ? (
+        <div className="flex items-center justify-center">
+          <Icon name={icon} iconContainerStyle={iconStyle} />
+          <div className="ml-2.5">{children}</div>
         </div>
-      </> : <>
-        {children}
-      </>}
+      ) : (
+        <>{children}</>
+      )}
 
       {dropdownEl}
     </button>
-  )
+  );
 }
 
 export default Button

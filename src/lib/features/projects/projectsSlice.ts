@@ -2,7 +2,7 @@ import { fetchWrapper } from "@/util/fetchWrapper";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CookieValueTypes } from "cookies-next";
 import { SliceStatus, Update } from "../updates/updatesSlice";
-import { User } from "../auth/authSlice";
+import { MinUser, User } from "../auth/authSlice";
 
 export type NewProject = {
   title: string;
@@ -13,38 +13,32 @@ export type NewProject = {
 export type PostDBProps<T> = {
   body: T;
   token: CookieValueTypes;
-  userInfo: {
-    firstname: string;
-    lastname: string;
-    image?: string;
-  };
+  userInfo: MinUser;
   id?: string;
 };
 
 export type DeleteDBProps = {
-    id: string; 
-    token: CookieValueTypes;
-}
+  id: string;
+  token: CookieValueTypes;
+};
 
 export interface Project {
   id: string;
   body: string;
   createdAt: string;
-  teamMembers: Array<string>;
+  teamMembers: Array<string | MinUser>;
   title: string;
-  user: {
-    id: string,
-    firstname: string,
-    lastname: string,
-  };
-  updates?: Update;
+  user: MinUser;
+  updates?: Array<Update>;
   editable: boolean;
 }
 
 export interface ProjectsState {
-  projects: Project[];
+  projects: Array<Project>;
   status: SliceStatus;
-  errors: { [x: string]: string } | undefined;
+  errors?: { 
+    [x: string]: string 
+  };
   teamMembers: Array<User>
 }
 
@@ -81,26 +75,32 @@ export const postProject = createAsyncThunk(
     );
 
     if (!project.id) return rejectWithValue(project);
-    return { ...project, user: userInfo };
+
+    // structure new project
+    const { userId, ...rest } = project;
+    return { ...rest, user: { id: userId, ...userInfo } };
   }
 );
 
 export const editProject = createAsyncThunk(
-    "/projects/editProject",
-    async (
-      { body, token, userInfo, id }: PostDBProps<NewProject>,
-      { rejectWithValue }
-    ) => {
-      const project = await fetchWrapper.post(
-        `${process.env.NEXT_PUBLIC_API_URL}projects/${id}`,
-        body,
-        token
-      );
-  
-      if (!project.id) return rejectWithValue(project);
-      return { ...project, user: userInfo };
-    }
-  );
+  "/projects/editProject",
+  async (
+    { body, token, userInfo, id }: PostDBProps<NewProject>,
+    { rejectWithValue }
+  ) => {
+    const project = await fetchWrapper.post(
+      `${process.env.NEXT_PUBLIC_API_URL}projects/${id}`,
+      body,
+      token
+    );
+
+    if (!project.id) return rejectWithValue(project);
+
+    // structure edited project
+    const { userId, ...rest } = project;
+    return { ...rest, user: { id: userId, ...userInfo } };
+  }
+);
 
 // For populating Select Team Members Menu, 
 export const getUsers = createAsyncThunk(

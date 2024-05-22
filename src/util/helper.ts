@@ -6,7 +6,7 @@ export const calculatePercentageChange = (currentValue: number, oldValue: number
     return Math.round(difference / oldValue * 100);
 }
 
-export const formatDate = (previousDate: Date) => { //format Status updates' createdAt Relative To Current Date
+export const formatDate = (prevDate: string) => { //format Status updates' createdAt Relative To Current Date
 
     const minutes = 60 * 1000;
     const hours = minutes * 60;
@@ -15,7 +15,7 @@ export const formatDate = (previousDate: Date) => { //format Status updates' cre
     const years = days * 365;
 
     const currentDate = new Date();
-    const secondsPast = (currentDate.getTime() - previousDate.getTime());
+    const secondsPast = (currentDate.getTime() - new Date(prevDate).getTime());
 
     let timeName, time;
     if (secondsPast < minutes) {
@@ -42,4 +42,18 @@ export const formatDate = (previousDate: Date) => { //format Status updates' cre
     if (value === 1) timeName = timeName.slice(0, -1);
     
     return `${value} ${timeName} ago`;
+}
+
+export const validateTags = (formTags: string) => {
+
+    //replace any special characters with space, then replace any whitespaces with one space and split using that one space.
+    const tags = formTags.replace(/[^a-zA-Z ]/g, " ").replace(/\s+/g, " ").split(' ');
+    const uniqueTags: Array<string> = [];
+
+    // remove duplicates and removes case-sensitive
+    tags.forEach( tag => {
+        if(!uniqueTags.includes(tag.toLowerCase())) uniqueTags.push(tag.toLowerCase());
+    })
+
+    return uniqueTags;
 }

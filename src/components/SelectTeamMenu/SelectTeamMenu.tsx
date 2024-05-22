@@ -63,7 +63,7 @@ export default function SelectTeamMenu({onChange, value, error}: CustomInput) {
 
                 <div className="flex gap-3 overflow-scroll">
                 { chosenMembers.length > 0 && chosenMembers.map( chosenMember => (
-                <div key={chosenMember.id} className="w-[60px] flex flex-col items-center justify-center">
+                <div key={chosenMember.id} className="w-[60px] flex-col-center">
                     <div className="relative w-[50px] h-[50px] min-w-[50px] mb-1.5">
                         { chosenMember.image ? <img src={chosenMember.image} alt="member image" className="rounded-full object-cover w-[50px] h-[50px] min-w-[50px]"/>
                             : <Image 
@@ -97,7 +97,7 @@ export default function SelectTeamMenu({onChange, value, error}: CustomInput) {
 
                 <div className="flex gap-3 overflow-scroll">
             { members.length > 0 ? members.map( member => (
-                <div key={member.id} className="w-[60px] mb-2.5 flex flex-col items-center justify-center cursor-pointer hover:opacity-70">
+                <div key={member.id} className="w-[60px] mb-2.5 flex-col-center cursor-pointer hover:opacity-70">
                     <div className="relative w-[50px] h-[50px] min-w-[50px] mb-1.5" onClick={() => handleAddMember(member)}>
                     { member.image ? <img src={member.image} alt="member image" className="rounded-full object-cover w-[50px] h-[50px] min-w-[50px]"/>
                             : <Image 
@@ -114,6 +114,7 @@ export default function SelectTeamMenu({onChange, value, error}: CustomInput) {
             )): <p className="text-body">No Members Found!</p>}
             </div>
             </div>}
+            {/** Make this into one component */}
         </div>
     )
 }

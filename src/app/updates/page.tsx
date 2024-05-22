@@ -9,10 +9,23 @@ import { statusUpdates } from '../../../data'
 import { Update } from "@/lib/features/updates/updatesSlice"
 import { useState } from "react"
 import TableCardView from "@/components/TableCardView/TableCardView"
+import { useAppSelector } from "@/lib/hooks"
 
 
 const Updates = () => {
     const [cardView, setCardView] = useState<CardView>("table");
+    const updates = useAppSelector( state => state.updates.updates);
+    
+    const object = {
+      "today": [
+        { update: 1},
+        { update: 2}
+      ],
+      "yesterday": [
+        { update: 1},
+        { update: 2}
+      ],
+    }
 
     const handleViewChange = (newView: CardView) => {
       if (cardView !== newView) setCardView(newView)

@@ -1,8 +1,7 @@
 import { calculatePercentageChange } from '@/util/helper'
-import TriangleIcon from '@/components/Icon/TriangleIcon'
 import Card from '@/components/Card/Card'
-import Text from '@/components/Text/Text';
 import Icon, { CustomIcons } from '@/components/Icon/Icon'
+import TriangleIcon from '@/components/Icon/TriangleIcon'
 
 type Statistic = {
     id: number,
@@ -31,8 +30,8 @@ const CardStatistic = ({data}: CardStatisticProps) => {
             />
 
             <h2 className="text-black text-[65px]">{currentValue}</h2>
-            <Text tag="h6" type="body" className="mt-[-15px]">{title}</Text>
-            <div className="flex items-center mt-5">
+            <h6 className="text-body mt-[-15px]">{title}</h6>
+            <div className="flex-center mt-5">
                 {percValue && (percValue > 0 ? (
                     <>
                         <TriangleIcon direction="up" color="border-b-success" />

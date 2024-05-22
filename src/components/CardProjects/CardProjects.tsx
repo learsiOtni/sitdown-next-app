@@ -8,10 +8,13 @@ export default function CardProjects() {
 
   return (
     <>
-      {projects &&
+      {projects.length > 0 ? (
         projects.map((project) => (
           <CardProject key={project.id} data={project} />
-        ))}
+        ))
+      ) : (
+        <p className="p-2.5 mt-2.5 text-caption-2">No Projects yet! Please start adding projects!</p>
+      )}
     </>
   );
 }

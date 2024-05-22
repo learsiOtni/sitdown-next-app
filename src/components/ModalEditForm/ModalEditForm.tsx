@@ -12,6 +12,7 @@ import EditUpdateFormFile from "./editUpdateFormFile";
 import EditProjectFormFile from "./editProjectFormFile";
 import { NewProject, Project, editProject, setStatus as setProjectsStatus } from "@/lib/features/projects/projectsSlice";
 import { ReduxSlice } from "../CardUpdates/CardUpdate";
+import { validateTags } from "@/util/helper";
 
 type ModalEditFormProps = {
     show: boolean,
@@ -33,8 +34,9 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
     const user = useAppSelector( state => state.auth.credentials.user)
 
     const handleSubmit = (formData: NewUpdate & NewProject) => {
+
       if (formData.tags && typeof formData.tags === "string")
-        formData = { ...formData, tags: formData.tags.split(" ") };
+        formData = { ...formData, tags: validateTags(formData.tags)};
 
       if (formData.teamMembers) {
         const teamMembersId: Array<String> = []
@@ -53,7 +55,9 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
         },
         id: params.id,
       };
-      console.log(newData);
+
+      console.log(formData)
+
       if(slice === "projects") dispatch( editProject(newData));
       if (slice === "updates") dispatch( editUpdate(newData))
     };

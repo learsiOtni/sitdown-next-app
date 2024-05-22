@@ -10,11 +10,21 @@ const roboto = Roboto({
     subsets: ["latin"]
 });
 
+export type GlobalCSS =
+  | "text-title"
+  | "text-caption"
+  | "text-caption-2"
+  | "text-caption-underline"
+  | "text-caption-primary"
+  | "flex-center"
+  | "flex-col-center"
+  | "flex-between";
+
 export default function RootLayout({
     children
-}: {
+}: Readonly<{
     children: React.ReactNode
-}) {
+}>) {
 
     return (
         <html lang="en">

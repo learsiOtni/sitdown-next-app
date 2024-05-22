@@ -3,25 +3,28 @@
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Form from "../Form";
 import signupForm from "./signupFormFile";
-import { UserSignup, clearErrors, signup } from "@/lib/features/auth/authSlice";
+import { UserSignup, clearErrors, getAuthUser, signup } from "@/lib/features/auth/authSlice";
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
 import Button from "@/components/Button/Button";
 
 export default function SignupForm() {
+  const dispatch = useAppDispatch()
   const errors = useAppSelector( state => state.auth.errors)
   const isAuth = useAppSelector( state => state.auth.isAuth)
-  const dispatch = useAppDispatch()
+  const authUserId = useAppSelector( state => state.auth.credentials.user.id)
+  
 
   useEffect(() => {
     dispatch(clearErrors());
   }, []);
 
-  const handleSubmit = (formData: UserSignup) => {
-    dispatch(signup(formData));
+  const handleSubmit = async (formData: UserSignup) => {
+    const action = await dispatch(signup(formData));
+    if(action.payload.token) dispatch(getAuthUser(action.payload.token))
   };
 
-  if (isAuth) redirect('/dashboard')
+  if (isAuth && authUserId) redirect('/dashboard')
   
   return (
     <Form

@@ -35,8 +35,8 @@ export default function Modal({ title, isOpen, toggle, children }: ModalProps) {
       ref={outsideModalRef}
     >
       <Card className="bg-red-500 w-[600px] my-0 mx-auto">
-        <header className="py-4 px-5 bg-[#F4F8F9] flex justify-between items-center">
-          <h3 className="text-body text-lg">{title}</h3>
+        <header className="py-4 px-5 bg-[#F4F8F9] flex-between">
+          <h3 className="text-title">{title}</h3>
           <div onClick={handleCloseButton} className="hover:opacity-80">
             <Icon
               name="close"

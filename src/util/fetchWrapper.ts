@@ -9,28 +9,23 @@ const request = (method: RequestMethod) => {
         }
 
         if (body) {
+            // doesnt work if body is image, only works with form texts
             options.headers = {'Content-Type': 'application/json'}
             options.body = JSON.stringify(body)
         }
-        console.log(token)
+
         if (token) options.headers = {...options.headers, 'Authorization': `Bearer ${token}`}
 
-        console.log(url, options);
-        //return fetch(url, options).then(handleResponse);
         const response = await fetch(url, options);
 
-        if (!response.ok) {
-            // if 401, 403 includes in response.status and theres token
-            // then logout
-            //console.log('response not okay')
-        }
+        if (!response.ok) { console.log("Fetch Error") }
 
         //  need to return if theres an error so rejectedValue can be called
         return await response.json() // or the can check from call if it returns a json with error  
     }
 }
 
-// fetchWrapper.post(URL, body)
+// fetchWrapper.post(URL, body, token)
 export const fetchWrapper = {
     get: request('GET'),
     post: request('POST'),

@@ -1,7 +1,6 @@
 
 import Image from "next/image"
 import Card from "@/components/Card/Card"
-import Text from "@/components/Text/Text"
 
 type User = {
     id: number,
@@ -31,8 +30,8 @@ const CardUser = ({data}: CardUserProps) => {
                 />
 
                 <div className="ml-7">
-                    <Text tag="h6" type="title">{name}</Text>
-                    <Text tag="p" type="body">{role}</Text>
+                    <h6 className="text-title">{name}</h6>
+                    <p className="text-body">{role}</p>
                 </div>
             </div>
 
@@ -41,6 +40,7 @@ const CardUser = ({data}: CardUserProps) => {
                 <div className="w-10 h-10 rounded-full bg-primary text-center text-white pt-2">{teams}</div>
                 <div className="w-10 h-10 rounded-full bg-[#05E6D7] text-center text-white pt-2">{projects}</div>
             </div>
+            {/** Todo, make reusable */}
         </Card>
     )
 }

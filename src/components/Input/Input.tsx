@@ -1,9 +1,8 @@
-import { ChangeEvent, useEffect } from "react";
-import Tiptap from "../Tiptap/Tiptap";
-import SelectProjectMenu from "../SelectProjectMenu/SelectProjectMenu";
 import { ElementType, InputConfig } from "../Form/Form";
 import InputField from "../InputField/InputField";
+import SelectProjectMenu from "../SelectProjectMenu/SelectProjectMenu";
 import SelectTeamMenu from "../SelectTeamMenu/SelectTeamMenu";
+import Tiptap from "../Tiptap/Tiptap";
 
 export type onInputChange = (name: string, value: any) => void
 
@@ -32,7 +31,7 @@ export default function Input({ elementType, config, value, onChange, error, lab
   console.log(subLabel)
   return (
     <>
-      { label && <p className="text-sm pb-1.5 text-body">{label}
+      { label && <p className="pb-1.5 text-caption-2">{label}
       {subLabel && <span className="ml-[5px] text-xs text-body opacity-60">{subLabel}</span>}
       </p>}
       { error && <p className="text-xs text-error">{error}</p>}

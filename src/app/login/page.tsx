@@ -1,8 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
+import Container from "@/components/Container/Container";
 import Logo from "@/components/Logo/Logo";
 import googleLogo from "@/assets/img/google.png";
-import Container from "@/components/Container/Container";
-import Link from "next/link";
 import LoginForm from "@/components/Form/LoginForm/LoginForm";
 
 const Login = () => {

@@ -4,6 +4,14 @@ import { fetchWrapper } from '@/util/fetchWrapper';
 
 export type Status = 'idle' | 'loading' | 'succeeded' | 'failed';
 
+// minified user
+export type MinUser = {
+    id: string,
+    firstname: string,
+    lastname: string,
+    image?: string
+}
+
 export type User = {
     id: string,
     email: string,
@@ -46,6 +54,7 @@ const initialState: AuthState = {
             firstname: '',
             lastname: '',
             createdAt: '',
+            image: ''
         }
     },
     status: 'idle',
@@ -111,6 +120,9 @@ export const authSlice = createSlice({
         setAuth: (state) => {
             state.isAuth = true
         },
+        setProfileImage: (state, action) => {
+            state.credentials.user.image = action.payload
+        },
         setCredentials: (state, action) => {
             state.credentials.user = action.payload
             state.isAuth = true
@@ -170,5 +182,5 @@ export const authSlice = createSlice({
     }
 });
 
-export const { setAuth, setCredentials, clearErrors, logout } = authSlice.actions;
+export const { setAuth, setCredentials, clearErrors, logout, setProfileImage } = authSlice.actions;
 export default authSlice.reducer;

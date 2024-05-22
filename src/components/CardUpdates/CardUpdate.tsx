@@ -1,18 +1,16 @@
 'use client'
-import Image from 'next/image'
-import Card from '../Card/Card';
-import Text from '@/components/Text/Text';
-import Icon from '@/components/Icon/Icon'
-import { formatDate } from '@/util/helper';
-import { Update } from '@/lib/features/updates/updatesSlice';
+
 import Link from 'next/link';
-import TiptapRender from '../TiptapRender/TiptapRender';
 import ButtonDelete from '../ButtonDelete/ButtonDelete';
 import ButtonEdit from '../ButtonEdit/ButtonEdit';
-import Tiptap from '../Tiptap/Tiptap';
+import Card from '../Card/Card';
+import Icon from '@/components/Icon/Icon'
+import ProfileImage from '../ProfileImage/ProfileImage';
+import TiptapRender from '../TiptapRender/TiptapRender';
+import { Update } from '@/lib/features/updates/updatesSlice';
+import { formatDate } from '@/util/helper';
 
 export type CardView = "card" | "table" | "full";
-
 export type ReduxSlice = "updates" | "projects";
 
 type CardUpdateProps = {
@@ -24,81 +22,84 @@ type CardUpdateProps = {
 const Title = ({ id, title }: { id: string; title: string }) => {
   return (
     <Link href={`/updates/${id}`}>
-      <Text tag="h4" type="title">
-        {title}
-      </Text>
+      <h4 className="text-title">{title}</h4>
     </Link>
   );
 };
 
-const Tags = ({tags, updateId}: {tags: String[], updateId:string}) => (
+const tiptapClass = "h-16 max-h-16 overflow-scroll"
+
+const FormattedDate = ({ date }: { date: string }) => (
+  <p className="text-caption-primary">{formatDate(date)}</p>
+)
+
+const Tags = ({ tags, updateId }: { tags: string[]; updateId: string }) => (
   <div className="flex items-center mt-4">
     <div className="w-4 h-4 text-primary">
       <Icon name="tags" />
     </div>
-    {tags &&
-      tags.map((tag) => (
-        <p className="ml-2.5 underline text-black text-sm" key={`${updateId}-${tag}`}>
-          {tag}
-        </p>
-      ))}
+
+    {tags?.map((tag) => (
+      <p
+        key={`${updateId}-${tag}`}
+        className="text-caption underline ml-2.5 "
+      >
+        {tag}
+      </p>
+    ))}
   </div>
 );
 
-const ProfileImage = () => <Image
-  src="/noavatar.png"
-  fill
-  alt="profile image"
-  className="rounded-full"
-/>
 
-const CardView = ({ data }: { data: Update }) => {
-  //w-[32.5%]
-  return (
-    <>
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center">
-            <div className="min-w-[40px] w-[40px] h-[40px] relative mr-2.5">
-              <ProfileImage />
-            </div>
-
-            <p className="text-black capitalize text-sm underline">
-              {`${data.user.firstname} ${data.user.lastname}`}
-            </p>
-          </div>
-
-          <Text tag="p" type="caption-primary">
-            {formatDate(new Date(data.createdAt))}
-          </Text>
+const CardView = ({ data }: { data: Update }) => (
+  <>
+    <div className="flex-between mb-6">
+      <div className="flex items-center">
+        <div className="min-w-[40px] w-[40px] h-[40px] relative mr-2.5">
+          <ProfileImage image={data.user.image} />
         </div>
 
-        <Title id={data.id} title={data.title}/>
-        <TiptapRender content={data.body} className="max-h-16 overflow-scroll"/>
-        <Tags tags={data.tags} updateId={data.id}/>
-    </>
-  );
-};
+        <p className="text-caption-underline capitalize">
+          {`${data.user.firstname} ${data.user.lastname}`}
+        </p>
+      </div>
+
+      <FormattedDate date={data.createdAt} />
+    </div>
+
+    <Title id={data.id} title={data.title} />
+    <TiptapRender
+      content={data.body}
+      className={tiptapClass}
+    />
+    <Tags tags={data.tags} updateId={data.id} />
+  </>
+);
 
 const TableView = ({ data, fullView }: { data: Update, fullView: boolean }) => {
   return (
     <>
-      <div className="min-w-[65px] w-[65px] h-[65px] relative mr-5">
-        <ProfileImage />
+      <div className="mr-5 min-w-[65px] w-[65px] h-[65px] relative">
+        <ProfileImage image={data.user.image} />
       </div>
 
       <div className="min-w-0 w-full">
         <div className="flex justify-between">
-          <Title id={data.id} title={data.title}/>
-
-          <Text tag="p" type="caption-primary">
-            {formatDate(new Date(data.createdAt))}
-          </Text>
+          <Title id={data.id} title={data.title} />
+          <FormattedDate date={data.createdAt} />
         </div>
 
-        <TiptapRender content={data.body} className={`${!fullView && "max-h-16 overflow-scroll"}`}/>
-        <Tags tags={data.tags} updateId={data.id}/>
+        <TiptapRender
+          content={data.body}
+          className={`${!fullView && tiptapClass}`}
+        />
+        <Tags tags={data.tags} updateId={data.id} />
 
-        {data.lastUpdated && <p className="text-xs text-body mt-10">Last Updated: {formatDate(new Date(data.lastUpdated))}</p>}
+        {data.lastUpdated && (
+          <p className="mt-10 text-body text-xs">
+            Last Updated: {formatDate(data.lastUpdated)}
+          </p>
+        )}
       </div>
     </>
   );
@@ -107,21 +108,20 @@ const TableView = ({ data, fullView }: { data: Update, fullView: boolean }) => {
 const DefaultView = ({ data }: { data: Update }) => {
   return (
     <>
-      <div className="min-w-[35px] w-[35px] h-[35px] relative mr-2.5">
-        <ProfileImage />
+      <div className="mr-2.5 relative min-w-[35px] w-[35px] h-[35px]">
+        <ProfileImage image={data.user.image}/>
       </div>
 
       <div className="min-w-0 w-full">
-        <Text tag="p" type="caption-primary" className="mt-2 mb-4">
-          <Text tag="span" type="caption-primary" className="capitalize">{`${data.user?.firstname} ${data.user?.lastname}`}{" "}</Text>
-          <Text tag="span" type="body">
-            updated his status
-          </Text>{" "}
-          {formatDate(new Date(data.createdAt))}
-        </Text>
+
+        <p className="text-caption-primary mt-2 mb-4">
+          <span className="capitalize">{`${data.user?.firstname} ${data.user?.lastname} `}</span>
+          <span className="text-body">{`updated his status `}</span>
+          {formatDate(data.createdAt)}
+        </p>
 
         <Title id={data.id} title={data.title}/>
-        <TiptapRender content={data.body} className="max-h-16 overflow-scroll"/>
+        <TiptapRender content={data.body} className={tiptapClass}/>
         <Tags tags={data.tags} updateId={data.id}/>
       </div>
     </>
@@ -131,7 +131,7 @@ const DefaultView = ({ data }: { data: Update }) => {
 const CardUpdate = ({ data, view, enableEdit }: CardUpdateProps) => {
 
   let content = <DefaultView data={data} />;
-  if (view === "table" || view === "full") content = <TableView data={data} fullView={view === "full" ? true : false}/>;
+  if (view === "table" || view === "full") content = <TableView data={data} fullView={view === "full"}/>;
   else if (view === "card") content = <CardView data={data} />; 
 
   return (
@@ -143,7 +143,7 @@ const CardUpdate = ({ data, view, enableEdit }: CardUpdateProps) => {
       {content}
 
       {enableEdit && (
-        <div className="absolute bottom-[20px] right-[30px] flex items-center justify-center">
+        <div className="absolute bottom-[20px] right-[30px] flex-center">
           <ButtonEdit data={data} slice="updates" />
           <ButtonDelete data={data} slice="updates"/>
         </div>

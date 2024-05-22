@@ -1,38 +1,56 @@
 "use client";
 
-import { Project } from "@/lib/features/projects/projectsSlice";
+import { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "@/lib/hooks";
-import { useRef, useState } from "react";
-import TriangleIcon from "../Icon/TriangleIcon";
-import Icon from "../Icon/Icon";
+import { Project } from "@/lib/features/projects/projectsSlice";
 import { CustomInput } from "../Input/Input";
-
+import Icon from "../Icon/Icon";
+import TriangleIcon from "../Icon/TriangleIcon";
 
 export default function SelectProjectMenu({ onChange, error, value} : CustomInput) {
-  const projects = useAppSelector((state) => state.projects.projects);
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<Project | undefined>(projects.find( (project) => project.id === value));
   const menu = useRef<HTMLDivElement>(null);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<Project | undefined>();
+  const [filteredProjects, setFilteredProjects] = useState<Array<Project>>([]);
+
+  const projects = useAppSelector(state => state.projects.projects);
+  const authUserId = useAppSelector( state => state.auth.credentials.user.id);
+  const status = useAppSelector(state => state.projects.status);
+
+  useEffect( () => {
+    setSelectedItem(projects.find((project) => project.id === value))
+  }, [value])
+
+  useEffect( () => {
+    // only show projects to users they belong to, meaning they are team members or author
+    if(projects.length > 0 || status === "editSucceeded") {
+      setFilteredProjects(projects.filter( project => authUserId === project?.user?.id || project?.teamMembers?.includes(authUserId)))
+    }
+      
+  }, [projects, status])
+
+  /* 
+  once project is made, does not update the projects immediately to reflect the changes
+  findings: the userId and user is separate, need to put userId to user { id: userId }
+  */
+  
+  const handleMenuSelect = (e: MouseEvent, project: Project) => {
+    const projectId = (e.currentTarget as HTMLButtonElement).getAttribute("data-value")
+    setSelectedItem(project);
+    toggleMenu();
+    onChange("projectId", projectId)
+  }
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   };
-  console.log(projects)
-  const handleMenuSelect = (e: MouseEvent, project: Project) => {
-    const projectId = (e.currentTarget as HTMLButtonElement).getAttribute("data-value")
-    console.log(projectId)
-    
-    setSelectedItem(project);
-    toggleMenu();
-
-    onChange("projectId", projectId)
-  }
-
 
   return (
     <div className="relative mb-3" ref={menu}>
       <div
-        className={`p-2 border rounded text-lg bg-[#FBFBFD] flex items-center justify-between mb-1 ${error && "border-error"}`}
+        className={`mb-1 p-2 border rounded text-lg bg-[#FBFBFD] flex-between ${
+          error && "border-error"
+        }`}
         onClick={toggleMenu}
       >
         <p className="text-body h-7">{selectedItem && selectedItem.title}</p>
@@ -40,16 +58,16 @@ export default function SelectProjectMenu({ onChange, error, value} : CustomInpu
       </div>
 
       <div
-        className={`bg-[#FBFBFD] absolute w-full z-10 border rounded ${
+        className={`bg-gray-100 absolute w-full z-10 border rounded ${
           openMenu ? "block" : "hidden"
         }`}
       >
         <ul className="text-body cursor-pointer max-h-[180px] overflow-scroll">
-          {projects &&
-            projects.map((project) => (
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project) => (
               <li
                 key={project.id}
-                className={`hover:bg-body/10 p-2 flex justify-between items-center ${
+                className={`hover:bg-body/10 p-2 flex-between ${
                   selectedItem?.id === project.id && "text-black"
                 }`}
                 onClick={(e: any) => handleMenuSelect(e, project)}
@@ -63,7 +81,12 @@ export default function SelectProjectMenu({ onChange, error, value} : CustomInpu
                   </span>
                 )}
               </li>
-            ))}
+            ))
+          ) : (
+            <li key="no-project" className="p-2.5 text-caption-2">
+              No Project found!
+            </li>
+          )}
         </ul>
       </div>
     </div>

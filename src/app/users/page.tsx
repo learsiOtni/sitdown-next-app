@@ -1,8 +1,6 @@
-import SearchBar from "@/components/SearchBar/SearchBar"
-import Text from "@/components/Text/Text"
 import { users } from "../../../data"
 import CardUser from "@/components/CardUser/CardUser"
-
+import SearchBar from "@/components/SearchBar/SearchBar"
 
 const Users = () => {
 
@@ -14,18 +12,17 @@ const Users = () => {
 
         <div className="flex flex-row-reverse">
           <div className="flex gap-10 mr-8">
-            <Text tag="h2" type="title">Updates</Text>
-            <Text tag="h2" type="title">Teams</Text>
-            <Text tag="h2" type="title">Projects</Text>
+            <h2 className="text-title">Updates</h2>
+            <h2 className="text-title">Teams</h2>
+            <h2 className="text-title">Projects</h2>
           </div>
         </div>
 
         { users.map( user => (
-          <CardUser data={user} />
+          <CardUser key={user.id} data={user} />
         ))}
 
       </div>
-      
     </div>
   )
 }

@@ -32,7 +32,7 @@ export default function LoginForm() {
       onSubmit={handleSubmit}
       errors={errors}
     >
-      <p className="self-end underline text-body text-sm mb-4 mt-1 ">
+      <p className="self-end mb-4 mt-1 text-caption-2 underline">
         Forgotten Password?
       </p>
 
@@ -41,7 +41,7 @@ export default function LoginForm() {
       </Button>
 
       {errors.error && (
-        <p className="self-center text-sm text-error mt-2">
+        <p className="self-center mt-2 text-sm text-error">
           {errors.error}
         </p>
       )}

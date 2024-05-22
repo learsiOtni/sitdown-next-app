@@ -46,9 +46,9 @@ export default async function middleware(req: NextRequest) {
         return NextResponse.redirect(absoluteURL.toString());
     }
 
-    if(req.nextUrl.pathname.match(/updates\/.*/)) { 
+    //if(req.nextUrl.pathname.match(/updates\/.*/)) { 
         //console.log(req.se);
-    }
+    //}
 }
 
 export const config = {

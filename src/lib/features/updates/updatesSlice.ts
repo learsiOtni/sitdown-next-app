@@ -29,6 +29,7 @@ export interface Update {
     id: string;
     firstname: string;
     lastname: string;
+    image?: string;
   };
   project?: {
     id: string;
@@ -79,7 +80,10 @@ export const postUpdate = createAsyncThunk(
     );
 
     if (!update.id) return rejectWithValue(update);
-    return { ...update, user: userInfo };
+
+    // structure new update
+    const { userId, ...rest } = update;
+    return { ...rest, user: { id: userId, ...userInfo } };
   }
 );
 
@@ -96,7 +100,10 @@ export const editUpdate = createAsyncThunk(
     );
 
     if (!update.id) return rejectWithValue(update);
-    return { ...update, user: userInfo };
+
+    // structure edited update
+    const { userId, ...rest } = update;
+    return { ...rest, user: { id: userId, ...userInfo } };
   }
 );
 
@@ -130,6 +137,9 @@ export const updatesSlice = createSlice({
     toggleModal: (state) => {
       state.isModalOpen = !state.isModalOpen;
     },
+    setUpdates: (state, action) => {
+      state.updates = action.payload
+    }
   },
   extraReducers(builder) {
     builder
@@ -199,6 +209,6 @@ export const updatesSlice = createSlice({
   },
 });
 
-export const { setStatus, clearErrors, toggleModal } = updatesSlice.actions;
+export const { setStatus, clearErrors, toggleModal, setUpdates } = updatesSlice.actions;
 
 export default updatesSlice.reducer;

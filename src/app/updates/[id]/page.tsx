@@ -1,4 +1,5 @@
 import CardUpdate from "@/components/CardUpdates/CardUpdate";
+import { Update } from "@/lib/features/updates/updatesSlice";
 import { redirect } from "next/navigation";
 
 type UpdatePageParams = {
@@ -7,30 +8,11 @@ type UpdatePageParams = {
   }
 }
 
-export interface Update {
-  id: string;
-  createdAt: string;
-  title: string;
-  body: string;
-  tags: string[];
-  user: {
-    id: string;
-    firstname: string;
-    lastname: string;
-    image?: string;
-  };
-  project?: {
-    id: string;
-    title: string;
-  };
-  lastUpdated?: string;
-}
-
 export default async function UpdatePage({ params: { id }}: UpdatePageParams) {
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}updates/${id}`
   const response = await fetch(url, { cache: 'no-store' })
-  const data = await response.json()
+  const data: Update & { error: string } = await response.json()
 
   if(data.error) redirect('/dashboard')
   return (

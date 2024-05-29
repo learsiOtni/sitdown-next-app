@@ -56,10 +56,8 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
         id: params.id,
       };
 
-      console.log(formData)
-
       if(slice === "projects") dispatch( editProject(newData));
-      if (slice === "updates") dispatch( editUpdate(newData))
+      if(slice === "updates") dispatch( editUpdate(newData))
     };
 
     useEffect(() => {
@@ -90,8 +88,9 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
 
     useEffect(() => {
         if (updatesStatus === "editSucceeded" || projectsStatus === "editSucceeded") {
-        if(slice === "updates") dispatch(setUpdatesStatus("idle"));
-        if(slice === "projects") dispatch(setProjectsStatus("idle"));
+          if(slice === "updates") dispatch(setUpdatesStatus("idle"));
+          if(slice === "projects") dispatch(setProjectsStatus("idle"));
+          
           toggleModal();
           router.refresh();
           router.push('/dashboard');

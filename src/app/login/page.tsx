@@ -11,7 +11,7 @@ const Login = () => {
       <section className="flex flex-col items-center w-[480px]">
         <Logo width={318} height={85} />
 
-        <button className="mt-[48px] flex py-2 items-center justify-center border min-w-full rounded shadow-sm">
+        <button className="mt-[48px] py-2 flex-center border min-w-full rounded shadow-sm">
           <Image src={googleLogo} width={27} height={27} alt="Google logo" />
           <p className="pl-2 text-[#4F5761] text-opacity-95 text-lg">
             Login with Google

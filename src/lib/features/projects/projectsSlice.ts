@@ -177,11 +177,10 @@ export const projectsSlice = createSlice({
         state.errors = {};
       })
       .addCase(editProject.fulfilled, (state, action) => {
-        console.log(action.payload);
         const index = state.projects.findIndex(
           (project) => project.id === action.payload.id
         );
-        console.log(index);
+        
         state.status = "editSucceeded";
         state.projects[index] = action.payload;
         state.errors = {};

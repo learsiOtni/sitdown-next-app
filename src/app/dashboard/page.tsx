@@ -1,8 +1,8 @@
 import { statistics } from "../../../data";
 import Button from "@/components/Button/Button";
-import CardProjects from "@/components/CardProjects/CardProjects";
 import CardStatistic from "@/components/CardStatistic/CardStatistic";
-import CardUpdates from "../../components/CardUpdates/CardUpdates";
+import Updates from "./Updates";
+import CardProjects from "@/components/CardProjects/CardProjects";
 
 const Dashboard = () => {
   return (
@@ -27,8 +27,7 @@ const Dashboard = () => {
         {/* status updates */}
         <div className="col-span-1">
           <h1 className="text-heading mb-2.5">Status Updates</h1>
-
-          <CardUpdates />
+          <Updates />
         </div>
 
         {/* projects */}
@@ -46,7 +45,7 @@ const Dashboard = () => {
           </div>
 
           <div className="min-w-[575px] flex flex-wrap gap-4">
-            <CardProjects />
+            <CardProjects className="w-[48.5%]"/>
           </div>
         </div>
       </div>

@@ -1,35 +1,52 @@
 'use client'
 
-import SearchBar from "@/components/SearchBar/SearchBar"
-import TableIcon from "@/components/Icon/TableIcon"
-import CardIcon from "@/components/Icon/CardIcon"
+import { useEffect, useState } from "react"
+import { useAppSelector } from "@/lib/hooks"
 import Divider from "@/components/Divider/Divider"
 import CardUpdate, { CardView } from '@/components/CardUpdates/CardUpdate'
-import { statusUpdates } from '../../../data'
-import { Update } from "@/lib/features/updates/updatesSlice"
-import { useState } from "react"
+import SearchBar from "@/components/SearchBar/SearchBar"
 import TableCardView from "@/components/TableCardView/TableCardView"
-import { useAppSelector } from "@/lib/hooks"
 
+import { statusUpdates } from '../../../data'
+import { fetchWrapper } from "@/util/fetchWrapper"
+import { Update } from "@/lib/features/updates/updatesSlice"
+import CardUpdates from "@/components/CardUpdates/CardUpdates"
+import { formatDateTitle } from "@/util/helper"
+
+type Dates = {
+  id: "string";
+  updates: Array<Update>
+}
 
 const Updates = () => {
     const [cardView, setCardView] = useState<CardView>("table");
-    const updates = useAppSelector( state => state.updates.updates);
+    const [dates, setDates] = useState<Array<Dates>>([]);
     
-    const object = {
-      "today": [
-        { update: 1},
-        { update: 2}
-      ],
-      "yesterday": [
-        { update: 1},
-        { update: 2}
-      ],
+    useEffect(() => {
+      const fetch = async () => {
+        const dates = await fetchWrapper.get(
+          `${process.env.NEXT_PUBLIC_API_URL}dates`
+        );
+        setDates(dates);
+      };
+
+      fetch();
+    }, []);
+
+    const sort = (array: Array<any>) => {
+      
+      //return array
+      //array.sort( (a, b) => new Date(a).getTime() - new Date(b).getTime())
+
+      /** TODO: create a sort function to sort updates from desc */
     }
+    
 
     const handleViewChange = (newView: CardView) => {
       if (cardView !== newView) setCardView(newView)
     }
+
+    dates && console.log(sort(dates[0]?.updates))
 
     return (
       <div className="p-11 w-full">
@@ -41,33 +58,22 @@ const Updates = () => {
         />
 
         {/** Table Card options */}
-        <TableCardView view={cardView} onChange={handleViewChange}/>
+
+        <TableCardView view={cardView} onChange={handleViewChange} />
 
         {/** Content */}
-        <div className="mt-6">
-          <Divider title="Today" />
+        <div>
+        {dates.length > 0 &&
+          dates.map((date) => (
+            <div className="mt-6" key={date.id}>
+              <Divider title={formatDateTitle(date.id)} />
 
-          <div className="mt-2.5">
-            <CardUpdate
-              data={statusUpdates[0] as any}
-              view={cardView}
-            />
+              <div className="mt-2.5 flex gap-3 flex-wrap">
+                <CardUpdates data={date.updates} view={cardView}/>
+              </div>
+            </div>
+          ))}
           </div>
-        </div>
-
-        <div className="mt-8">
-          <Divider title="Yesterday" />
-
-          <div className="mt-2.5 flex gap-3 flex-wrap">
-            {statusUpdates.slice(1, 4).map((status) => (
-              <CardUpdate
-                data={status as any}
-                view={cardView}
-                key={status.id}
-              />
-            ))}
-          </div>
-        </div>
       </div>
     );
   }

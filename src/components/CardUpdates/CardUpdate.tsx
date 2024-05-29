@@ -8,7 +8,7 @@ import Icon from '@/components/Icon/Icon'
 import ProfileImage from '../ProfileImage/ProfileImage';
 import TiptapRender from '../TiptapRender/TiptapRender';
 import { Update } from '@/lib/features/updates/updatesSlice';
-import { formatDate } from '@/util/helper';
+import { formatDate, toHours } from '@/util/helper';
 
 export type CardView = "card" | "table" | "full";
 export type ReduxSlice = "updates" | "projects";
@@ -30,7 +30,7 @@ const Title = ({ id, title }: { id: string; title: string }) => {
 const tiptapClass = "h-16 max-h-16 overflow-scroll"
 
 const FormattedDate = ({ date }: { date: string }) => (
-  <p className="text-caption-primary">{formatDate(date)}</p>
+  <p className="text-caption-primary">{toHours(date)}</p>
 )
 
 const Tags = ({ tags, updateId }: { tags: string[]; updateId: string }) => (
@@ -95,7 +95,7 @@ const TableView = ({ data, fullView }: { data: Update, fullView: boolean }) => {
         />
         <Tags tags={data.tags} updateId={data.id} />
 
-        {data.lastUpdated && (
+        {data.lastUpdated && fullView && (
           <p className="mt-10 text-body text-xs">
             Last Updated: {formatDate(data.lastUpdated)}
           </p>
@@ -118,6 +118,7 @@ const DefaultView = ({ data }: { data: Update }) => {
           <span className="capitalize">{`${data.user?.firstname} ${data.user?.lastname} `}</span>
           <span className="text-body">{`updated his status `}</span>
           {formatDate(data.createdAt)}
+          
         </p>
 
         <Title id={data.id} title={data.title}/>
@@ -137,7 +138,7 @@ const CardUpdate = ({ data, view, enableEdit }: CardUpdateProps) => {
   return (
     <Card
       className={`p-5 border border-[#E2E5E6] relative ${
-        view !== "card" ? "flex" : "w-[32%]"
+        view !== "card" ? "flex w-[100%]" : "w-[32%]"
       }`}
     >
       {content}

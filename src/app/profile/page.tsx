@@ -10,13 +10,14 @@ import Card from "@/components/Card/Card"
 import ProfileImage from "@/components/ProfileImage/ProfileImage"
 
 const Profile = () => {
-    const user = useAppSelector( state => state.auth.credentials.user);
-    const token = getCookie('authToken');
-    const router = useRouter();
-    const updates = useAppSelector( state => state.updates.updates)
-    const dispatch = useAppDispatch();
     const [imageForm, setImageForm] = useState<File>();
     const imageFileRef = useRef<HTMLInputElement>(null);
+
+    const router = useRouter();
+    const token = getCookie('authToken');
+    const dispatch = useAppDispatch();
+    const user = useAppSelector( state => state.auth.credentials.user);
+    const updates = useAppSelector( state => state.updates.updates)
 
     const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.target.files && setImageForm(e.target.files[0])
@@ -39,10 +40,10 @@ const Profile = () => {
           );
 
           const data: {message: string, image: string} = await message.json();
-          // update the current updates with the new image, 
+
+          // update all the current updates with the new users' image, 
           const updatedUpdates: any = []
           updates.forEach( update => {
-            console.log(update.user.id === user.id)
             if(update.user.id === user.id) updatedUpdates.push({
                 ...update, 
                 user: {
@@ -54,8 +55,8 @@ const Profile = () => {
           })
           
           dispatch( setUpdates(updatedUpdates))
-          setImageForm(undefined);
           dispatch( setProfileImage(data.image))
+          setImageForm(undefined);
           router.refresh()
         } else {
           imageFileRef.current && imageFileRef.current.click();

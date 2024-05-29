@@ -18,10 +18,8 @@ const request = (method: RequestMethod) => {
 
         const response = await fetch(url, options);
 
-        if (!response.ok) { console.log("Fetch Error") }
-
-        //  need to return if theres an error so rejectedValue can be called
-        return await response.json() // or the can check from call if it returns a json with error  
+        // if there's an error, API will return a JSON with errors in it, which can be use to display
+        return await response.json();
     }
 }
 

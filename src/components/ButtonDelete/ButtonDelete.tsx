@@ -24,7 +24,6 @@ export default function ButtonDelete({ data, slice}: ButtonDeleteProps) {
     if (slice === "projects") dispatch(deleteProject({ id: data.id, token }));
     router.replace("/dashboard");
   };
-  console.log(data)
 
   if (authUserId === data?.user?.id)
     return (

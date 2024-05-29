@@ -28,7 +28,7 @@ export default function Input({ elementType, config, value, onChange, error, lab
   if (elementType === "editor") element = <Tiptap value={value} onChange={onChange} error={error}/>
   if (elementType === "projectMenu") element = <SelectProjectMenu value={value} onChange={onChange} error={error}/>
   if (elementType === "teamMenu") element = <SelectTeamMenu value={value} onChange={onChange} error={error}/>
-  console.log(subLabel)
+
   return (
     <>
       { label && <p className="pb-1.5 text-caption-2">{label}

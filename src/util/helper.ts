@@ -44,6 +44,34 @@ export const formatDate = (prevDate: string) => { //format Status updates' creat
     return `${value} ${timeName} ago`;
 }
 
+export const toHours = (createdAt: string) => {
+    const newDate = new Date(createdAt);
+    const hours = newDate.getUTCHours();
+    const minutes = newDate.getUTCMinutes();
+    const minLength = minutes.toLocaleString().length;
+
+    const currentDate = new Date();
+    const secondsPast = (currentDate.getTime() - new Date(createdAt).getTime());
+    // if less than 6 hours ago
+    if (secondsPast < 6*60*60*1000) return formatDate(createdAt)
+
+    return `${hours}:${minLength === 1 ? `0${minutes}` : minutes}`
+}
+
+export const formatDateTitle = (createdAt: string) => {
+
+    const currentDate = new Date();
+    const secondsPast = (currentDate.getTime() - new Date(createdAt).getTime());
+
+    // less than one day
+    if (secondsPast < 24*60*60*1000) return 'Today';
+    else if (secondsPast > 24*60*60*1000 && secondsPast < 48*60*60*1000) return 'Yesterday';
+    
+    // string ref = Mon May 20 2024
+    const a = createdAt.split(' ');
+    return `${a[0]}, ${a[2]} ${a[1]}`
+}
+
 export const validateTags = (formTags: string) => {
 
     //replace any special characters with space, then replace any whitespaces with one space and split using that one space.

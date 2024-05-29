@@ -13,11 +13,10 @@ import { fetchUpdates } from "@/lib/features/updates/updatesSlice";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 
-  const isAuth = useAppSelector((state) => state.auth.isAuth);
-  const isModalOpen = useAppSelector( state => state.updates.isModalOpen);
   const dispatch = useAppDispatch();
-  const updates = useAppSelector( state => state.updates.updates)
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const authUserId = useAppSelector( state => state.auth.credentials.user.id) 
+  const updates = useAppSelector( state => state.updates.updates)
   const rightSideBar = false;
 
   /*const {data, isFetching } = useGetAuthenticatedUserQuery('userDetails')
@@ -33,18 +32,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect( () => {
-    console.log(Object.keys(updates).length)
     if(isAuth && Object.keys(updates).length <= 0) {
       dispatch( fetchProjects());
       dispatch( fetchUpdates());
     }
   }, [isAuth])
 
-  /*if(status === "postSucceeded" && !isModalOpen) {
-    setStatus("idle")
-    redirect('/dashboard');
-  }*/
-console.log(authUserId, isAuth)
   return (
     <div>
       {isAuth && authUserId ? (

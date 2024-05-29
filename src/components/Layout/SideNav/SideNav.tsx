@@ -8,6 +8,7 @@ import links from './links';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { logout } from '@/lib/features/auth/authSlice';
 import { clearErrors, setStatus, toggleModal } from '@/lib/features/updates/updatesSlice';
+import ProfileImage from '@/components/ProfileImage/ProfileImage';
 
 type Link = {
     id: number;
@@ -20,6 +21,7 @@ const SideNav = () => {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const status = useAppSelector( state => state.updates.status)
+    const user = useAppSelector( state => state.auth.credentials.user)
 
     const handleLogout = () => {
         dispatch(logout())
@@ -63,14 +65,11 @@ const SideNav = () => {
             </nav>
 
             <div className="w-9 h-9 mt-[190px] relative">
-                <div className="w-4 h-4 rounded-full bg-brand z-10 absolute left-6 top-[-5px]" />
+                <div className="w-4 h-4 rounded-full bg-brand z-10 absolute left-6 top-[-5px]"/>
                 <Link href="/profile">
-                    <Image
-                        className={`rounded-full border hover:opacity-70 ${pathname === "/profile" && 'border-brand'}`}
-                        src="/noavatar.png"
-                        fill={true}
-                        alt="profile image"
-                    />
+                    <div className={`rounded-full border ${pathname === "/profile" && 'border-brand'} hover:opacity-70 hover:border-brand`}>
+                        <ProfileImage image={user.image}/>
+                    </div>
                 </Link>
             </div>
 

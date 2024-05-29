@@ -1,11 +1,5 @@
-import SearchBar from "@/components/SearchBar/SearchBar"
-import Divider from "@/components/Divider/Divider"
-import CardProject from '@/components/CardProjects/CardProject';
-
-
-import { projects } from '../../../data'
 import CardProjects from "@/components/CardProjects/CardProjects";
-import { Project } from "@/lib/features/projects/projectsSlice";
+import Divider from "@/components/Divider/Divider"
 import ModalProjectForm from "@/components/ModalProjectForm/ModalProjectForm";
 
 const Projects = () => {
@@ -18,11 +12,11 @@ const Projects = () => {
         <Divider title="My Projects" />
 
         <div className="mt-2.5 flex flex-wrap gap-4">
-          <CardProjects />
-
+          <CardProjects filterData="myProjects" className="w-[24%]"/>
 
           {/** Todo
            * Need card projects to be more reusable
+           * and do my projects & other projects divider
            */}
         </div>
       </div>
@@ -31,10 +25,7 @@ const Projects = () => {
         <Divider title="Other Projects" />
 
         <div className="mt-2.5 flex flex-wrap gap-4">
-          {projects.map(project => (
-            <CardProject data={project as Project} className="w-[24%]"/>
-          ))}
-          
+          <CardProjects filterData="otherProjects" className="w-[24%]"/>
         </div>
       </div>
     </div>

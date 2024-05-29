@@ -15,16 +15,17 @@ type CardProjectProps = {
   data: Project;
   view?: "full";
   enableEdit?: boolean;
+  className?: string;
 };
 
-const CardProject = ({ data, view, enableEdit }: CardProjectProps) => {
+const CardProject = ({ data, view, enableEdit, className }: CardProjectProps) => {
   const { id, title, body, teamMembers, user, createdAt } = data;
   return (
     <Card
       key={id}
-      className={`${
-        view === "full" ? "w-full" : "w-[23%]"
-      } min-w-[280px] relative`}
+      className={`${className}
+      ${view === "full" && "w-full"} 
+      min-w-[280px] relative`}
     >
       <div
         className={`p-5 w-full flex flex-col ${view !== "full" && "h-[180px]"}`}

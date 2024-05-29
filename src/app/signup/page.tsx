@@ -1,7 +1,8 @@
+import Link from "next/link";
 import Container from "@/components/Container/Container";
 import SignupForm from "@/components/Form/SignupForm/SignupForm";
 import Logo from "@/components/Logo/Logo";
-import Link from "next/link";
+
 
 export default function Signup() {
   return (

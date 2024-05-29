@@ -1,15 +1,17 @@
-"use client";
+import { Update } from "@/lib/features/updates/updatesSlice";
+import CardUpdate, { CardView } from "./CardUpdate";
 
-import {  useAppSelector } from "@/lib/hooks";
-import CardUpdate from "./CardUpdate";
+type CardUpdatesProps = {
+  data: Array<Update>;
+  className?: string;
+  view?: CardView
+}
 
-export default function CardUpdates() {
-  const updates = useAppSelector((state) => state.updates.updates);
-
+export default function CardUpdates({ data, className, view }: CardUpdatesProps) {
   return (
     <>
-      {updates.length > 0 ? (
-        updates.map((update) => <CardUpdate key={update.id} data={update} />)
+      {data.length > 0 ? (
+        data.map((update) => <CardUpdate key={update.id} data={update} view={view}/>)
       ) : (
         <p className="p-2.5 mt-5 text-caption-2">
           No Status Updates yet! Please start adding status updates!

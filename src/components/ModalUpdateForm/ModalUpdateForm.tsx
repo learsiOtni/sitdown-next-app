@@ -43,6 +43,7 @@ export default function ModalUpdateForm(){
       if (status === "postSucceeded") {
         dispatch(setStatus("idle"));
         dispatch(toggleModal());
+        router.refresh();
         router.push("/dashboard");
       }
     }, [status]);

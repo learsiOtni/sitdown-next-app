@@ -21,7 +21,7 @@ export default function ModalProjectForm() {
   const status = useAppSelector( state => state.projects.status)
 
   const handleSubmit = (formData: Project) => {
-    console.log(formData);
+
     const minTeamMembers: Array<string> = [];
     formData.teamMembers.length > 0 &&
       formData.teamMembers.forEach( (member: any) => {

@@ -1,16 +1,15 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { useAppSelector } from "@/lib/hooks"
+
+import { fetchWrapper } from "@/util/fetchWrapper"
+import { Update } from "@/lib/features/updates/updatesSlice"
+import { CardView } from '@/components/CardUpdates/CardUpdate'
+import CardUpdates from "@/components/CardUpdates/CardUpdates"
 import Divider from "@/components/Divider/Divider"
-import CardUpdate, { CardView } from '@/components/CardUpdates/CardUpdate'
 import SearchBar from "@/components/SearchBar/SearchBar"
 import TableCardView from "@/components/TableCardView/TableCardView"
 
-import { statusUpdates } from '../../../data'
-import { fetchWrapper } from "@/util/fetchWrapper"
-import { Update } from "@/lib/features/updates/updatesSlice"
-import CardUpdates from "@/components/CardUpdates/CardUpdates"
 import { formatDateTitle } from "@/util/helper"
 
 type Dates = {

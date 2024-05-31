@@ -1,15 +1,14 @@
 'use client'
 
+import { useEffect, useState } from "react"
 import { User } from "@/lib/features/auth/authSlice";
 import { getUsers } from "@/lib/features/projects/projectsSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import Image from "next/image";
-import { useEffect, useState } from "react"
-import Icon from "../Icon/Icon";
 import { CustomInput } from "../Input/Input";
+import Icon from "../Icon/Icon";
+import ProfileImage from "../ProfileImage/ProfileImage";
 
-
-export default function SelectTeamMenu({onChange, value, error}: CustomInput) {
+export default function SelectTeamMenu({onChange, value}: Readonly<CustomInput>) {
 
     const [chosenMembers, setChosenMembers] = useState<Array<User>>([]);
     const [members, setMembers] = useState<Array<User>>([]);
@@ -28,11 +27,16 @@ export default function SelectTeamMenu({onChange, value, error}: CustomInput) {
     }, [])
 
     useEffect( () => {
-
         const filteredUser: Array<any> = [];
-        const defaultChosen: Array<any> = []
+        const defaultChosen: Array<any> = [];
+        const chosenMembersId: Array<string> = [];
+
+        value.length > 0 && value.forEach( (user: User ) => {
+            chosenMembersId.push(user.id)
+        })
+
         users.forEach( user => {
-            if(!value.includes(user.id)) filteredUser.push(user)
+            if(!chosenMembersId.includes(user.id)) filteredUser.push(user)
             else defaultChosen.push(user)
         })
 
@@ -65,13 +69,7 @@ export default function SelectTeamMenu({onChange, value, error}: CustomInput) {
                 { chosenMembers.length > 0 && chosenMembers.map( chosenMember => (
                 <div key={chosenMember.id} className="w-[60px] flex-col-center">
                     <div className="relative w-[50px] h-[50px] min-w-[50px] mb-1.5">
-                        { chosenMember.image ? <img src={chosenMember.image} alt="member image" className="rounded-full object-cover w-[50px] h-[50px] min-w-[50px]"/>
-                            : <Image 
-                            fill 
-                            src={'/noavatar.png'} 
-                            alt="member image"
-                            className="rounded-full object-cover"
-                        />}
+                        <ProfileImage image={chosenMember.image} />
 
                         <Icon 
                             name="close" 
@@ -97,19 +95,15 @@ export default function SelectTeamMenu({onChange, value, error}: CustomInput) {
 
                 <div className="flex gap-3 overflow-scroll">
             { members.length > 0 ? members.map( member => (
-                <div key={member.id} className="w-[60px] mb-2.5 flex-col-center cursor-pointer hover:opacity-70">
-                    <div className="relative w-[50px] h-[50px] min-w-[50px] mb-1.5" onClick={() => handleAddMember(member)}>
-                    { member.image ? <img src={member.image} alt="member image" className="rounded-full object-cover w-[50px] h-[50px] min-w-[50px]"/>
-                            : <Image 
-                            fill 
-                            src={'/noavatar.png'} 
-                            alt="member image"
-                            className="rounded-full object-cover"
-                        />}
-                    </div>
+                <div key={member.id} className="w-[60px] mb-2.5 cursor-pointer hover:opacity-70">
+                    <button onClick={() => handleAddMember(member)}>
+                        <div className="relative w-[50px] h-[50px] min-w-[50px] mb-1.5" >
+                            <ProfileImage image={member.image} />
+                        </div>
 
-                    <p className="text-xs text-body capitalize">{member.firstname}</p>
-                    <p className="text-xs text-body capitalize">{member.lastname}</p>
+                        <p className="text-xs text-body capitalize">{member.firstname}</p>
+                        <p className="text-xs text-body capitalize">{member.lastname}</p>
+                    </button>
                 </div>
             )): <p className="text-body">No Members Found!</p>}
             </div>

@@ -32,7 +32,7 @@ const CardProject = ({ data, view, enableEdit, className }: CardProjectProps) =>
       >
         {view === "full" ? (
           <div className="flex-col-center">
-            <div className="w-[65px] h-[65px] relative">
+            <div className="w-[65px] h-[65px] relative mb-2.5">
               <ProfileImage image={user.image} />
             </div>
 

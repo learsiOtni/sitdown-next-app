@@ -44,18 +44,19 @@ export const formatDate = (prevDate: string) => { //format Status updates' creat
     return `${value} ${timeName} ago`;
 }
 
+const addZeroPrefix = (value: string) => `0${value}`;
+
 export const toHours = (createdAt: string) => {
     const newDate = new Date(createdAt);
-    const hours = newDate.getUTCHours();
-    const minutes = newDate.getUTCMinutes();
-    const minLength = minutes.toLocaleString().length;
+    const hours = newDate.getUTCHours().toLocaleString();
+    const minutes = newDate.getUTCMinutes().toLocaleString();
 
     const currentDate = new Date();
-    const secondsPast = (currentDate.getTime() - new Date(createdAt).getTime());
+    const secondsPast = (currentDate.getTime() - newDate.getTime());
     // if less than 6 hours ago
     if (secondsPast < 6*60*60*1000) return formatDate(createdAt)
 
-    return `${hours}:${minLength === 1 ? `0${minutes}` : minutes}`
+    return `${hours.length === 1 ? addZeroPrefix(hours) : hours}:${minutes.length === 1 ? addZeroPrefix(minutes) : minutes}`
 }
 
 export const formatDateTitle = (createdAt: string) => {
@@ -85,3 +86,8 @@ export const validateTags = (formTags: string) => {
 
     return uniqueTags;
 }
+
+export const sortDates = (datesArray: Array<any>) =>
+  datesArray.toSorted(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );

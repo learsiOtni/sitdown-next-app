@@ -17,6 +17,7 @@ type CardUpdateProps = {
     data: Update
     view?: CardView
     enableEdit?: boolean
+    className?: string
 }
 
 const Title = ({ id, title }: { id: string; title: string }) => {
@@ -129,7 +130,7 @@ const DefaultView = ({ data }: { data: Update }) => {
   );
 };
 
-const CardUpdate = ({ data, view, enableEdit }: CardUpdateProps) => {
+const CardUpdate = ({ data, view, enableEdit, className}: CardUpdateProps) => {
 
   let content = <DefaultView data={data} />;
   if (view === "table" || view === "full") content = <TableView data={data} fullView={view === "full"}/>;

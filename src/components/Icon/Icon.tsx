@@ -15,6 +15,7 @@ import {
   faListOl,
   faCheck
 } from "@fortawesome/free-solid-svg-icons";
+
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SizeProp } from "@fortawesome/fontawesome-svg-core";
@@ -92,8 +93,8 @@ const Icon = ({ name, iconContainerStyle, background, size, onClick }: IconProps
   name === "check" && (icon = faCheck);
 
   return (
-    <div className={containerStyle} onClick={onClick}>
-      <FontAwesomeIcon icon={icon} className={iconStyle} size={size} />
+    <div className={containerStyle}>
+      <FontAwesomeIcon icon={icon} className={iconStyle} size={size} onClick={onClick}/>
     </div>
   );
 };

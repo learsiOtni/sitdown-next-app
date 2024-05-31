@@ -1,12 +1,12 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import Form from "../Form";
-import loginForm from "./loginFormFile";
-import { UserLogin, clearErrors, getAuthUser, login } from "@/lib/features/auth/authSlice";
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { UserLogin, clearErrors, getAuthUser, login } from "@/lib/features/auth/authSlice";
 import Button from "@/components/Button/Button";
+import Form from "../Form";
+import loginForm from "./loginFormFile";
 
 export default function LoginForm() {
   const errors = useAppSelector( state => state.auth.errors)
@@ -19,7 +19,7 @@ export default function LoginForm() {
   }, []);
 
   const handleSubmit = async (formData: UserLogin) => {
-    const action = await dispatch(login(formData))
+    const action = await dispatch(login({ userData: formData }));
     if(action.payload.token) dispatch(getAuthUser(action.payload.token))
   };
 

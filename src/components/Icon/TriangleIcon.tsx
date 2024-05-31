@@ -11,29 +11,25 @@ const Triangle = ({direction, color, size} : TriangleProps) => {
     let triangleDown = `w-0 h-0 
         border-l-[7.5px] border-l-transparent
         border-t-[10px] ${color}
-        border-r-[7.5px] border-r-transparent
-    `
+        border-r-[7.5px] border-r-transparent`
 
     // color must be border-t-color
     let triangleUp = `w-0 h-0
         border-l-[7.5px] border-l-transparent
         border-b-[10px] ${color}
-        border-r-[7.5px] border-r-transparent
-    `
+        border-r-[7.5px] border-r-transparent`
 
     if (size === "sm") {
 
         triangleDown = `w-0 h-0 
             border-l-[5px] border-l-transparent
             border-t-[7.5px] ${color}
-            border-r-[5px] border-r-transparent
-        `
+            border-r-[5px] border-r-transparent`
 
         triangleUp = `w-0 h-0
             border-l-[5px] border-l-transparent
-            border-b-[7.5px}] ${color}
-            border-r-[5px] border-r-transparent
-        `
+            border-b-[7.5px] ${color}
+            border-r-[5px] border-r-transparent`
     }
 
     let style;

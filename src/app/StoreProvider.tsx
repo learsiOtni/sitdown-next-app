@@ -6,9 +6,9 @@ import { makeStore, AppStore } from '../lib/store'
 
 export default function StoreProvider({
     children
-}: {
+}: Readonly<{
     children: React.ReactNode
-}) {
+}>) {
     const storeRef = useRef<AppStore>()
 
     if (!storeRef.current) {

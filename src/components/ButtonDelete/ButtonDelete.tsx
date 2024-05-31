@@ -13,7 +13,7 @@ type ButtonDeleteProps = {
   slice: ReduxSlice
 };
 
-export default function ButtonDelete({ data, slice}: ButtonDeleteProps) {
+export default function ButtonDelete({ data, slice}: Readonly<ButtonDeleteProps>) {
   const token = getCookie("authToken");
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -27,11 +27,8 @@ export default function ButtonDelete({ data, slice}: ButtonDeleteProps) {
 
   if (authUserId === data?.user?.id)
     return (
-      <div
-        className="ml-5 text-error cursor-pointer opacity-70 hover:opacity-90"
-        onClick={handleDelete}
-      >
-        <Icon name="delete" />
+      <div className="ml-5 text-error cursor-pointer opacity-70 hover:opacity-90">
+        <Icon name="delete" onClick={handleDelete} />
       </div>
     );
 }

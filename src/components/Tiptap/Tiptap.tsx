@@ -1,14 +1,13 @@
 'use client'
 
 import { useEditor, EditorContent, JSONContent } from '@tiptap/react'
+import { CustomInput } from '../Input/Input'
 import StarterKit from '@tiptap/starter-kit'
 import Toolbar from '../Toolbar/Toolbar'
 import classes from './Tiptap.module.css'
 import Underline from '@tiptap/extension-underline'
-import { CustomInput } from '../Input/Input'
 
-
-export default function Tiptap({ onChange, error, value}: CustomInput) {
+export default function Tiptap({ onChange, error, value}: Readonly<CustomInput>) {
 
     const editor = useEditor({
         editorProps:{

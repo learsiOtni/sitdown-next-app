@@ -83,7 +83,7 @@ export const postUpdate = createAsyncThunk(
 
     // structure new update
     const { userId, ...rest } = update;
-    return { ...rest, user: { id: userId, ...userInfo } };
+    return { ...rest, user: userInfo };
   }
 );
 
@@ -103,7 +103,7 @@ export const editUpdate = createAsyncThunk(
 
     // structure edited update
     const { userId, ...rest } = update;
-    return { ...rest, user: { id: userId, ...userInfo } };
+    return { ...rest, user: userInfo };
   }
 );
 

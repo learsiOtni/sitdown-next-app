@@ -8,7 +8,7 @@ type UpdatePageParams = {
   }
 }
 
-export default async function UpdatePage({ params: { id }}: UpdatePageParams) {
+export default async function UpdatePage({ params: { id }}: Readonly<UpdatePageParams>) {
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}updates/${id}`
   const response = await fetch(url, { cache: 'no-store' })
@@ -17,7 +17,7 @@ export default async function UpdatePage({ params: { id }}: UpdatePageParams) {
   if(data.error) redirect('/dashboard')
   return (
     <div className="w-full p-11">
-      {data && <CardUpdate view="full" data={data} enableEdit/>}
+      <CardUpdate view="full" data={data} enableEdit/>
 
       <div>
         {/** TODOS

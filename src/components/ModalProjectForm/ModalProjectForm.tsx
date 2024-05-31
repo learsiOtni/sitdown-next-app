@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { User } from "@/lib/features/auth/authSlice";
 import { Project, clearErrors, postProject, setStatus } from "@/lib/features/projects/projectsSlice";
 import Button from "../Button/Button";
 import Form from "../Form/Form";
@@ -28,11 +27,12 @@ export default function ModalProjectForm() {
         minTeamMembers.push(member.id);
       });
 
-    const { firstname, lastname, image } = user;
+    const { id, firstname, lastname, image } = user;
     const newData = {
       body: { ...formData, teamMembers: minTeamMembers },
       token: authCookie,
       userInfo: {
+        id,
         firstname,
         lastname,
         image,

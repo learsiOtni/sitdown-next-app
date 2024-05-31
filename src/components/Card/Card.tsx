@@ -1,4 +1,3 @@
-
 type CardProps = {
     className?: string
     children: React.ReactNode

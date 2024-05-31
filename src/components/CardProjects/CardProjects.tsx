@@ -9,7 +9,7 @@ type CardProjectsProps = {
   filterData?: "myProjects" | "otherProjects";
 }
 
-export default function CardProjects({ className, filterData}: CardProjectsProps) {
+export default function CardProjects({ className, filterData}: Readonly<CardProjectsProps>) {
 
   const authUserId = useAppSelector((state) => state.auth.credentials.user.id);
   const projects = useAppSelector((state) => state.projects.projects);

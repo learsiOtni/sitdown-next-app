@@ -1,16 +1,14 @@
 'use client'
 
 import { useEffect, useState } from "react"
-
 import { fetchWrapper } from "@/util/fetchWrapper"
+import { formatDateTitle } from "@/util/helper"
 import { Update } from "@/lib/features/updates/updatesSlice"
 import { CardView } from '@/components/CardUpdates/CardUpdate'
 import CardUpdates from "@/components/CardUpdates/CardUpdates"
 import Divider from "@/components/Divider/Divider"
 import SearchBar from "@/components/SearchBar/SearchBar"
 import TableCardView from "@/components/TableCardView/TableCardView"
-
-import { formatDateTitle } from "@/util/helper"
 
 type Dates = {
   id: "string";
@@ -31,21 +29,10 @@ const Updates = () => {
 
       fetch();
     }, []);
-
-    const sort = (array: Array<any>) => {
-      
-      //return array
-      //array.sort( (a, b) => new Date(a).getTime() - new Date(b).getTime())
-
-      /** TODO: create a sort function to sort updates from desc */
-    }
     
-
     const handleViewChange = (newView: CardView) => {
       if (cardView !== newView) setCardView(newView)
     }
-
-    dates && console.log(sort(dates[0]?.updates))
 
     return (
       <div className="p-11 w-full">

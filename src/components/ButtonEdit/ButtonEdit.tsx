@@ -10,11 +10,11 @@ import { ReduxSlice } from "../CardUpdates/CardUpdate";
 
 
 type ButtonEditProps = {
-    data: Update & Project
+    data: Update | Project
     slice: ReduxSlice
 }
 
-export default function ButtonEdit({data, slice}: ButtonEditProps) {
+export default function ButtonEdit({data, slice}: Readonly<ButtonEditProps>) {
     const authUserId = useAppSelector( state => state.auth.credentials.user.id) 
     const [show, setShow] = useState(false)
 
@@ -28,13 +28,10 @@ export default function ButtonEdit({data, slice}: ButtonEditProps) {
 
     if(authUserId === data?.user?.id) return (
         <>
-            <ModalEditForm show={show} toggleModal={toggleModal} data={data} slice={slice}/>
+            <ModalEditForm show={show} toggleModal={toggleModal} data={data as Update & Project} slice={slice}/>
             
-            <div className="text-black cursor-pointer opacity-70 hover:opacity-90"
-                onClick={handleEdit}
-            >  
-                
-                <Icon name="edit" />
+            <div className="text-black cursor-pointer opacity-70 hover:opacity-90">  
+                <Icon name="edit" onClick={handleEdit}/>
             </div>
         </>
     )

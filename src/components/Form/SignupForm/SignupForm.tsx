@@ -1,26 +1,25 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import Form from "../Form";
-import signupForm from "./signupFormFile";
-import { UserSignup, clearErrors, getAuthUser, signup } from "@/lib/features/auth/authSlice";
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { UserSignup, clearErrors, getAuthUser, login } from "@/lib/features/auth/authSlice";
 import Button from "@/components/Button/Button";
+import Form from "../Form";
+import signupForm from "./signupFormFile";
 
 export default function SignupForm() {
   const dispatch = useAppDispatch()
   const errors = useAppSelector( state => state.auth.errors)
   const isAuth = useAppSelector( state => state.auth.isAuth)
   const authUserId = useAppSelector( state => state.auth.credentials.user.id)
-  
 
   useEffect(() => {
     dispatch(clearErrors());
   }, []);
 
   const handleSubmit = async (formData: UserSignup) => {
-    const action = await dispatch(signup(formData));
+    const action = await dispatch(login({userData: formData, isSignup: true}));
     if(action.payload.token) dispatch(getAuthUser(action.payload.token))
   };
 

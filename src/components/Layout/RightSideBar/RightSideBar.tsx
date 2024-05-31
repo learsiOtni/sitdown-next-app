@@ -1,6 +1,5 @@
-import Icon from "@/components/Icon/Icon"
 import Card from "@/components/Card/Card"
-
+import Icon from "@/components/Icon/Icon"
 
 const RightSideBar = () => {
   return (

@@ -4,20 +4,20 @@ type ProfileImageProps = {
   image?: string;
 };
 
-export default function ProfileImage({ image }: ProfileImageProps) {
+export default function ProfileImage({ image }: Readonly<ProfileImageProps>) {
   return (
     <>
       {image ? (
         <img
           src={image}
-          alt="profile image"
+          alt="user profile"
           className="rounded-full object-cover w-full h-full m-w-full"
         />
       ) : (
         <Image
           src="/noavatar.png"
           fill
-          alt="profile image"
+          alt="user profile image"
           className="rounded-full"
         />
       )}

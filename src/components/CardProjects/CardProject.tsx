@@ -1,15 +1,15 @@
 "use client";
 
-import Icon from "@/components/Icon/Icon";
-import Card from "@/components/Card/Card";
 import { Project } from "@/lib/features/projects/projectsSlice";
-import TiptapRender from "../TiptapRender/TiptapRender";
+import { Update } from "@/lib/features/updates/updatesSlice";
+import { formatDate } from "@/util/helper";
 import Link from "next/link";
 import ButtonDelete from "../ButtonDelete/ButtonDelete";
 import ButtonEdit from "../ButtonEdit/ButtonEdit";
-import { Update } from "@/lib/features/updates/updatesSlice";
+import Card from "@/components/Card/Card";
+import Icon from "@/components/Icon/Icon";
 import ProfileImage from "../ProfileImage/ProfileImage";
-import { formatDate } from "@/util/helper";
+import TiptapRender from "../TiptapRender/TiptapRender";
 
 type CardProjectProps = {
   data: Project;
@@ -53,7 +53,6 @@ const CardProject = ({ data, view, enableEdit, className }: CardProjectProps) =>
       {/** Start of Card Footer */}
       <div className="border-t border-t-[#E6E7E8] p-5 relative flex items-center text-body text-sm">
         {view === "full" ? (
-          <>
             <div className="ml-2.5 pl-2.5 flex-center">
               <div className="text-[#707070] w-10 h-10 text-opacity-50 flex-col-center">
                 <Icon name="users" size="lg" />
@@ -74,7 +73,6 @@ const CardProject = ({ data, view, enableEdit, className }: CardProjectProps) =>
                 )}
               </div>
             </div>
-          </>
         ) : (
           <>
             <div className="text-[#707070] text-opacity-50">

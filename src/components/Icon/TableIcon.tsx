@@ -5,7 +5,7 @@ type TableProps = {
 
 const Table = ({color}: TableProps) => {
 
-    let style = `w-4 h-[7px] mt-[1px] ${color && color}`;
+    let style = `w-4 h-[7px] mt-[1px] ${color}`;
 
     return (
         <div className="">

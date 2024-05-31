@@ -7,26 +7,26 @@ type TableCardViewProps = {
     view: CardView
     onChange: (newView: CardView) => void
 }
-export default function TableCardView({view, onChange}: TableCardViewProps) {
+export default function TableCardView({view, onChange}: Readonly<TableCardViewProps>) {
 
     return (
         <div className="mt-10 flex justify-end">
           <div className="bg-[#EBEFF0] p-1.5 w-[177px] flex">
-            <div
+            <button
               className={`${classes.optionContainer} ${view === "table" ? classes.active : classes.inactive}`}
               onClick={() => onChange("table")}
             >
               <TableIcon color={`${view === "table" ? "bg-primary" : "bg-[#454D57]"}`} />
               <p className="ml-1.5">Table</p>
-            </div>
+            </button>
 
-            <div
+            <button
               className={`${classes.optionContainer} ${view === "card" ? classes.active : classes.inactive}`}
               onClick={() => onChange("card")}
             >
               <CardIcon color={`${view === "card" ? "bg-primary" : "bg-[#454D57]"}`}  />
               <p className="ml-1.5">Card</p>
-            </div>
+            </button>
           </div>
         </div>
     )

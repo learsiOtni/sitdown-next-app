@@ -1,8 +1,7 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import Input from "../Input/Input";
-import { checkValidity } from "@/util/formValidation";
 
 export type InputConfig = {
     id: string
@@ -47,7 +46,7 @@ export default function Form({
   onSubmit,
   children,
   errors,
-}: FormProps) {
+}: Readonly<FormProps>) {
   const [form, setForm] = useState<Forms>(formFile);
   const formKeys = Object.keys(formFile);
 

@@ -13,11 +13,6 @@ const Projects = () => {
 
         <div className="mt-2.5 flex flex-wrap gap-4">
           <CardProjects filterData="myProjects" className="w-[24%]"/>
-
-          {/** Todo
-           * Need card projects to be more reusable
-           * and do my projects & other projects divider
-           */}
         </div>
       </div>
 

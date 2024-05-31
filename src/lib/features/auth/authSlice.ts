@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { CookieValueTypes, deleteCookie, setCookie } from 'cookies-next';
 import { fetchWrapper } from '@/util/fetchWrapper';
 
-export type Status = 'idle' | 'loading' | 'succeeded' | 'failed';
-
 // minified user
 export type MinUser = {
     id: string,
@@ -40,7 +38,7 @@ export interface AuthState {
         token: string,
         user: User
     };
-    status: Status,
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
     errors: { [x: string]: string};
 }
 
@@ -58,16 +56,17 @@ const initialState: AuthState = {
         }
     },
     status: 'idle',
-    errors: {} as any
+    errors: {}
 }
 
 export const login = createAsyncThunk(
   "/login",
-  async (userData: UserLogin, { rejectWithValue }) => {
-    const data = await fetchWrapper.post(
-      `${process.env.NEXT_PUBLIC_API_URL}login`,
-      userData
-    );
+  async ({userData, isSignup}: { userData: UserLogin | UserSignup, isSignup?: boolean }, { rejectWithValue }) => {
+
+    let url = `${process.env.NEXT_PUBLIC_API_URL}login`;
+    if (isSignup) url = `${process.env.NEXT_PUBLIC_API_URL}signup`
+
+    const data = await fetchWrapper.post(url, userData);
 
     // if there's no token, login is unsuccessful, and will return an object with list of errors
     if (!data.token) return rejectWithValue(data);
@@ -77,24 +76,6 @@ export const login = createAsyncThunk(
       expires: new Date(Date.now() + 60 * 60 * 1000),
     });
     
-    return data;
-  }
-);
-
-export const signup = createAsyncThunk(
-  "/signup",
-  async (userData: UserSignup, { rejectWithValue }) => {
-    const data = await fetchWrapper.post(
-      `${process.env.NEXT_PUBLIC_API_URL}signup`,
-      userData
-    );
-
-    if (!data.token) return rejectWithValue(data);
-
-    setCookie("authToken", data.token, {
-      expires: new Date(Date.now() + 60 * 60 * 1000),
-    });
-
     return data;
   }
 );
@@ -148,20 +129,6 @@ export const authSlice = createSlice({
                 state.credentials.token = action.payload.token;
             })
             .addCase(login.rejected, (state, action) => {
-                state.status = 'failed';
-                state.errors = action.payload as any;
-            })
-
-            .addCase(signup.pending, (state, action) => {
-                state.errors = {};
-                state.status = 'loading';
-            })
-            .addCase(signup.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.isAuth = true;
-                state.credentials.token = action.payload.token;
-            })
-            .addCase(signup.rejected, (state, action) => {
                 state.status = 'failed';
                 state.errors = action.payload as any;
             })

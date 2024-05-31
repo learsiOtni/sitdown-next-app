@@ -3,7 +3,7 @@ import TriangleIcon from "../Icon/TriangleIcon"
 
 type Props = {
   className?: string,
-  type?: "button" | "submit" | "reset" | undefined,
+  type?: "button" | "submit" | "reset",
   icon?: CustomIcons,
   iconStyle?: string,
   bgNone?: boolean,
@@ -36,7 +36,7 @@ const Button = ({ className, type, icon, iconStyle, bgNone, dropdown, children, 
     
   return (
     <button
-      className={style ? style : defaultStyle}
+      className={style || defaultStyle}
       onClick={onClick}
       type={type}
     >

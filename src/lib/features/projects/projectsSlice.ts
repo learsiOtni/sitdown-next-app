@@ -78,7 +78,7 @@ export const postProject = createAsyncThunk(
 
     // structure new project
     const { userId, ...rest } = project;
-    return { ...rest, user: { id: userId, ...userInfo } };
+    return { ...rest, user: userInfo};
   }
 );
 
@@ -98,7 +98,7 @@ export const editProject = createAsyncThunk(
 
     // structure edited project
     const { userId, ...rest } = project;
-    return { ...rest, user: { id: userId, ...userInfo } };
+    return { ...rest, user: userInfo};
   }
 );
 

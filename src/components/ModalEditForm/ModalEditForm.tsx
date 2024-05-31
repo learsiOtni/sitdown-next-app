@@ -5,14 +5,15 @@ import { useParams, useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import {  NewUpdate, Update, editUpdate, setStatus as setUpdatesStatus } from "@/lib/features/updates/updatesSlice";
+import { NewProject, Project, editProject, setStatus as setProjectsStatus } from "@/lib/features/projects/projectsSlice";
+import { ReduxSlice } from "../CardUpdates/CardUpdate";
+import { validateTags } from "@/util/helper";
 import Button from "@/components/Button/Button";
 import Form from "@/components/Form/Form";
 import Modal from "@/components/Modal/Modal";
 import EditUpdateFormFile from "./editUpdateFormFile";
 import EditProjectFormFile from "./editProjectFormFile";
-import { NewProject, Project, editProject, setStatus as setProjectsStatus } from "@/lib/features/projects/projectsSlice";
-import { ReduxSlice } from "../CardUpdates/CardUpdate";
-import { validateTags } from "@/util/helper";
+
 
 type ModalEditFormProps = {
     show: boolean,
@@ -39,16 +40,17 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
         formData = { ...formData, tags: validateTags(formData.tags)};
 
       if (formData.teamMembers) {
-        const teamMembersId: Array<String> = []
+        const teamMembersId: Array<string> = []
         formData.teamMembers.forEach( member => teamMembersId.push(member.id))
         formData = { ...formData, teamMembers: teamMembersId}
       }
 
-      const { firstname, lastname, image } = user;
+      const { id, firstname, lastname, image } = user;
       const newData = {
         body: { ...formData },
         token: authCookie,
         userInfo: {
+          id,
           firstname,
           lastname,
           image,
@@ -69,7 +71,7 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
 
       data &&
         formKeys.forEach((formKey) => {
-          if (formKey === "projectId") {
+          if (formKey === "projectId" && slice === "updates") {
             file[formKey].value = data?.project?.id; //{id: data.project.id, title: data.project.title}
           } else if (formKey === "tags") {
             let tagsString = "";

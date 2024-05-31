@@ -3,11 +3,12 @@ import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { NewUpdate, postUpdate, setStatus, toggleModal } from "@/lib/features/updates/updatesSlice";
+import { validateTags } from "@/util/helper";
 import Button from "../Button/Button";
 import Form from "../Form/Form";
 import Modal from "../Modal/Modal";
 import UpdateFormFile from "./updateFormFile";
-import { validateTags } from "@/util/helper";
+
 
 
 export default function ModalUpdateForm(){
@@ -25,11 +26,12 @@ export default function ModalUpdateForm(){
         let filteredTags: Array<string> = [];
         if(typeof formData.tags === "string") filteredTags = validateTags(formData.tags)
         
-        const { firstname, lastname, image } = user;
+        const { id, firstname, lastname, image } = user;
         const newData = {
             body: {...formData, tags: filteredTags},
             token: authCookie,
             userInfo: {
+                id,
                 firstname,
                 lastname,
                 image

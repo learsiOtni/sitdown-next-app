@@ -8,7 +8,7 @@ type ToolbarProps = {
   editor: Editor | null;
 };
 
-export default function Toolbar({ editor }: ToolbarProps) {
+export default function Toolbar({ editor }: Readonly<ToolbarProps>) {
   if (!editor) return null;
 
   const handleHeadingChange  = (e: ChangeEvent<HTMLSelectElement>) => {

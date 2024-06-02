@@ -1,3 +1,4 @@
+import { Update } from "@/lib/features/updates/updatesSlice";
 
 export const calculatePercentageChange = (currentValue: number, oldValue: number): number => {
 
@@ -87,7 +88,7 @@ export const validateTags = (formTags: string) => {
     return uniqueTags;
 }
 
-export const sortDates = (datesArray: Array<any>) =>
-  datesArray.toSorted(
+export const sortDates = (datesArray: Array<Update>) =>
+  datesArray.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );

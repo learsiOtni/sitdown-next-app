@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppSelector } from "@/lib/hooks";
 import { Project } from "@/lib/features/projects/projectsSlice";
 import { CustomInput } from "../Input/Input";
@@ -21,9 +21,13 @@ export default function SelectProjectMenu({
   const authUserId = useAppSelector((state) => state.auth.credentials.user.id);
   const status = useAppSelector((state) => state.projects.status);
 
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(!isMenuOpen);
+  }, [isMenuOpen]);
+
   useEffect(() => {
     setSelectedItem(projects.find((project) => project.id === value));
-  }, [value]);
+  }, [value, projects]);
 
   useEffect(() => {
     // only show projects to users they belong to, meaning they are team members or author
@@ -36,12 +40,14 @@ export default function SelectProjectMenu({
         )
       );
     }
-  }, [projects, status]);
+  }, [projects, status, authUserId]);
 
   useEffect(() => {
-    menuRef.current?.addEventListener("click", toggleMenu);
-    return () => menuRef.current?.removeEventListener("click", toggleMenu);
-  }, [isMenuOpen]);
+    const current = menuRef.current;
+
+    current?.addEventListener("click", toggleMenu);
+    return () => current?.removeEventListener("click", toggleMenu);
+  }, [isMenuOpen, toggleMenu]);
 
   const handleMenuSelect = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -51,10 +57,6 @@ export default function SelectProjectMenu({
     setSelectedItem(project);
     toggleMenu();
     onChange("projectId", projectId);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
   };
 
   return (

@@ -16,7 +16,7 @@ export default function LoginForm() {
 
   useEffect(() => {
     dispatch(clearErrors());
-  }, []);
+  }, [dispatch]);
 
   const handleSubmit = async (formData: UserLogin) => {
     const action = await dispatch(login({ userData: formData }));

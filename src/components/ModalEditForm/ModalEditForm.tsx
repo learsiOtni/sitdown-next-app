@@ -86,7 +86,7 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
         });
 
       setFile(file);
-    }, [slice]);
+    }, [slice, data]);
 
     useEffect(() => {
         if (updatesStatus === "editSucceeded" || projectsStatus === "editSucceeded") {
@@ -97,7 +97,7 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
           router.refresh();
           router.push('/dashboard');
         }
-      }, [updatesStatus, projectsStatus]);
+      }, [updatesStatus, projectsStatus, dispatch, router, toggleModal, slice]);
 
     
     return (

@@ -9,7 +9,7 @@ const RightSideBar = () => {
                 <Icon name="notification"/>
             </div>
             
-            <h1 className="ml-2.5 text-heading">Today's Agenda</h1>
+            <h1 className="ml-2.5 text-heading">{`"Today's Agenda"`}</h1>
         </div>
 
         <div className="mt-9 border-b-[3px] border-[#4DA1FF] mb-5"/>

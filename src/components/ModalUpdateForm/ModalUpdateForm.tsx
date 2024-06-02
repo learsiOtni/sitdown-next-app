@@ -48,7 +48,7 @@ export default function ModalUpdateForm(){
         router.refresh();
         router.push("/dashboard");
       }
-    }, [status]);
+    }, [status, dispatch, router]);
     
     return (
         <Modal title={"Add new update"} isOpen={isModalOpen} toggle={ () => dispatch( toggleModal())}>

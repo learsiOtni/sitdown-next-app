@@ -24,7 +24,7 @@ export default function SelectTeamMenu({onChange, value}: Readonly<CustomInput>)
 
     useEffect( () => {
         (users.length <= 0) && dispatch( getUsers())
-    }, [])
+    }, [dispatch, users.length])
 
     useEffect( () => {
         const filteredUser: Array<any> = [];
@@ -42,7 +42,7 @@ export default function SelectTeamMenu({onChange, value}: Readonly<CustomInput>)
 
         setMembers(filteredUser.filter( user => user.id !== authUserId))
         setChosenMembers(defaultChosen)
-    }, [users])
+    }, [users, authUserId, value])
 
     
     const handleAddMember = (user: User) => {

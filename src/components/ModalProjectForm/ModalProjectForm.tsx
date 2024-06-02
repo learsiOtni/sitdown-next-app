@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { Project, clearErrors, postProject, setStatus } from "@/lib/features/projects/projectsSlice";
@@ -44,7 +44,7 @@ export default function ModalProjectForm() {
     dispatch(postProject(newData));
   };
 
-  const toggleModal = () => setIsModalOpen(!isModalOpen)
+  const toggleModal = useCallback(() => setIsModalOpen(!isModalOpen), [isModalOpen]);
 
   const handleAddProject = () => {
     toggleModal()
@@ -56,7 +56,7 @@ export default function ModalProjectForm() {
       dispatch(setStatus("idle"));
       toggleModal();
     }
-  }, [status]);
+  }, [status, dispatch, toggleModal]);
 
   return (
     <>

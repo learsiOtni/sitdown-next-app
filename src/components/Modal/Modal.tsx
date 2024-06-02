@@ -22,9 +22,11 @@ export default function Modal({ title, isOpen, toggle, children }: Readonly<Moda
       if(outsideModalRef && outsideModalRef.current === e.target) toggle()
     }
 
-    outsideModalRef.current?.addEventListener("click", handleOutsideModal)
-    return () => outsideModalRef.current?.removeEventListener("click", handleOutsideModal)
-  }, [isOpen])
+    const current = outsideModalRef.current;
+
+    current?.addEventListener("click", handleOutsideModal)
+    return () => current?.removeEventListener("click", handleOutsideModal)
+  }, [isOpen, toggle])
   
   return (
     <div

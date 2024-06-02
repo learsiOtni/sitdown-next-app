@@ -1,0 +1,17 @@
+.tagsContainer {
+    @apply flex gap-1 overflow-y-scroll;
+}
+
+.tagsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.icons {
+    @apply px-2.5 text-primary text-2xl cursor-pointer hover:rounded-full hover:bg-slate-200;
+}

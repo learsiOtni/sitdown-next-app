@@ -16,7 +16,7 @@ export default function SignupForm() {
 
   useEffect(() => {
     dispatch(clearErrors());
-  }, []);
+  }, [dispatch]);
 
   const handleSubmit = async (formData: UserSignup) => {
     const action = await dispatch(login({userData: formData, isSignup: true}));

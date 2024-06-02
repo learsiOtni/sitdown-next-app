@@ -27,7 +27,9 @@ const Dashboard = () => {
         {/* status updates */}
         <div className="col-span-1">
           <h1 className="text-heading mb-2.5">Status Updates</h1>
-          <CardUpdates />
+          <div className="max-h-screen overflow-scroll">
+            <CardUpdates />
+          </div>
         </div>
 
         {/* projects */}

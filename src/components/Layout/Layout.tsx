@@ -25,18 +25,19 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     if (data) dispatch(setCredentials(data))
   }, [data, dispatch])*/
 
-  const authCookie = getCookie("authToken");
+  
 
   useEffect(() => {
+    const authCookie = getCookie("authToken");
     authCookie && dispatch(getAuthUser(authCookie));
-  }, []);
+  }, [dispatch]);
 
   useEffect( () => {
     if(isAuth && Object.keys(updates).length <= 0) {
       dispatch( fetchProjects());
       dispatch( fetchUpdates());
     }
-  }, [isAuth])
+  }, [isAuth, updates, dispatch])
 
   return (
     <div>

@@ -5,7 +5,7 @@ import StarterKit from '@tiptap/starter-kit'
 import classes from "./TiptapRender.module.css";
 import Underline from '@tiptap/extension-underline';
 
-export default ({content, className} : {content: any, className?: string}) => {
+export default function TiptapRender({content, className} : {content: any, className?: string}) {
 
   const editor = useEditor({
     editorProps:{

@@ -1,14 +1,18 @@
-'use client';
-
-import "./globals.css"
-import Layout from '@/components/Layout/Layout';
+import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import Layout from '@/components/Layout/Layout';
 import StoreProvider from "./StoreProvider";
+import "./globals.css"
 
 const roboto = Roboto({
     weight: '400',
     subsets: ["latin"]
 });
+
+export const metadata: Metadata = {
+  title: "Sitdown-App",
+  description: "A social app for project management!",
+};
 
 export type GlobalCSS =
   | "text-title"

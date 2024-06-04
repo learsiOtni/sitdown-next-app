@@ -1,6 +1,7 @@
 import { fetchWrapper } from "@/util/fetchWrapper";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DeleteDBProps, PostDBProps } from "../projects/projectsSlice";
+import { getDateIndexes, getNewDates, getNewTagsNotInCurrentTags } from "@/util/helper";
 
 export type NewUpdate = {
   title: string;
@@ -18,6 +19,12 @@ export type SliceStatus =
   | "deleteSucceeded"
   | "editSucceeded"
   | "editing";
+
+export type Dates = {
+  id: string,
+  createdAt: string,
+  updates: Array<Update>
+}
 
 export interface Update {
   id: string;
@@ -41,9 +48,11 @@ export interface Update {
 export interface UpdatesState {
   updates: Update[];
   status: SliceStatus;
-  errors: { [x: string]: string } | undefined;
+  errors?: { [x: string]: string };
   isModalOpen: boolean;
   updateId: string;
+  dates: Array<Dates>;
+  tags: Array<string>;
 }
 
 const initialState: UpdatesState = {
@@ -52,6 +61,8 @@ const initialState: UpdatesState = {
   errors: {},
   isModalOpen: false,
   updateId: "",
+  dates: [],
+  tags: []
 };
 
 export const fetchUpdates = createAsyncThunk(
@@ -124,6 +135,30 @@ export const deleteUpdate = createAsyncThunk(
   }
 );
 
+export const fetchUpdatesByDates = createAsyncThunk(
+  "/updates/fetchUpdatesByDate",
+  async (param, { rejectWithValue }) => {
+    const dates = await fetchWrapper.get(
+      `${process.env.NEXT_PUBLIC_API_URL}dates`
+    );
+
+    if (dates.error) return rejectWithValue(dates);
+    return dates;
+  }
+);
+
+export const fetchTags = createAsyncThunk(
+  "/updates/fetchTags",
+  async (param, { rejectWithValue }) => {
+    const tags = await fetchWrapper.get(
+      `${process.env.NEXT_PUBLIC_API_URL}tags`
+    );
+
+    if (tags.error) return rejectWithValue(tags);
+    return tags;
+  }
+);
+
 export const updatesSlice = createSlice({
   name: "updates",
   initialState,
@@ -151,9 +186,9 @@ export const updatesSlice = createSlice({
         state.status = "fetchSucceeded";
         state.updates = state.updates.concat(action.payload);
       })
-      .addCase(fetchUpdates.rejected, (state, action) => {
+      .addCase(fetchUpdates.rejected, (state, action: any) => {
         state.status = "failed";
-        state.errors = action.error.message as any;
+        state.errors = action.payload;
       })
 
       .addCase(postUpdate.pending, (state, action) => {
@@ -161,13 +196,17 @@ export const updatesSlice = createSlice({
         state.errors = {};
       })
       .addCase(postUpdate.fulfilled, (state, action) => {
+        const newTags = getNewTagsNotInCurrentTags(action.payload.tags, state.tags);
+
         state.status = "postSucceeded";
         state.updates.unshift(action.payload);
+        state.tags = [...state.tags, ...newTags];
+        state.dates = getNewDates(action.payload, state.dates)
         state.errors = {};
       })
-      .addCase(postUpdate.rejected, (state, action) => {
+      .addCase(postUpdate.rejected, (state, action: any) => {
         state.status = "failed";
-        state.errors = action.payload as any;
+        state.errors = action.payload;
       })
 
       .addCase(editUpdate.pending, (state, action) => {
@@ -178,14 +217,18 @@ export const updatesSlice = createSlice({
         const index = state.updates.findIndex(
           (update) => update.id === action.payload.id
         );
+        const newTags = getNewTagsNotInCurrentTags(action.payload.tags, state.tags);
 
+        const { datesIndex, updateIndex} = getDateIndexes(action.payload.id, state.dates);
+        if(datesIndex !== -1) state.dates[datesIndex].updates[updateIndex] = action.payload;
         state.status = "editSucceeded";
         state.updates[index] = action.payload;
+        state.tags = [...state.tags, ...newTags]
         state.errors = {};
       })
-      .addCase(editUpdate.rejected, (state, action) => {
+      .addCase(editUpdate.rejected, (state, action: any) => {
         state.status = "failed";
-        state.errors = action.payload as any;
+        state.errors = action.payload;
       })
 
       .addCase(deleteUpdate.pending, (state, action) => {
@@ -197,13 +240,42 @@ export const updatesSlice = createSlice({
           update => update.id === action.payload.id
         );
 
+        const { datesIndex, updateIndex} = getDateIndexes(action.payload.id, state.dates);
+        if(datesIndex !== -1) state.dates[datesIndex].updates.splice(updateIndex, 1);
+
         state.updates.splice(indexToDelete, 1);
         state.status = "deleteSucceeded";
         state.errors = {};
       })
-      .addCase(deleteUpdate.rejected, (state, action) => {
+      .addCase(deleteUpdate.rejected, (state, action: any) => {
         state.status = "failed";
-        state.errors = action.payload as any;
+        state.errors = action.payload;
+      })
+
+      .addCase(fetchUpdatesByDates.pending, (state, action) => {
+        state.status = "loading";
+        state.errors = {};
+      })
+      .addCase(fetchUpdatesByDates.fulfilled, (state, action) => {
+        state.status = "fetchSucceeded";
+        state.dates = state.dates.concat(action.payload);
+      })
+      .addCase(fetchUpdatesByDates.rejected, (state, action: any) => {
+        state.status = "failed";
+        state.errors = action.payload;
+      })
+
+      .addCase(fetchTags.pending, (state, action) => {
+        state.status = "loading";
+        state.errors = {};
+      })
+      .addCase(fetchTags.fulfilled, (state, action) => {
+        state.status = "fetchSucceeded";
+        state.tags = state.tags.concat(action.payload);
+      })
+      .addCase(fetchTags.rejected, (state, action: any) => {
+        state.status = "failed";
+        state.errors = action.payload;
       });
   },
 });

@@ -13,8 +13,9 @@ export default async function UpdatePage({ params: { id }}: Readonly<UpdatePageP
   const url = `${process.env.NEXT_PUBLIC_API_URL}updates/${id}`
   const response = await fetch(url, { cache: 'no-store' })
   const data: Update & { error: string } = await response.json()
-
+  
   if(data.error) redirect('/dashboard')
+
   return (
     <div className="w-full p-11">
       <CardUpdate view="full" data={data} enableEdit/>

@@ -2,7 +2,7 @@ import { statistics } from "../../../data";
 import Button from "@/components/Button/Button";
 import CardProjects from "@/components/CardProjects/CardProjects";
 import CardStatistic from "@/components/CardStatistic/CardStatistic";
-import CardUpdates from "@/components/CardUpdates/CardUpdates";
+import Updates from "./Updates";
 
 const Dashboard = () => {
   return (
@@ -28,7 +28,7 @@ const Dashboard = () => {
         <div className="col-span-1">
           <h1 className="text-heading mb-2.5">Status Updates</h1>
           <div className="max-h-screen overflow-scroll">
-            <CardUpdates />
+            <Updates />
           </div>
         </div>
 

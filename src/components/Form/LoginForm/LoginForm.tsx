@@ -6,13 +6,17 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { UserLogin, clearErrors, getAuthUser, login } from "@/lib/features/auth/authSlice";
 import Button from "@/components/Button/Button";
 import Form from "../Form";
+import Spinner from "@/components/Spinner/Spinner";
 import loginForm from "./loginFormFile";
 
 export default function LoginForm() {
+  const dispatch = useAppDispatch()
   const errors = useAppSelector( state => state.auth.errors)
   const isAuth = useAppSelector( state => state.auth.isAuth)
   const authUserId = useAppSelector( state => state.auth.credentials.user.id)
-  const dispatch = useAppDispatch()
+  const authStatus = useAppSelector( state => state.auth.status)
+  const updatesStatus = useAppSelector(state => state.updates.status)
+  
 
   useEffect(() => {
     dispatch(clearErrors());
@@ -37,7 +41,7 @@ export default function LoginForm() {
       </p>
 
       <Button type="submit" className="text-xl">
-        Login
+        {authStatus === "loading" || updatesStatus === "loading" ? <Spinner className="w-6 h-6 text-white"/> : "Login"}
       </Button>
 
       {errors.error && (

@@ -1,39 +1,23 @@
 'use client'
 
-import { useEffect, useState } from "react"
-import { fetchWrapper } from "@/util/fetchWrapper"
+import { useState } from "react"
+import { useAppSelector } from "@/lib/hooks"
 import { formatDateTitle } from "@/util/helper"
-import { Update } from "@/lib/features/updates/updatesSlice"
 import { CardView } from '@/components/CardUpdates/CardUpdate'
+import { UpdatesPageSkeleton } from "@/components/Skeleton/UpdatesSkeleton"
 import CardUpdates from "@/components/CardUpdates/CardUpdates"
 import Divider from "@/components/Divider/Divider"
 import SearchBar from "@/components/SearchBar/SearchBar"
 import TableCardView from "@/components/TableCardView/TableCardView"
 
-type Dates = {
-  id: "string";
-  updates: Array<Update>
-}
-
 const Updates = () => {
     const [cardView, setCardView] = useState<CardView>("table");
-    const [dates, setDates] = useState<Array<Dates>>([]);
-    
-    useEffect(() => {
-      const fetch = async () => {
-        const dates = await fetchWrapper.get(
-          `${process.env.NEXT_PUBLIC_API_URL}dates`
-        );
-        setDates(dates);
-      };
+    const dates = useAppSelector( state => state.updates.dates);
 
-      fetch();
-    }, []);
-    
     const handleViewChange = (newView: CardView) => {
       if (cardView !== newView) setCardView(newView)
     }
-
+  
     return (
       <div className="p-11 w-full">
         {/** Search Bar */}
@@ -49,16 +33,18 @@ const Updates = () => {
 
         {/** Content */}
         <div>
-        {dates.length > 0 &&
-          dates.map((date) => (
+        {dates.length > 0 ?
+          dates.map((date) => date.updates.length > 0 && (
             <div className="mt-6" key={date.id}>
               <Divider title={formatDateTitle(date.id)} />
 
               <div className="mt-2.5 flex gap-3 flex-wrap">
-                <CardUpdates data={date.updates} view={cardView}/>
+                <CardUpdates data={[...date.updates]} view={cardView}/>
               </div>
             </div>
-          ))}
+          )) : (
+            <UpdatesPageSkeleton />
+          )}
           </div>
       </div>
     );

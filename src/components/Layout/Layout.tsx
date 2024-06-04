@@ -8,7 +8,7 @@ import { useAppSelector, useAppDispatch } from "../../lib/hooks";
 import { getAuthUser } from "@/lib/features/auth/authSlice";
 import ModalUpdateForm from "../ModalUpdateForm/ModalUpdateForm";
 import { fetchProjects } from "@/lib/features/projects/projectsSlice";
-import { fetchUpdates } from "@/lib/features/updates/updatesSlice";
+import { fetchTags, fetchUpdates, fetchUpdatesByDates } from "@/lib/features/updates/updatesSlice";
 //import { useGetAuthenticatedUserQuery } from "@/lib/services/auth/authService";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -25,8 +25,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     if (data) dispatch(setCredentials(data))
   }, [data, dispatch])*/
 
-  
-
   useEffect(() => {
     const authCookie = getCookie("authToken");
     authCookie && dispatch(getAuthUser(authCookie));
@@ -36,6 +34,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     if(isAuth && Object.keys(updates).length <= 0) {
       dispatch( fetchProjects());
       dispatch( fetchUpdates());
+      dispatch( fetchUpdatesByDates());
+      dispatch( fetchTags());
     }
   }, [isAuth, updates, dispatch])
 

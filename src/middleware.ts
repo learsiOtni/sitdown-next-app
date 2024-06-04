@@ -8,7 +8,7 @@ async function isAuthenticated(req: NextRequest) {
         const user = await fetchWrapper.get(
             `${process.env.NEXT_PUBLIC_API_URL}user`,
             undefined,
-            req.cookies.get('authToken')?.value
+            token
         )
         if (user.id) return true
     }

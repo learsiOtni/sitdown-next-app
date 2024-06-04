@@ -1,29 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { fetchWrapper } from "@/util/fetchWrapper";
+import { useAppSelector } from "@/lib/hooks";
 import { Update } from "@/lib/features/updates/updatesSlice";
 import CardUpdates from "@/components/CardUpdates/CardUpdates";
 import Icon from "@/components/Icon/Icon";
+import Spinner from "@/components/Spinner/Spinner";
 import classes from "./style.module.css";
+import TagsSkeleton from "@/components/Skeleton/TagsSkeleton";
 
 const Tags = () => {
   const tagsRef = useRef<HTMLDivElement>(null);
-  const [tags, setTags] = useState<Array<any>>([]);
   const [showLeftIcon, setShowLeftIcon] = useState<boolean>(false);
   const [showRightIcon, setShowRightIcon] = useState<boolean>(true);
   const [updates, setUpdates] = useState<Array<Update>>([]);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const data = await fetchWrapper.get(
-        `${process.env.NEXT_PUBLIC_API_URL}tags`
-      );
-      if (!data.error) setTags(data);
-    };
-
-    fetch();
-  }, []);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const tags = useAppSelector(state => state.updates.tags);
 
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>, scroll?: "left" | "right") => {
@@ -45,60 +38,68 @@ const Tags = () => {
   };
 
   const handleClickTag = async (id: string) => {
-
+    setIsLoading(true)
     const data = await fetchWrapper.get(`${process.env.NEXT_PUBLIC_API_URL}tags/${id}`)
-    if (!data.error) setUpdates(data.updates)
+    if (!data.error) {
+      setUpdates(data.updates)
+    }
+    setIsLoading(false)
   }
-
   
   return (
     <div className="w-full p-11">
       <h1 className="text-heading mb-2.5">Tags</h1>
 
       {/** Tags Heading */}
-      <div className="flex-center">
-        {showLeftIcon && (
-          <span
-            className={`mr-1 ${classes.icons}`}
-            onClick={(e: any) => handleScroll(e, "left")}
-          >
-            &lt;
-          </span>
-        )}
+      {tags.length > 0 ? (
+        <div className="flex-center">
+          {showLeftIcon && (
+            <button
+              className={`mr-1 ${classes.icons}`}
+              onClick={(e: any) => handleScroll(e, "left")}
+            >
+              &lt;
+            </button>
+          )}
 
-        <div
-          className={classes.tagsContainer}
-          onScroll={handleScroll}
-          ref={tagsRef}
-        >
-          {tags.length > 0 &&
-            tags.map((tag) => (
+          <div
+            className={classes.tagsContainer}
+            onScroll={handleScroll}
+            ref={tagsRef}
+          >
+            {tags.map((tag) => (
               <button
                 className="p-2.5 flex-center border rounded-lg cursor-pointer hover:bg-slate-200"
-                key={tag.id}
-                onClick={() => handleClickTag(tag.id)}
+                key={tag}
+                onClick={() => handleClickTag(tag)}
               >
-                <Icon name="tags" iconContainerStyle="text-primary" size="lg"/>
-                <p className="ml-1 text-md text-black">{tag.id}</p>
+                <Icon name="tags" iconContainerStyle="text-primary" size="lg" />
+                <p className="ml-1 text-md text-black">{tag}</p>
               </button>
             ))}
-        </div>
+          </div>
 
-        {showRightIcon && (
-          <span
-            className={`ml-1 ${classes.icons}`}
-            onClick={(e: any) => handleScroll(e, "right")}
-          >
-            &gt;
-          </span>
-        )}
-      </div>
+          {showRightIcon && (
+            <button
+              className={`ml-1 ${classes.icons}`}
+              onClick={(e: any) => handleScroll(e, "right")}
+            >
+              &gt;
+            </button>
+          )}
+        </div>
+      ) : (
+        <TagsSkeleton />
+      )}
       {/** End of Tags Heading */}
 
-      <div className="my-5">
-        
+      <div className="mt-10">
         <div className="flex-col-center gap-3">
-          <CardUpdates data={updates} view="table"/>
+          {!isLoading ? (
+            <CardUpdates data={updates} view="table"/>
+          ) : (
+            <Spinner showText/>
+          )}
         </div>
       </div>
     </div>

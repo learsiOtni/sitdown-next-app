@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { UserSignup, clearErrors, getAuthUser, login } from "@/lib/features/auth/authSlice";
 import Button from "@/components/Button/Button";
 import Form from "../Form";
+import Spinner from "@/components/Spinner/Spinner";
 import signupForm from "./signupFormFile";
 
 export default function SignupForm() {
@@ -13,6 +14,8 @@ export default function SignupForm() {
   const errors = useAppSelector( state => state.auth.errors)
   const isAuth = useAppSelector( state => state.auth.isAuth)
   const authUserId = useAppSelector( state => state.auth.credentials.user.id)
+  const authStatus = useAppSelector( state => state.auth.status)
+  const updatesStatus = useAppSelector(state => state.updates.status)
 
   useEffect(() => {
     dispatch(clearErrors());
@@ -32,7 +35,10 @@ export default function SignupForm() {
       onSubmit={handleSubmit}
       errors={errors}
     >
-      <Button type="submit" className="text-xl">Register</Button>
+      <Button type="submit" className="text-xl">
+        {authStatus === "loading" || updatesStatus === "loading" ? <Spinner className="w-6 h-6 text-white"/> : "Register"}
+      </Button>
+      
     </Form>
   );
 }

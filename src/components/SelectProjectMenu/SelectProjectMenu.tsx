@@ -82,7 +82,7 @@ export default function SelectProjectMenu({
           isMenuOpen ? "block" : "hidden"
         }`}
       >
-        <ul className="text-body cursor-pointer max-h-[180px] overflow-scroll">
+        <ul className="text-body cursor-pointer max-h-[120px] overflow-scroll">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
               <li key={project.id}>

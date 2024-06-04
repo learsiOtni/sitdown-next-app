@@ -22,6 +22,7 @@ export default function ButtonDelete({ data, slice}: Readonly<ButtonDeleteProps>
   const handleDelete = () => {
     if (slice === "updates") dispatch(deleteUpdate({ id: data.id, token }));
     if (slice === "projects") dispatch(deleteProject({ id: data.id, token }));
+    router.refresh();
     router.replace("/dashboard");
   };
 

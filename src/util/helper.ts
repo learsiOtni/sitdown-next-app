@@ -1,4 +1,4 @@
-import { Update } from "@/lib/features/updates/updatesSlice";
+import { Dates, Update } from "@/lib/features/updates/updatesSlice";
 
 export const calculatePercentageChange = (currentValue: number, oldValue: number): number => {
 
@@ -88,7 +88,42 @@ export const validateTags = (formTags: string) => {
     return uniqueTags;
 }
 
-export const sortDates = (datesArray: Array<Update>) =>
-  datesArray.sort(
+export const sortDates = (datesArray: Array<Update>) => datesArray.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+);
+
+export const getNewTagsNotInCurrentTags = (newTags:Array<string>, currentTags: Array<string>) => {
+    const tagsNotInCurrentTags: Array<string> = []
+    newTags.forEach( newTag => {
+        if(!currentTags.includes(newTag)) tagsNotInCurrentTags.push(newTag)
+    })
+
+    return tagsNotInCurrentTags;
+}
+
+// example date Id: Tue May 28 2024
+export const getNewDates = (payload: Update, dates: Array<Dates>) => {
+    const newDateId = new Date(payload.createdAt).toDateString();
+    const index = dates.findIndex( date => date.id === newDateId);
+
+    if (index !== -1) dates[index].updates.unshift(payload) // if theres a date entry found, add new update to that
+    else dates.unshift({ id: newDateId, createdAt: payload.createdAt, updates: [payload]}) // else create new date entry
+
+    return dates;
+}
+
+export const getDateIndexes = (id: string, dates: Array<Dates>) => {
+
+    for (let i = 0; i < dates.length; i++) {
+        const index = dates[i].updates.findIndex( update => update.id === id);
+        if (index !== -1) return { // its found
+            datesIndex: i,
+            updateIndex: index
+        }
+    }
+
+    return {
+        datesIndex: -1,
+        updateIndex: -1
+    }
+}

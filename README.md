@@ -1,7 +1,8 @@
 ## Sitdown App
 
 <div align="center">
-![Sitdown App Logo](src/assets//img/small-logo.png) 
+
+<image src="https://github.com/learsiOtni/sitdown-next-app/blob/main/src/assets/img/small-logo.png" alt="sitdown app logo">
 
 A web app for managing projects in a team. 
 

@@ -7,32 +7,33 @@
     <a href="https://sitdown-next-app.vercel.app/login">
       <strong>View Demo</strong>
     </a>
+    <br />
+    <br />
 </div>
 
-## Description
+## About the Project
 
 ![Sitdown App](src/assets/screenshot/dashboard.png) 
 
 Sitdown app is a web application where users can create projects, add members to the projects, and the added members can post status updates about the project. 
 
+Turned my sisters design in [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into working code. 
+
+
 ### Technology stack
 
-##### Front-End
+##### Front-End: (Deployed with Vercel)
 * Next.js 
 * Typescript
 * Tailwind
 * Redux
 * ESLint
 * Tiptap Editor
-- Deployed with Vercel
 
-##### Back-End:
-* Node.js 
+##### Back-End: (Deployed with Firebase)
+* Express.js
 * Firebase Cloud Firestore Database
 * Firebase Cloud Functions
-- Deployed as Firebase Cloud Function
-
-Turned my sisters design in [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into working code. 
 
 ### Features
 * Pop-up form to add or edit status updates.

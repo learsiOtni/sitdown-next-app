@@ -6,6 +6,8 @@ A web app for managing projects in a team.
 
 ## Description
 
+![Sitdown App](https://github.com/learsiOtni/sitdown-next-app/tree/main/src/assets/screenshot/dashboard.png "Sitdown App") 
+
 what the application does?
 The Application 
 
@@ -17,6 +19,7 @@ Typescript
 Tailwind
 Redux
 ESLint
+Tiptap Editor
 -Deployed with Vercel
 
 Server side:
@@ -27,7 +30,15 @@ Firebase Cloud Functions
 Turned my sisters design in [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into working code. 
 
 
-Challenges and Features
+Features
+Add and Edit Status updates
+Add and Edit Projects
+Status updates view by date, table and card view options
+Custom add members dropdown
+Change profile picture
+Tags validation, remove duplicates and extra white space
+Validation at server side
+
 
 
 

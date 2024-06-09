@@ -1,49 +1,52 @@
 ## Sitdown App
 
+<div align="center">
 ![Sitdown App Logo](src/assets//img/small-logo.png) 
 
 A web app for managing projects in a team. 
 
 [View Demo](https://sitdown-next-app.vercel.app/login)
+</div>
 
 ## Description
 
 ![Sitdown App](src/assets/screenshot/dashboard.png) 
 
+Sitdown app is a web application where users can create projects, add members to the projects, and the added members can post status updates about the project. 
 
-what the application does?
-The Application 
+### Technology stack
 
+##### Front-End
+* Next.js 
+* Typescript
+* Tailwind
+* Redux
+* ESLint
+* Tiptap Editor
+- Deployed with Vercel
 
-
-Technology stack
-Next.js 
-Typescript
-Tailwind
-Redux
-ESLint
-Tiptap Editor
--Deployed with Vercel
-
-Server side:
-Node.js 
-Firebase Cloud Functions
--Deployed as Cloud Function
+##### Back-End:
+* Node.js 
+* Firebase Cloud Firestore Database
+* Firebase Cloud Functions
+- Deployed as Firebase Cloud Function
 
 Turned my sisters design in [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into working code. 
 
+### Features
+* Pop-up form to add or edit status updates.
+    * Tags validation. Remove duplicates and white spaces.
+* Pop-up form to add or edit projects.
+    * Custom Select Members Input
+* Status updates view by current date. 
+    * Provides table or card view options. 
+* Change profile picture.
+* Form validation at server side.
 
-Features
-Add and Edit Status updates
-Add and Edit Projects
-Status updates view by date, table and card view options
-Custom add members dropdown
-Change profile picture
-Tags validation, remove duplicates and extra white space
-Validation at server side
 
 
 
+### Getting Started
 
 First, run the development server:
 
@@ -55,23 +58,11 @@ yarn dev
 pnpm dev
 ```
 
+Add this to your .env.local
+```sh
+NEXT_PUBLIC_API_URL="https://us-central1-sitdown-834fc.cloudfunctions.net/api/"
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can also clone the sitdown-nexp-app-functions found on my github repository, create a firebase project, login using your firebase credentials, navigate to functions, run npm run serve, and copy the link and replace the NEXT_PUBLIC_API_URL.

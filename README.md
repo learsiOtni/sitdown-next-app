@@ -1,6 +1,6 @@
 ## Sitdown App
 
-![Sitdown App Logo](https://github.com/learsiOtni/sitdown-next-app/tree/main/screenshot/logo.png "Sitdown App Logo") 
+![Sitdown App Logo](src/assets//img/small-logo.png) 
 
 A web app for managing projects in a team. 
 
@@ -8,7 +8,7 @@ A web app for managing projects in a team.
 
 ## Description
 
-![Sitdown App](https://github.com/learsiOtni/sitdown-next-app/tree/main/screenshot/dashboard.png "Sitdown App") 
+![Sitdown App](src/assets/screenshot/dashboard.png) 
 
 
 what the application does?

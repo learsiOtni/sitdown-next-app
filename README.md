@@ -1,12 +1,12 @@
-## Sitdown App
-
 <div align="center">
-
-<image src="https://github.com/learsiOtni/sitdown-next-app/blob/main/src/assets/img/small-logo.png" alt="sitdown app logo">
-
-A web app for managing projects in a team. 
-
-[View Demo](https://sitdown-next-app.vercel.app/login)
+    <h1>Sitdown App</h1>
+    <image src="https://github.com/learsiOtni/sitdown-next-app/blob/main/src/assets/img/small-logo.png" alt="sitdown app logo">
+    <br />
+    <br />
+    <p>A web app for managing projects in a team.</p>
+    <a href="https://sitdown-next-app.vercel.app/login">
+      <strong>View Demo</strong>
+    </a>
 </div>
 
 ## Description

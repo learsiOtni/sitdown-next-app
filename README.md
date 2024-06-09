@@ -1,6 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Sitdown App
 
-## Getting Started
+A web app for managing projects in a team. 
+
+[View Demo](https://sitdown-next-app.vercel.app/login)
+
+## Description
+
+what the application does?
+The Application 
+
+
+
+Technology stack
+Next.js 
+Typescript
+Tailwind
+Redux
+ESLint
+-Deployed with Vercel
+
+Server side:
+Node.js 
+Firebase Cloud Functions
+-Deployed as Cloud Function
+
+Turned my sisters design in [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into working code. 
+
+
+Challenges and Features
+
+
 
 First, run the development server:
 

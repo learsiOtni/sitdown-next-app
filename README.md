@@ -1,12 +1,15 @@
 ## Sitdown App
 
+![Sitdown App Logo](https://github.com/learsiOtni/sitdown-next-app/tree/main/screenshot/logo.png "Sitdown App Logo") 
+
 A web app for managing projects in a team. 
 
 [View Demo](https://sitdown-next-app.vercel.app/login)
 
 ## Description
 
-![Sitdown App](https://github.com/learsiOtni/sitdown-next-app/tree/main/src/assets/screenshot/dashboard.png "Sitdown App") 
+![Sitdown App](https://github.com/learsiOtni/sitdown-next-app/tree/main/screenshot/dashboard.png "Sitdown App") 
+
 
 what the application does?
 The Application 

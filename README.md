@@ -87,15 +87,15 @@ pnpm dev
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the project.
 
 ## :compass: Roadmap
-* Work on its responsiveness on different screens.
-* A confirm message once a project or status update is added, edited or deleted, etc.
-* A notification functionality 
-    * Notification message, e.g. if a status update is posted, the team members will receive notification.
-    * Notification counter showing all the relevant updates.
-* Search functionality where the user can search by project name or tags.
-* Users page, fetching the data from the database instead of the static page.
-* Account page
-    * Edit user details form.
-    * Changing email address and password.
-* Dashboard page, fetching the data from the database to show the statistics overview.
-* Change the tags input into a tags field instead, for clarity and better UI.
+* [ ] Work on its responsiveness on different screens.
+* [ ] A confirm message once a project or status update is added, edited or deleted, etc.
+* [ ] A notification functionality 
+    * [ ] Notification message, e.g. if a status update is posted, the team members will receive notification.
+    * [ ] Notification counter showing all the relevant updates.
+* [ ] Search functionality where the user can search by project name or tags.
+* [ ] Users page, fetching the data from the database instead of the static page.
+* [ ] Account page
+    * [ ] Edit user details form.
+    * [ ] Changing email address and password.
+* [ ] Dashboard page, fetching the data from the database to show the statistics overview.
+* [ ] Change the tags input into a tags field instead, for clarity and better UI.

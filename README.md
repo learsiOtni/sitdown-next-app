@@ -3,7 +3,7 @@
     <image src="https://github.com/learsiOtni/sitdown-next-app/blob/main/src/assets/img/small-logo.png" alt="sitdown app logo">
     <br />
     <br />
-    <p>A web app to help you manage multiple team projects.</p>
+    <p>A web app to help teams share daily updates about their work with the rest of the team.</p>
     <a href="https://sitdown-next-app.vercel.app/login">
       <strong>View Demo</strong>
     </a>
@@ -15,9 +15,11 @@
 
 ![Sitdown App](src/assets/screenshot/dashboard.png) 
 
-Sitdown app is a web application where users can create projects, write the project description, add members to that project, and the added members can post status updates about the project with relevant tags. Then, you can go to the specific project page, and you can see all the status updates made to that project, alternatively, you can go to the tags page, and you can select a tag, and any status updates containing that tag will be shown.
+The Sitdown app is a web application where users can post status updates and share them with the rest of their team. The users can create projects, write the project description, add members to that project, and the added members can post status updates about that project with relevant tags (for filtering). Then, you can go to the specific project page, and you can see all the status updates made to that project, alternatively, you can go to the tags page, and you can select a tag, and any status updates containing that tag will be shown.
 
-I converted a UI designer's design from [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into a working code. 
+This application allows the team members to share status updates in real-time, via the web. This eliminates the need for the team to share their updates using an unstructured process, for example, instant messages and email.
+
+Note: I converted a UI designer's design from [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into a working code. 
 
 </br>
 
@@ -39,6 +41,8 @@ I converted a UI designer's design from [Adobe XD](https://xd.adobe.com/view/dd6
 </br> 
 
 ### Features
+* Status updates view in descending order, with the latest status updates at the top.
+    * Clickable status update view for showing the whole content.
 * Pop-up form to add or edit status updates.
     * Tags validation. Remove duplicates and white spaces.
     * Delete status updates.
@@ -52,6 +56,7 @@ I converted a UI designer's design from [Adobe XD](https://xd.adobe.com/view/dd6
 * Change profile picture.
 * Form validation at the server side.
 * Loading Skeleton while the web app fetches data from the database.
+* Login and register a new account.
 
 </br>
 
@@ -93,3 +98,4 @@ pnpm dev
     * Edit user details form.
     * Changing email address and password.
 * Dashboard page, fetching the data from the database to show the statistics overview.
+* Change the tags input into a tags field instead, for clarity and better UI.

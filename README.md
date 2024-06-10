@@ -47,10 +47,10 @@ I converted a UI design from [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-
     * Delete projects.
 * Status updates view by current date. 
     * Provides table or card view options. 
-* A rich text editor for adding description to status updates and projects.
-* A Tags page showing all the added tags, and clicking a tag will show all the relevant status containing that tag.
+* A rich text editor for adding descriptions to status updates and projects.
+* A Tags page showing all the added tags, and clicking a tag will show all the relevant statuses containing that tag.
 * Change profile picture.
-* Form validation at server side.
+* Form validation at the server side.
 * Loading Skeleton while the web app fetches data from the database.
 
 </br>

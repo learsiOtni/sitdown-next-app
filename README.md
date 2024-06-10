@@ -15,9 +15,9 @@
 
 ![Sitdown App](src/assets/screenshot/dashboard.png) 
 
-Sitdown app is a web application where users can create projects, write the project description, add members to that project, and the added members can post status updates about the project with relevant tags. Then, you can go to the specific project page, and you can see all the status updates made to that project, or alternatively, you can go to the tags page, and you can select a tag, and any status updates containing that tag will be shown.
+Sitdown app is a web application where users can create projects, write the project description, add members to that project, and the added members can post status updates about the project with relevant tags. Then, you can go to the specific project page, and you can see all the status updates made to that project, alternatively, you can go to the tags page, and you can select a tag, and any status updates containing that tag will be shown.
 
-I converted a UI designers' design from [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into a working code. 
+I converted a UI designer's design from [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into a working code. 
 
 </br>
 
@@ -55,7 +55,7 @@ I converted a UI designers' design from [Adobe XD](https://xd.adobe.com/view/dd6
 
 </br>
 
-### Getting Started
+## :toolbox: Getting Started
 Get the project running on your local server.
 
 1. Clone the repository.
@@ -80,3 +80,16 @@ pnpm dev
 ```
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the project.
+
+## :compass: Roadmap
+* Work on its responsiveness on different screens.
+* A confirm message once a project or status update is added, edited or deleted, etc.
+* A notification functionality 
+    * Notification message, e.g. if a status update is posted, the team members will receive notification.
+    * Notification counter showing all the relevant updates.
+* Search functionality where the user can search by project name or tags.
+* Users page, fetching the data from the database instead of the static page.
+* Account page
+    * Edit user details form.
+    * Changing email address and password.
+* Dashboard page, fetching the data from the database to show the statistics overview.

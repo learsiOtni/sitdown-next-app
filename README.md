@@ -15,9 +15,9 @@
 
 ![Sitdown App](src/assets/screenshot/dashboard.png) 
 
-Sitdown app is a web application where users can create projects, write the project description, add members to the projects, and the added members can post status updates about the project with relevant tags.  
+Sitdown app is a web application where users can create projects, write the project description, add members to that project, and the added members can post status updates about the project with relevant tags. Then, you can go to the specific project page, and you can see all the status updates made to that project, or alternatively, you can go to the tags page, and you can select a tag, and any status updates containing that tag will be shown.
 
-I converted a UI design from [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into a working code. 
+I converted a UI designers' design from [Adobe XD](https://xd.adobe.com/view/dd6bbf87-41bb-4196-a87b-15ebf31ff0bc-8838/specs/?fbclid=IwZXh0bgNhZW0CMTAAAR0ZRBR0ETV0urundu9y7qu-KMyMowjEfABJg3CIHEavuhO_jgvA7CUxJ64_aem_AdY8OcPzJJwmj7y5xdqCDrMPWNVUufNl25Osb5gHqtnEAPXI7RTzGHt03NDlDcCchEp8zpdGRt8U6VZBs5s5yuHN) into a working code. 
 
 </br>
 

@@ -7,7 +7,9 @@ import { validateTags } from "@/util/helper";
 import Button from "../Button/Button";
 import Form from "../Form/Form";
 import Modal from "../Modal/Modal";
+import Spinner from "../Spinner/Spinner";
 import UpdateFormFile from "./updateFormFile";
+
 
 
 
@@ -58,7 +60,9 @@ export default function ModalUpdateForm(){
                 onSubmit={handleSubmit}
                 errors={errors}
             >
-                <Button type="submit" className="text-xl p-10 mb-7 place-self-end">Add</Button>
+                <Button type="submit" className="text-xl p-10 mb-7 place-self-end">
+                    {status === "loading" ? <Spinner className="w-6 h-6 text-white"/> : "Add"}
+                </Button>
             </Form>}
         </Modal>
     )

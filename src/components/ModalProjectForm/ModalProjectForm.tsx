@@ -9,6 +9,7 @@ import Form from "../Form/Form";
 import Modal from "../Modal/Modal";
 import SearchBar from "../SearchBar/SearchBar";
 import ProjectFormFile from "./projectFormFile";
+import Spinner from "../Spinner/Spinner";
 
 export default function ModalProjectForm() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -20,8 +21,6 @@ export default function ModalProjectForm() {
   const status = useAppSelector( state => state.projects.status)
 
   const handleSubmit = (formData: Project) => {
-
-    console.log(JSON.stringify(formData.body))
 
     const minTeamMembers: Array<string> = [];
     formData.teamMembers.length > 0 &&
@@ -73,9 +72,10 @@ export default function ModalProjectForm() {
           onSubmit={handleSubmit}
           errors={errors}
         >
-
+          
+          
           <Button type="submit" className="text-xl p-10 mb-7 place-self-end">
-            Add
+            {status === "loading" ? <Spinner className="w-6 h-6 text-white"/> : "Add"}
           </Button>
         </Form>}
         

@@ -109,7 +109,7 @@ export const editUpdate = createAsyncThunk(
       body,
       token
     );
-
+    
     if (!update.id) return rejectWithValue(update);
 
     // structure edited update

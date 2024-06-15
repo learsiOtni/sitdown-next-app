@@ -13,6 +13,7 @@ import Form from "@/components/Form/Form";
 import Modal from "@/components/Modal/Modal";
 import EditUpdateFormFile from "./editUpdateFormFile";
 import EditProjectFormFile from "./editProjectFormFile";
+import Spinner from "../Spinner/Spinner";
 
 
 type ModalEditFormProps = {
@@ -29,8 +30,9 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
     const params: {id?: string} = useParams();
     const dispatch = useAppDispatch()
     
-    const errors = useAppSelector( state => state.updates.errors)
+    const updatesErrors = useAppSelector( state => state.updates.errors)
     const updatesStatus = useAppSelector( state => state.updates.status)
+    const projectsErrors = useAppSelector( state => state.projects.errors)
     const projectsStatus = useAppSelector( state => state.projects.status)
     const user = useAppSelector( state => state.auth.credentials.user)
 
@@ -106,9 +108,16 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
                 formFile={file}
                 className="flex flex-col min-w-full"
                 onSubmit={handleSubmit}
-                errors={errors}
+                errors={slice === "projects" ? projectsErrors : updatesErrors}
             >
-                <Button type="submit" className="text-xl p-10 mb-7 place-self-end">Edit</Button>
+              
+                <Button type="submit" className="text-xl p-10 mb-7 place-self-end">
+                  {updatesStatus === "loading" || projectsStatus === "loading" ? (
+                  <Spinner className="w-6 h-6 text-white"/>
+                  ) : (
+                    "Edit"
+                  )}
+                </Button>
             </Form>}
         </Modal>
     )

@@ -1,13 +1,12 @@
 'use client';
 
 import { useState } from "react";
-import { useAppSelector } from "@/lib/hooks";
-import { Update } from "@/lib/features/updates/updatesSlice";
-import { Project } from "@/lib/features/projects/projectsSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { Update, clearErrors as clearUpdateErrors } from "@/lib/features/updates/updatesSlice";
+import { Project, clearErrors as clearProjectErrors } from "@/lib/features/projects/projectsSlice";
 import Icon from "../Icon/Icon";
 import ModalEditForm from "../ModalEditForm/ModalEditForm";
 import { ReduxSlice } from "../CardUpdates/CardUpdate";
-
 
 type ButtonEditProps = {
     data: Update | Project
@@ -16,6 +15,7 @@ type ButtonEditProps = {
 
 export default function ButtonEdit({data, slice}: Readonly<ButtonEditProps>) {
     const authUserId = useAppSelector( state => state.auth.credentials.user.id) 
+    const dispatch = useAppDispatch()
     const [show, setShow] = useState(false)
 
     const toggleModal = () => {
@@ -23,6 +23,8 @@ export default function ButtonEdit({data, slice}: Readonly<ButtonEditProps>) {
     }
 
     const handleEdit = () => {
+        dispatch(clearProjectErrors())
+        dispatch(clearUpdateErrors())
         setShow(true)
     }
 

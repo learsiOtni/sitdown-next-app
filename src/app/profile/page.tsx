@@ -8,11 +8,13 @@ import { setUpdates } from "@/lib/features/updates/updatesSlice"
 import Button from "@/components/Button/Button"
 import Card from "@/components/Card/Card"
 import ProfileImage from "@/components/ProfileImage/ProfileImage"
+import Spinner from "@/components/Spinner/Spinner"
 
 const Profile = () => {
     const [imageForm, setImageForm] = useState<File>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const imageFileRef = useRef<HTMLInputElement>(null);
-
+    
     const router = useRouter();
     const token = getCookie('authToken');
     const dispatch = useAppDispatch();
@@ -28,6 +30,7 @@ const Profile = () => {
         if (imageForm) {
           const formData = new FormData();
           imageForm && formData.append("image", imageForm, imageForm?.name);
+          setIsLoading(true)
           const message = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}profile/upload`,
             {
@@ -40,6 +43,8 @@ const Profile = () => {
           );
 
           const data: {message: string, image: string} = await message.json();
+
+          if(data.message) setIsLoading(false)
 
           // update all the current updates with the new users' image, 
           const updatedUpdates: any = []
@@ -111,7 +116,10 @@ const Profile = () => {
                                     <ProfileImage image={image}/>
                                 </div>
                                 <input type="file" onChange={onImageChange} className="hidden" ref={imageFileRef}/>
-                                <Button className="mt-5 w-[93px] text-[13px]" onClick={handleUpload}>{imageForm ? 'Save' : 'Update'}</Button>
+
+                                <Button className="mt-5 w-[93px] text-[13px]" onClick={handleUpload}>
+                                    {isLoading ? <Spinner className="w-6 h-6 text-white"/> : imageForm ? 'Save' : 'Update'}
+                                </Button>
                             </div>
                         </div>
 

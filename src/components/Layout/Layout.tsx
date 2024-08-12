@@ -9,6 +9,7 @@ import { getAuthUser } from "@/lib/features/auth/authSlice";
 import ModalUpdateForm from "../ModalUpdateForm/ModalUpdateForm";
 import { fetchProjects } from "@/lib/features/projects/projectsSlice";
 import { fetchTags, fetchUpdates, fetchUpdatesByDates } from "@/lib/features/updates/updatesSlice";
+import Alert from "../Alert/Alert";
 //import { useGetAuthenticatedUserQuery } from "@/lib/services/auth/authService";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -43,8 +44,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div>
       {isAuth && authUserId ? (
         <>
+          <Alert/>
           <ModalUpdateForm/>
-          
           <SideNav />
 
           <div className="flex ml-[110px] bg-[#F5F7FA] h-full min-h-screen">

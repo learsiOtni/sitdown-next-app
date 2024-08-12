@@ -2,8 +2,8 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import authSlice from './features/auth/authSlice'
 import updatesSlice from './features/updates/updatesSlice'
 import projectsSlice from './features/projects/projectsSlice'
+import uiSlice from './features/ui/uiSlice'
 import { authApi } from './services/auth/authService'
-
 
 export const makeStore = () => {
     return configureStore({
@@ -11,6 +11,7 @@ export const makeStore = () => {
             auth: authSlice,
             updates: updatesSlice,
             projects: projectsSlice,
+            ui: uiSlice,
             [authApi.reducerPath]: authApi.reducer,
         },
         middleware: (getDefaultMiddleware) =>

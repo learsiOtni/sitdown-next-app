@@ -4,12 +4,14 @@ import { useCallback, useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { Project, clearErrors, postProject, setStatus } from "@/lib/features/projects/projectsSlice";
+import { setAlertMessage } from "@/lib/features/ui/uiSlice";
 import Button from "../Button/Button";
 import Form from "../Form/Form";
 import Modal from "../Modal/Modal";
 import SearchBar from "../SearchBar/SearchBar";
 import ProjectFormFile from "./projectFormFile";
 import Spinner from "../Spinner/Spinner";
+
 
 export default function ModalProjectForm() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -53,6 +55,7 @@ export default function ModalProjectForm() {
   useEffect(() => {
     if (status === "postSucceeded") {
       dispatch(setStatus("idle"));
+      dispatch(setAlertMessage("New project added successfully!"));
       toggleModal();
     }
   }, [status, dispatch, toggleModal]);

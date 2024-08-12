@@ -3,14 +3,13 @@ import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { NewUpdate, postUpdate, setStatus, toggleModal } from "@/lib/features/updates/updatesSlice";
+import { setAlertMessage } from "@/lib/features/ui/uiSlice";
 import { validateTags } from "@/util/helper";
 import Button from "../Button/Button";
 import Form from "../Form/Form";
 import Modal from "../Modal/Modal";
 import Spinner from "../Spinner/Spinner";
 import UpdateFormFile from "./updateFormFile";
-
-
 
 
 export default function ModalUpdateForm(){
@@ -47,6 +46,7 @@ export default function ModalUpdateForm(){
       if (status === "postSucceeded") {
         dispatch(setStatus("idle"));
         dispatch(toggleModal());
+        dispatch(setAlertMessage("New status update posted successfully!"));
         router.refresh();
         router.push("/dashboard");
       }

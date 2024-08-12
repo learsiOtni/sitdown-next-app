@@ -6,6 +6,7 @@ import { getCookie } from "cookies-next";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import {  NewUpdate, Update, editUpdate, setStatus as setUpdatesStatus } from "@/lib/features/updates/updatesSlice";
 import { NewProject, Project, editProject, setStatus as setProjectsStatus } from "@/lib/features/projects/projectsSlice";
+import { setAlertMessage } from "@/lib/features/ui/uiSlice";
 import { ReduxSlice } from "../CardUpdates/CardUpdate";
 import { validateTags } from "@/util/helper";
 import Button from "@/components/Button/Button";
@@ -14,6 +15,7 @@ import Modal from "@/components/Modal/Modal";
 import EditUpdateFormFile from "./editUpdateFormFile";
 import EditProjectFormFile from "./editProjectFormFile";
 import Spinner from "../Spinner/Spinner";
+
 
 
 type ModalEditFormProps = {
@@ -92,8 +94,14 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
 
     useEffect(() => {
         if (updatesStatus === "editSucceeded" || projectsStatus === "editSucceeded") {
-          if(slice === "updates") dispatch(setUpdatesStatus("idle"));
-          if(slice === "projects") dispatch(setProjectsStatus("idle"));
+          if(slice === "updates") {
+            dispatch(setUpdatesStatus("idle"));
+            dispatch(setAlertMessage("Status update edited successfully!"));
+          }
+          if(slice === "projects") {
+            dispatch(setProjectsStatus("idle"));
+            dispatch(setAlertMessage("Project edited successfully!"));
+          }
           
           toggleModal();
           router.refresh();

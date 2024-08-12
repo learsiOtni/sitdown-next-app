@@ -88,7 +88,7 @@ pnpm dev
 
 ## :compass: Roadmap
 * [ ] Work on its responsiveness on different screens.
-* [ ] A confirm message once a project or status update is added, edited or deleted, etc.
+* [X] A confirm message once a project or status update is added, edited or deleted, etc. (12/08/24)
 * [ ] A notification functionality 
     * [ ] Notification message, e.g. if a status update is posted, the team members will receive notification.
     * [ ] Notification counter showing all the relevant updates.

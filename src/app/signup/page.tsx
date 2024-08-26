@@ -7,15 +7,15 @@ import Logo from "@/components/Logo/Logo";
 export default function Signup() {
   return (
     <Container>
-      <section className="flex flex-col items-center w-[480px]">
-        <Logo width={318} height={85} />
+      <section className="flex flex-col items-center w-full md:w-[480px]">
+        <Logo />
 
         <h1 className="text-title mt-8">Sign Up</h1>
         <span className="text-caption mb-2">Please fill up the form:</span>
 
         <SignupForm />
 
-        <p className="text-body text-sm mt-4">
+        <p className="text-body mt-4">
           Already a member?{" "}
           <Link href="/login">
             <span className="underline">Login now!</span>

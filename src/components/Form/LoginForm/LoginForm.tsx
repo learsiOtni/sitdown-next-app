@@ -40,12 +40,12 @@ export default function LoginForm() {
         Forgotten Password?
       </p>
 
-      <Button type="submit" className="text-xl">
-        {authStatus === "loading" || updatesStatus === "loading" ? <Spinner className="w-6 h-6 text-white"/> : "Login"}
+      <Button type="submit" className="text-sm md:text-xl">
+        {authStatus === "loading" || updatesStatus === "loading" ? <Spinner className="w-3 h-3 text-white md:w-6 md:h-6"/> : "Login"}
       </Button>
 
       {errors.error && (
-        <p className="self-center mt-2 text-sm text-error">
+        <p className="self-center mt-2 text-[10px] text-error md:text-xs">
           {errors.error}
         </p>
       )}

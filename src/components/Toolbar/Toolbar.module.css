@@ -1,5 +1,5 @@
 .toolbar {
-    @apply flex p-3 gap-0.5 text-body border-b;
+    @apply flex p-3 gap-0.5 text-black/70 border-b text-xs md:text-base;
 }
 
 .button {

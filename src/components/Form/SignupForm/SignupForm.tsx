@@ -35,8 +35,8 @@ export default function SignupForm() {
       onSubmit={handleSubmit}
       errors={errors}
     >
-      <Button type="submit" className="text-xl">
-        {authStatus === "loading" || updatesStatus === "loading" ? <Spinner className="w-6 h-6 text-white"/> : "Register"}
+      <Button type="submit" className="text-sm md:text-xl">
+        {authStatus === "loading" || updatesStatus === "loading" ? <Spinner className="w-3 h-3 text-white md:w-6 md:h-6"/> : "Register"}
       </Button>
       
     </Form>

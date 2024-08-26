@@ -6,26 +6,26 @@ import Updates from "./Updates";
 
 const Dashboard = () => {
   return (
-    <div className="p-11 w-full">
+    <div className="p-2 w-full md:p-11 m:w-full">
       {/* Header */}
-      <header className="flex items-center justify-between">
+      <header className="flex items-center justify-between hidden">
         <h1 className="text-heading">Overview Statistics</h1>
 
-        <Button className="px-5 mr-1" dropdown>
+        <Button className="px-5 mr-1 text-xs md:text-base" dropdown>
           Last 30 days
         </Button>
       </header>
 
-      <div className="flex gap-4 mt-2.5">
+      <div className="flex gap-1 mt-2.5 flex-wrap md:gap-4 hidden">
         {statistics.map((statistic) => (
           <CardStatistic key={statistic.id} data={statistic} />
         ))}
       </div>
       {/* End of Header */}
 
-      <div className="mt-10 grid grid-cols-2 gap-4">
+      <div className="mt-10 flex flex-col md:grid md:grid-cols-2 md:gap-4">
         {/* status updates */}
-        <div className="col-span-1">
+        <div className="md:col-span-1">
           <h1 className="text-heading mb-2.5">Status Updates</h1>
           <div className="max-h-screen overflow-scroll">
             <Updates />
@@ -33,7 +33,7 @@ const Dashboard = () => {
         </div>
 
         {/* projects */}
-        <div className="col-span-1">
+        <div className="mt-10 md:col-span-1 md:mt-0">
           <div className="mb-2.5 relative">
             <h1 className="text-heading">Projects</h1>
 
@@ -46,7 +46,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="min-w-[575px] flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4">
             <CardProjects className="w-[48.5%]"/>
           </div>
         </div>

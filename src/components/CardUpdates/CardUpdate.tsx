@@ -36,8 +36,8 @@ const FormattedDate = ({ date }: { date: string }) => (
 
 const Tags = ({ tags, updateId }: { tags: string[]; updateId: string }) => (
   <div className="flex items-center mt-4">
-    <div className="w-4 h-4 text-primary">
-      <Icon name="tags" />
+    <div>
+      <Icon name="tags" iconContainerStyle='w-2 h-2 text-primary md:w-4 md:h-4'/>
     </div>
 
     {tags?.map((tag) => (

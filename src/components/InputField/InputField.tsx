@@ -16,9 +16,9 @@ export default function InputField({ label, error, config, value, onChange}: Inp
     <input
       className={`p-2 ${
         label ? "mb-5" : "mb-3"
-      } border rounded text-lg bg-[#FBFBFD] ${
+      } border text-xs rounded bg-[#FBFBFD] ${
         error && "border-error"
-      } last:mb-0`}
+      } last:mb-0 md:text-lg`}
       {...config}
       value={data}
       onChange={handleInputChange}

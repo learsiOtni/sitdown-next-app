@@ -8,21 +8,23 @@ import LoginForm from "@/components/Form/LoginForm/LoginForm";
 const Login = () => {
   return (
     <Container>
-      <section className="flex flex-col items-center w-[480px]">
-        <Logo width={318} height={85} />
+      <section className="flex flex-col items-center w-full md:w-[480px]">
+        <Logo />
 
         <button className="mt-[48px] py-2 flex-center border min-w-full rounded shadow-sm">
-          <Image src={googleLogo} width={27} height={27} alt="Google logo" />
-          <p className="pl-2 text-[#4F5761] text-opacity-95 text-lg">
+          <div className="relative w-3 h-3 md:w-[27px] md:h-[27px]">
+            <Image src={googleLogo} fill alt="Google logo" />
+          </div>
+          <p className="pl-2 text-[#4F5761] text-opacity-95 text-sm md:text-lg">
             Login with Google
           </p>
         </button>
 
-        <p className="text-body py-2">OR</p>
+        <p className="text-xs text-body py-2">OR</p>
 
         <LoginForm />
 
-        <p className="mt-4 text-body text-sm">
+        <p className="mt-4 text-body">
           Not a member?{" "}
           <Link href="/signup">
             <span className="underline">Register now!</span>

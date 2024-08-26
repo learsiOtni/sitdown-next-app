@@ -48,7 +48,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <ModalUpdateForm/>
           <SideNav />
 
-          <div className="flex ml-[110px] bg-[#F5F7FA] h-full min-h-screen">
+          <div className="flex bg-[#F5F7FA] h-full min-h-screen md:ml-[110px]">
             {children}
           </div>
 

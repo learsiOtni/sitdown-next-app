@@ -34,7 +34,7 @@ export default function Input({ elementType, config, value, onChange, error, lab
       { label && <p className="pb-1.5 text-caption-2">{label}
       {subLabel && <span className="ml-[5px] text-xs text-body opacity-60">{subLabel}</span>}
       </p>}
-      { error && <p className="text-xs text-error">{error}</p>}
+      { error && <p className="text-[10px] text-error md:text-xs">{error}</p>}
     
       {element}
     </>

@@ -13,7 +13,8 @@ import {
   faTimes,
   faList,
   faListOl,
-  faCheck
+  faCheck,
+  faBars
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faCopy } from "@fortawesome/free-regular-svg-icons";
@@ -36,7 +37,8 @@ export type CustomIcons =
   | "close"
   | "list"
   | "orList"
-  | "check";
+  | "check"
+  | "menu";
 
 type IconProps = {
   name: CustomIcons;
@@ -91,6 +93,7 @@ const Icon = ({ name, iconContainerStyle, background, size, onClick }: IconProps
   name === "list" && (icon = faList);
   name === "orList" && (icon = faListOl);
   name === "check" && (icon = faCheck);
+  name === "menu" && (icon = faBars);
 
   return (
     <div className={containerStyle}>

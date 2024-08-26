@@ -15,7 +15,7 @@ const Button = ({ className, type, icon, iconStyle, bgNone, dropdown, children, 
 
   let style = ""
   let defaultStyle = `whitespace-nowrap rounded py-2 text-white bg-primary shadow-md hover:opacity-70`
-  let bgNoneStyle = `whitespace-nowrap py-3 px-5 hover:bg-slate-100 `
+  let bgNoneStyle = `whitespace-nowrap py-2 hover:bg-slate-100 `
   
   if (className) {
     style = `${defaultStyle} ${className}`;

@@ -5,7 +5,7 @@ import SearchBar from "@/components/SearchBar/SearchBar"
 const Users = () => {
 
   return (
-    <div className="p-11 w-full">
+    <div className="p-4 w-full mt-5 md:p-11 md:mt-0">
       <SearchBar placeholder="Find Users" buttonText="Filter by" buttonDropdown/>
 
       <div className="mt-[58px]">

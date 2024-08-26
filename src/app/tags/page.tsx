@@ -47,7 +47,7 @@ const Tags = () => {
   }
   
   return (
-    <div className="w-full p-11">
+    <div className="p-4 w-full mt-5 md:p-11 md:mt-0">
       <h1 className="text-heading mb-2.5">Tags</h1>
 
       {/** Tags Heading */}
@@ -73,8 +73,8 @@ const Tags = () => {
                 key={tag}
                 onClick={() => handleClickTag(tag)}
               >
-                <Icon name="tags" iconContainerStyle="text-primary" size="lg" />
-                <p className="ml-1 text-md text-black">{tag}</p>
+                <Icon name="tags" iconContainerStyle="text-primary text-sm md:text-xl" />
+                <p className="ml-1 text-black text-xs md:text-base">{tag}</p>
               </button>
             ))}
           </div>

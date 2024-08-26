@@ -10,7 +10,7 @@ type TableCardViewProps = {
 export default function TableCardView({view, onChange}: Readonly<TableCardViewProps>) {
 
     return (
-        <div className="mt-10 flex justify-end">
+        <div className="hidden md:flex md:justify-end md:mt-10">
           <div className="bg-[#EBEFF0] p-1.5 w-[177px] flex">
             <button
               className={`${classes.optionContainer} ${view === "table" ? classes.active : classes.inactive}`}

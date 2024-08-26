@@ -36,14 +36,12 @@ const FormattedDate = ({ date }: { date: string }) => (
 
 const Tags = ({ tags, updateId }: { tags: string[]; updateId: string }) => (
   <div className="flex items-center mt-4">
-    <div>
-      <Icon name="tags" iconContainerStyle='w-2 h-2 text-primary md:w-4 md:h-4'/>
-    </div>
+    <Icon name="tags" iconContainerStyle='text-primary text-xs md:text-base'/>
 
     {tags?.map((tag) => (
       <p
         key={`${updateId}-${tag}`}
-        className="text-caption underline ml-2.5 "
+        className="text-caption underline ml-1.5 md:ml-2.5"
       >
         {tag}
       </p>
@@ -80,7 +78,7 @@ const CardView = ({ data }: { data: Update }) => (
 const TableView = ({ data, fullView }: { data: Update, fullView: boolean }) => {
   return (
     <>
-      <div className="mr-5 min-w-[65px] w-[65px] h-[65px] relative">
+      <div className="mr-5 relative min-w-[30px] w-[30px] h-[30px] md:min-w-[65px] md:w-[65px] md:h-[65px]">
         <ProfileImage image={data.user.image} />
       </div>
 

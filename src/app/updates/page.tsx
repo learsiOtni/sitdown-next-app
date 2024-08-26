@@ -19,7 +19,7 @@ const Updates = () => {
     }
   
     return (
-      <div className="p-11 w-full">
+      <div className="p-4 w-full mt-5 md:p-11 md:mt-0">
         {/** Search Bar */}
         <SearchBar
           placeholder="Find updates by tags"

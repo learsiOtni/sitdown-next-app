@@ -75,12 +75,10 @@ const CardProject = ({ data, view, enableEdit, className }: CardProjectProps) =>
             </div>
         ) : (
           <>
-            <div className="text-[#707070] text-opacity-50">
-              <Icon name="users" size="lg" />
-            </div>
+            <Icon name="users" iconContainerStyle="text-[#707070] text-opacity-50 text-xs md:text-xl" />
 
-            <div className="w-6 h-6 bg-primary text-center ml-2.5 rounded-full pt-1">
-              <p className="text-white text-xs">{teamMembers?.length}</p>
+            <div className="ml-1 w-3 h-3 flex-center bg-primary rounded-full md:w-6 md:h-6 md:ml-2.5">
+              <p className="text-white text-[8px] md:text-xs">{teamMembers?.length}</p>
             </div>
           </>
         )}

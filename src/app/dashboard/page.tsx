@@ -6,20 +6,22 @@ import Updates from "./Updates";
 
 const Dashboard = () => {
   return (
-    <div className="p-2 w-full md:p-11 m:w-full">
+    <div className="p-5 w-full md:p-11 md:w-full md:p-2">
       {/* Header */}
-      <header className="flex items-center justify-between hidden">
-        <h1 className="text-heading">Overview Statistics</h1>
+      <div className="hidden md:block">
+        <header className="flex items-center justify-between">
+          <h1 className="text-heading">Overview Statistics</h1>
 
-        <Button className="px-5 mr-1 text-xs md:text-base" dropdown>
-          Last 30 days
-        </Button>
-      </header>
+          <Button className="px-5 mr-1 text-xs md:text-base" dropdown>
+            Last 30 days
+          </Button>
+        </header>
 
-      <div className="flex gap-1 mt-2.5 flex-wrap md:gap-4 hidden">
-        {statistics.map((statistic) => (
-          <CardStatistic key={statistic.id} data={statistic} />
-        ))}
+        <div className="flex gap-1 mt-2.5 flex-wrap md:gap-4">
+          {statistics.map((statistic) => (
+            <CardStatistic key={statistic.id} data={statistic} />
+          ))}
+        </div>
       </div>
       {/* End of Header */}
 
@@ -41,13 +43,13 @@ const Dashboard = () => {
               <span className="text-caption-underline opacity-80">
                 See All Projects
               </span>
-              <span className="text-primary text-2xl ml-5">&lt;</span>
-              <span className="text-primary text-2xl ml-2.5">&gt;</span>
+              <span className="text-primary ml-5 md:text-2xl">&lt;</span>
+              <span className="text-primary ml-2.5 md:text-2xl">&gt;</span>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-4">
-            <CardProjects className="w-[48.5%]"/>
+            <CardProjects className="w-[48.5%]" />
           </div>
         </div>
       </div>

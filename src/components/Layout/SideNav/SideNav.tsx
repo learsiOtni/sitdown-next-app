@@ -7,7 +7,7 @@ const SideNav = () => {
   const outsideNavRef = useRef<HTMLDivElement>(null);
 
   const toggleNav = () => {
-    setShowNav(!showNav);
+    if(window.innerWidth < 768) setShowNav(!showNav);
   };
 
   useEffect(() => {

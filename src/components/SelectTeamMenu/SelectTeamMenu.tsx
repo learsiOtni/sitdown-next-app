@@ -67,8 +67,9 @@ export default function SelectTeamMenu({onChange, value}: Readonly<CustomInput>)
 
                 <div className="flex gap-3 overflow-scroll">
                 { chosenMembers.length > 0 && chosenMembers.map( chosenMember => (
-                <div key={chosenMember.id} className="w-[60px] flex-col-center">
-                    <div className="relative w-[50px] h-[50px] min-w-[50px] mb-1.5">
+                <div key={chosenMember.id} className="flex-col-center min-w-[50px] md:w-[60px]">
+                    <div className="relative w-[25px] h-[25px] min-w-[25px] mb-1.5 md:w-[50px] md:h-[50px] md:min-w-[50px]">
+                        
                         <ProfileImage image={chosenMember.image} />
 
                         <Icon 
@@ -78,8 +79,8 @@ export default function SelectTeamMenu({onChange, value}: Readonly<CustomInput>)
                         />
                     </div>
 
-                    <p className="text-xs text-body capitalize">{chosenMember.firstname}</p>
-                    <p className="text-xs text-body capitalize">{chosenMember.lastname}</p>
+                    <p className="text-body capitalize">{chosenMember.firstname}</p>
+                    <p className="text-body capitalize">{chosenMember.lastname}</p>
                 </div>
                 ))}
                 </div>
@@ -95,14 +96,14 @@ export default function SelectTeamMenu({onChange, value}: Readonly<CustomInput>)
 
                 <div className="flex gap-3 overflow-scroll">
             { members.length > 0 ? members.map( member => (
-                <div key={member.id} className="w-[60px] mb-2.5 cursor-pointer hover:opacity-70">
-                    <button onClick={() => handleAddMember(member)}>
-                        <div className="relative w-[50px] h-[50px] min-w-[50px] mb-1.5" >
+                <div key={member.id} className="mb-2.5 cursor-pointer hover:opacity-70 min-w-[50px] md:w-[60px]">
+                    <button onClick={() => handleAddMember(member)} className="flex-col-center">
+                        <div className="relative w-[25px] h-[25px] min-w-[25px] mb-1.5 md:w-[50px] md:h-[50px] md:min-w-[50px]" >
                             <ProfileImage image={member.image} />
                         </div>
 
-                        <p className="text-xs text-body capitalize">{member.firstname}</p>
-                        <p className="text-xs text-body capitalize">{member.lastname}</p>
+                        <p className="text-body capitalize">{member.firstname}</p>
+                        <p className="text-body capitalize">{member.lastname}</p>
                     </button>
                 </div>
             )): <p className="text-body">No Members Found!</p>}

@@ -48,7 +48,7 @@ export default function ButtonDelete({ data, slice}: Readonly<ButtonDeleteProps>
 
   if (authUserId === data?.user?.id)
     return (
-      <div className="ml-5 text-error cursor-pointer opacity-70 hover:opacity-90">
+      <div className="ml-3 text-error cursor-pointer opacity-70 hover:opacity-90 md:ml-5">
         <Icon name="delete" onClick={handleDelete} />
       </div>
     );

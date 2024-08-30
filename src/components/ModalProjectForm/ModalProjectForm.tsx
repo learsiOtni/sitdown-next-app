@@ -77,7 +77,7 @@ export default function ModalProjectForm() {
         >
           
           
-          <Button type="submit" className="text-xl p-10 mb-7 place-self-end">
+          <Button type="submit" className="text-base p-10 mb-7 place-self-end md:text-xl">
             {status === "loading" ? <Spinner className="w-6 h-6 text-white"/> : "Add"}
           </Button>
         </Form>}

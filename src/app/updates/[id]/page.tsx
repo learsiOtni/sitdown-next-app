@@ -17,9 +17,8 @@ export default async function UpdatePage({ params: { id }}: Readonly<UpdatePageP
   if(data.error) redirect('/dashboard')
 
   return (
-    <div className="w-full p-11">
+    <div className="p-4 w-full mt-5 md:p-11 md:mt-0">
       <CardUpdate view="full" data={data} enableEdit/>
-
       <div>
         {/** TODOS
          * show author details,

@@ -119,7 +119,7 @@ export default function ModalEditForm({show, toggleModal, data, slice}: Readonly
                 errors={slice === "projects" ? projectsErrors : updatesErrors}
             >
               
-                <Button type="submit" className="text-xl p-10 mb-7 place-self-end">
+                <Button type="submit" className="text-base p-10 mb-7 place-self-end md:text-xl">
                   {updatesStatus === "loading" || projectsStatus === "loading" ? (
                   <Spinner className="w-6 h-6 text-white"/>
                   ) : (

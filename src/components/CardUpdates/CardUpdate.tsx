@@ -54,7 +54,7 @@ const CardView = ({ data }: { data: Update }) => (
   <>
     <div className="flex-between mb-6">
       <div className="flex items-center">
-        <div className="min-w-[40px] w-[40px] h-[40px] relative mr-2.5">
+        <div className="min-w-[20px] w-[20px] h-[20px] relative mr-2.5 md:min-w-[40px] md:w-[40px] md:h-[40px]">
           <ProfileImage image={data.user.image} />
         </div>
 
@@ -137,7 +137,7 @@ const CardUpdate = ({ data, view, enableEdit, className}: CardUpdateProps) => {
   return (
     <Card
       className={`p-5 border border-[#E2E5E6] relative ${
-        view !== "card" ? "flex w-[100%]" : "w-[32%]"
+        view !== "card" ? "flex w-[100%]" : "w-full md:w-[32%]"
       }`}
     >
       {content}

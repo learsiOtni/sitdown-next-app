@@ -20,7 +20,7 @@ export default async function ProjectPage({
   const data: Project & { error: string } = await response.json();
   if (data.error) redirect("/dashboard");
   return (
-    <div className="w-full p-11">
+    <div className="p-4 w-full mt-5 md:p-11 md:mt-0">
       <CardProject data={data} view="full" enableEdit />
 
       <div>

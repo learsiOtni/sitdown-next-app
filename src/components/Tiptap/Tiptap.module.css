@@ -3,7 +3,7 @@
 }
 
 .tiptapEditor {
-    @apply grow w-full h-[220px] p-4 overflow-scroll;
+    @apply grow w-full h-[220px] p-4 overflow-scroll text-xs md:text-base;
 }
 
 .tiptapEditor:focus {

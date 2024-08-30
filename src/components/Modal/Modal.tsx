@@ -35,7 +35,7 @@ export default function Modal({ title, isOpen, toggle, children }: Readonly<Moda
       } w-full h-full fixed top-0 left-0 bg-[rgba(0,0,0,0.5)] z-50 overflow-hidden md:py-10`}
       ref={outsideModalRef}
     >
-      <Card className="absolute w-full bottom-0 md:static md:w-[600px] md:mx-auto">
+      <Card className="fixed w-full max-h-full bottom-0 overflow-scroll md:static md:w-[600px] md:mx-auto">
         <header className="py-2 px-2.5 bg-[#F4F8F9] flex-between md:py-4 md:px-5">
           <h3 className="text-title">{title}</h3>
           <button className="hover:opacity-80" onClick={toggle}>

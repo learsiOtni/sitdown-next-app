@@ -12,9 +12,9 @@ const Users = () => {
 
         <div className="flex flex-row-reverse">
           <div className="flex gap-10 mr-8">
-            <h2 className="text-title">Updates</h2>
-            <h2 className="text-title">Teams</h2>
-            <h2 className="text-title">Projects</h2>
+            <h2 className="text-title hidden md:block">Updates</h2>
+            <h2 className="text-title hidden md:block">Teams</h2>
+            <h2 className="text-title hidden md:block">Projects</h2>
           </div>
         </div>
 

@@ -22,7 +22,7 @@ const CardStatistic = ({data}: CardStatisticProps) => {
     const percValue = previousValue && calculatePercentageChange(currentValue, previousValue)
 
     return (
-        <Card key={id} className="py-7 min-w-[280px] flex flex-col items-center relative w-[25%]">
+        <Card key={id} className="py-7 flex flex-col items-center relative w-[23%]">
             <Icon
                 name={name as CustomIcons}
                 iconContainerStyle="w-7 h-7 p-[7px] rounded-full flex items-center justify-center text-white"
